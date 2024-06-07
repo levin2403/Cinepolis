@@ -4,12 +4,16 @@
  */
 package Presentacion;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
@@ -18,6 +22,9 @@ import javax.swing.SwingConstants;
  */
 public class Inicio extends javax.swing.JFrame {
 
+    private JPanel cardPanel;
+    private CardLayout cardLayout;
+
     /**
      * Creates new form Inicio
      */
@@ -25,17 +32,54 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         personalizador();
         agregarLabelsEnPanel();
+        agregarOpcionesMenu();
+
+
     }
+
 
     public void personalizador() {
         panelMenu.setBackground(Color.decode("#07285B"));
         btnAtras.setBackground(Color.decode("#07285B"));
         btnSiguiente.setBackground(Color.decode("#07285B"));
         btnCercana.setBackground(Color.decode("#07285B"));
-        
+
     }
-    
-     public void agregarLabelsEnPanel() {
+
+    public void agregarOpcionesMenu() {
+
+        JMenu menuPeliculas = new JMenu("Películas");
+        JMenuItem verPeliculas = new JMenuItem("Ver Películas");
+        menuPeliculas.add(verPeliculas);
+
+        JMenu menuFunciones = new JMenu("Funciones");
+        JMenuItem verFunciones = new JMenuItem("Ver Funciones");
+        JMenuItem agregarFunciones = new JMenuItem("Agregar Funciones");
+        menuFunciones.add(verFunciones);
+        menuFunciones.add(agregarFunciones);
+
+        JMenu menuSalas = new JMenu("Salas");
+        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
+        menuSalas.add(agregarSalas);
+
+        JMenu menuPais = new JMenu("Pais");
+        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
+        JMenuItem verPais = new JMenuItem("Ver Pais");
+        menuPais.add(agregarPais);
+        menuPais.add(verPais);
+
+        JMenu menuReportes = new JMenu("Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        menuReportes.add(GenerarReporte);
+
+        MenuBarAdmin.add(menuPeliculas);
+        MenuBarAdmin.add(menuFunciones);
+        MenuBarAdmin.add(menuSalas);
+        MenuBarAdmin.add(menuPais);
+        MenuBarAdmin.add(menuReportes);
+    }
+
+    public void agregarLabelsEnPanel() {
         panelPeliculas.setLayout(new GridLayout(2, 3, 50, 15)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
         JLabel[] labels = new JLabel[10];
@@ -53,12 +97,14 @@ public class Inicio extends javax.swing.JFrame {
             panelPeliculas.add(labels[i]);
         }
     }
-     
-     public void abrirNuevoFrame() {
+
+ 
+
+    public void abrirNuevoFrame() {
         Pelicula pelicula = new Pelicula();
         pelicula.setVisible(true);
-        
-         dispose();
+
+        dispose();
     }
 
     /**
@@ -80,9 +126,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnCercana = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,7 +166,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelPeliculas.setBackground(new java.awt.Color(255, 255, 255));
         panelPeliculas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Agrupador.add(panelPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 790, 320));
+        Agrupador.add(panelPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 790, 330));
 
         btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,18 +194,13 @@ public class Inicio extends javax.swing.JFrame {
         Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 140, -1));
+        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, -1));
 
+        btnCercana.setForeground(new java.awt.Color(255, 255, 255));
         btnCercana.setText("Sucursal cercana");
         Agrupador.add(btnCercana, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBarAdmin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,6 +261,7 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
+    private javax.swing.JMenuBar MenuBarAdmin;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCercana;
     private javax.swing.JButton btnSiguiente;
@@ -229,9 +269,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPeliculas;
     // End of variables declaration//GEN-END:variables

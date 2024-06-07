@@ -5,6 +5,8 @@
 package Presentacion;
 
 import java.awt.Color;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Pelicula extends javax.swing.JFrame {
     public Pelicula() {
         initComponents();
         personalizador();
+        agregarOpcionesMenu();
         
     }
     
@@ -31,6 +34,41 @@ public class Pelicula extends javax.swing.JFrame {
         btnVolver.setBackground(Color.decode("#07285B"));
         
     }
+      
+      
+    public void agregarOpcionesMenu() {
+
+        JMenu menuPeliculas = new JMenu("Películas");
+        JMenuItem verPeliculas = new JMenuItem("Ver Películas");
+        menuPeliculas.add(verPeliculas);
+
+        JMenu menuFunciones = new JMenu("Funciones");
+        JMenuItem verFunciones = new JMenuItem("Ver Funciones");
+        JMenuItem agregarFunciones = new JMenuItem("Agregar Funciones");
+        menuFunciones.add(verFunciones);
+        menuFunciones.add(agregarFunciones);
+
+        JMenu menuSalas = new JMenu("Salas");
+        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
+        menuSalas.add(agregarSalas);
+
+        JMenu menuPais = new JMenu("Pais");
+        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
+        JMenuItem verPais = new JMenuItem("Ver Pais");
+        menuPais.add(agregarPais);
+        menuPais.add(verPais);
+
+        JMenu menuReportes = new JMenu("Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        menuReportes.add(GenerarReporte);
+
+        MenuBarAdmin.add(menuPeliculas);
+        MenuBarAdmin.add(menuFunciones);
+        MenuBarAdmin.add(menuSalas);
+        MenuBarAdmin.add(menuPais);
+        MenuBarAdmin.add(menuReportes);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,15 +88,16 @@ public class Pelicula extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblimagen = new javax.swing.JLabel();
+        MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Agrupador.setBackground(new java.awt.Color(255, 255, 255));
         Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnVolver.setText("Volver");
         btnVolver.setBackground(new java.awt.Color(0, 102, 153));
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -70,9 +109,9 @@ public class Pelicula extends javax.swing.JFrame {
         etiquetaDescripcion.setText("Sinopsis");
         Agrupador.add(etiquetaDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 290, 140));
 
+        btnComprar.setText("Comprar boletos");
         btnComprar.setBackground(new java.awt.Color(0, 102, 153));
         btnComprar.setForeground(new java.awt.Color(255, 255, 255));
-        btnComprar.setText("Comprar boletos");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
@@ -88,9 +127,9 @@ public class Pelicula extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo barra.png"))); // NOI18N
 
+        jLabel3.setText("inepolis");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("inepolis");
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
@@ -116,15 +155,17 @@ public class Pelicula extends javax.swing.JFrame {
         Agrupador.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
         Agrupador.add(lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 220, 310));
 
+        setJMenuBar(MenuBarAdmin);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,7 +175,9 @@ public class Pelicula extends javax.swing.JFrame {
       Inicio inicio = new Inicio();
       
       inicio.setVisible(true);
+      
       dispose();
+      
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
@@ -142,7 +185,9 @@ public class Pelicula extends javax.swing.JFrame {
         Compra comprar = new Compra();
         
         comprar.setVisible(true);
+        
         dispose();
+       
     }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
@@ -182,6 +227,7 @@ public class Pelicula extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
+    private javax.swing.JMenuBar MenuBarAdmin;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel etiquetaDescripcion;

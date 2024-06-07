@@ -5,6 +5,8 @@
 package Presentacion;
 
 import java.awt.Color;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Compra extends javax.swing.JFrame {
     public Compra() {
         initComponents();
         personalizador();
+        agregarOpcionesMenu();
     }
 
     public void personalizador() {
@@ -28,6 +31,41 @@ public class Compra extends javax.swing.JFrame {
         btnComprar.setBackground(Color.decode("#07285B"));
         btnCancelar.setBackground(Color.decode("#07285B"));
     }
+    
+    
+    public void agregarOpcionesMenu() {
+
+        JMenu menuPeliculas = new JMenu("Películas");
+        JMenuItem verPeliculas = new JMenuItem("Ver Películas");
+        menuPeliculas.add(verPeliculas);
+
+        JMenu menuFunciones = new JMenu("Funciones");
+        JMenuItem verFunciones = new JMenuItem("Ver Funciones");
+        JMenuItem agregarFunciones = new JMenuItem("Agregar Funciones");
+        menuFunciones.add(verFunciones);
+        menuFunciones.add(agregarFunciones);
+
+        JMenu menuSalas = new JMenu("Salas");
+        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
+        menuSalas.add(agregarSalas);
+
+        JMenu menuPais = new JMenu("Pais");
+        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
+        JMenuItem verPais = new JMenuItem("Ver Pais");
+        menuPais.add(agregarPais);
+        menuPais.add(verPais);
+
+        JMenu menuReportes = new JMenu("Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        menuReportes.add(GenerarReporte);
+
+        MenuBarAdmin.add(menuPeliculas);
+        MenuBarAdmin.add(menuFunciones);
+        MenuBarAdmin.add(menuSalas);
+        MenuBarAdmin.add(menuPais);
+        MenuBarAdmin.add(menuReportes);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +97,7 @@ public class Compra extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,6 +219,8 @@ public class Compra extends javax.swing.JFrame {
         jLabel14.setText("$$$$$$");
         Agrupador.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
+        setJMenuBar(MenuBarAdmin);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,6 +288,7 @@ public class Compra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
+    private javax.swing.JMenuBar MenuBarAdmin;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnComprar;
     private javax.swing.JComboBox<String> jComboBox1;
