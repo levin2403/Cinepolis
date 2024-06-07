@@ -6,6 +6,8 @@ package Presentacion;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -22,7 +24,7 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
         personalizador();
-        agregarLabelsEnPanelPeliculas();
+        agregarLabelsEnPanel();
     }
 
     public void personalizador() {
@@ -31,47 +33,31 @@ public class Inicio extends javax.swing.JFrame {
         btnSiguiente.setBackground(Color.decode("#07285B"));
         
     }
-
-    public void agregarLabelsEnPanelPeliculas() {
+    
+     public void agregarLabelsEnPanel() {
         panelPeliculas.setLayout(new GridLayout(2, 3, 10, 25)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
-        JLabel label1 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label1.setOpaque(true);
-        label1.setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
-        label1.setForeground(java.awt.Color.WHITE); // Blanco
-
-        JLabel label2 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label2.setOpaque(true);
-        label2.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        label2.setForeground(java.awt.Color.WHITE);
-
-        JLabel label3 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label3.setOpaque(true);
-        label3.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        label3.setForeground(java.awt.Color.WHITE);
-
-        JLabel label4 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label4.setOpaque(true);
-        label4.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        label4.setForeground(java.awt.Color.WHITE);
-
-        JLabel label5 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label5.setOpaque(true);
-        label5.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        label5.setForeground(java.awt.Color.WHITE);
-
-        JLabel label6 = new JLabel("Pelicula", SwingConstants.CENTER);
-        label6.setOpaque(true);
-        label6.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        label6.setForeground(java.awt.Color.WHITE);
-
-        // Agregar etiquetas al panel
-        panelPeliculas.add(label1);
-        panelPeliculas.add(label2);
-        panelPeliculas.add(label3);
-        panelPeliculas.add(label4);
-        panelPeliculas.add(label5);
-        panelPeliculas.add(label6);
+        JLabel[] labels = new JLabel[6];
+        for (int i = 0; i < 6; i++) {
+            labels[i] = new JLabel("Pelicula", SwingConstants.CENTER);
+            labels[i].setOpaque(true);
+            labels[i].setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
+            labels[i].setForeground(java.awt.Color.WHITE); // Blanco
+            labels[i].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    abrirNuevoFrame();
+                }
+            });
+            panelPeliculas.add(labels[i]);
+        }
+    }
+     
+     public void abrirNuevoFrame() {
+        Pelicula pelicula = new Pelicula();
+        pelicula.setVisible(true);
+        
+         dispose();
     }
 
     /**

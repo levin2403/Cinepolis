@@ -5,6 +5,8 @@
 package Presentacion;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -17,6 +19,17 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
+        
+         // creamos lo de el label registro clickeable
+        lblRegistrarse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //abrimos los eventos de click en los label
+               Registro registro = new Registro();
+               registro.setVisible(true);
+               dispose();
+            }
+        });
         personalizador();
     }
 
@@ -123,7 +136,12 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-
+        
+        Inicio inicio = new Inicio();
+        
+        inicio.setVisible(true);
+        
+        dispose();
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
