@@ -4,6 +4,8 @@
  */
 package Presentacion;
 
+import java.awt.Color;
+
 /**
  *
  * @author jesus
@@ -15,6 +17,11 @@ public class LogIn extends javax.swing.JFrame {
      */
     public LogIn() {
         initComponents();
+        personalizador();
+    }
+    
+    public void personalizador(){
+    Agrupador.setBackground(Color.decode("#07285B"));
     }
 
     /**
@@ -26,21 +33,104 @@ public class LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Agrupador = new javax.swing.JPanel();
+        etiquetaUsuario = new javax.swing.JLabel();
+        etiquetaContrasena = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        btnIniciarSesion = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        lblRegistrarse = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Agrupador.setBackground(new java.awt.Color(0, 51, 102));
+        Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        etiquetaUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        etiquetaUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaUsuario.setText("Correo:");
+        Agrupador.add(etiquetaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+
+        etiquetaContrasena.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        etiquetaContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaContrasena.setText("Contraseña:");
+        Agrupador.add(etiquetaContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+
+        txtContrasena.setBackground(new java.awt.Color(234, 234, 234));
+        txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 180, -1));
+
+        txtCorreo.setBackground(new java.awt.Color(234, 234, 234));
+        txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 180, -1));
+
+        btnIniciarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnIniciarSesion.setText("Iniciar sesion");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 120, 40));
+
+        btnSalir.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalir.setForeground(new java.awt.Color(0, 0, 0));
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 120, 40));
+
+        lblRegistrarse.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        lblRegistrarse.setForeground(new java.awt.Color(0, 102, 153));
+        lblRegistrarse.setText("Registrarse");
+        Agrupador.add(lblRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("¿No tienes una cuenta?");
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
+        Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 160, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+
+       
+
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +168,15 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Agrupador;
+    private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel etiquetaContrasena;
+    private javax.swing.JLabel etiquetaUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblRegistrarse;
+    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
