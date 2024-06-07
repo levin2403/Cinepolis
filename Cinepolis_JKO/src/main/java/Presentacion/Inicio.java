@@ -4,6 +4,12 @@
  */
 package Presentacion;
 
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 /**
  *
  * @author jesus
@@ -15,6 +21,57 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        personalizador();
+        agregarLabelsEnPanelPeliculas();
+    }
+
+    public void personalizador() {
+        panelMenu.setBackground(Color.decode("#07285B"));
+        btnAtras.setBackground(Color.decode("#07285B"));
+        btnSiguiente.setBackground(Color.decode("#07285B"));
+        
+    }
+
+    public void agregarLabelsEnPanelPeliculas() {
+        panelPeliculas.setLayout(new GridLayout(2, 3, 10, 25)); // Filas, columnas, espaciado horizontal, espaciado vertical
+
+        JLabel label1 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label1.setOpaque(true);
+        label1.setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
+        label1.setForeground(java.awt.Color.WHITE); // Blanco
+
+        JLabel label2 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label2.setOpaque(true);
+        label2.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        label2.setForeground(java.awt.Color.WHITE);
+
+        JLabel label3 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label3.setOpaque(true);
+        label3.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        label3.setForeground(java.awt.Color.WHITE);
+
+        JLabel label4 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label4.setOpaque(true);
+        label4.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        label4.setForeground(java.awt.Color.WHITE);
+
+        JLabel label5 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label5.setOpaque(true);
+        label5.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        label5.setForeground(java.awt.Color.WHITE);
+
+        JLabel label6 = new JLabel("Pelicula", SwingConstants.CENTER);
+        label6.setOpaque(true);
+        label6.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        label6.setForeground(java.awt.Color.WHITE);
+
+        // Agregar etiquetas al panel
+        panelPeliculas.add(label1);
+        panelPeliculas.add(label2);
+        panelPeliculas.add(label3);
+        panelPeliculas.add(label4);
+        panelPeliculas.add(label5);
+        panelPeliculas.add(label6);
     }
 
     /**
@@ -26,21 +83,101 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Agrupador = new javax.swing.JPanel();
+        panelMenu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        panelPeliculas = new javax.swing.JPanel();
+        btnSiguiente = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Agrupador.setBackground(new java.awt.Color(255, 255, 255));
+        Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelMenu.setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo barra.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("inepolis");
+
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 490, Short.MAX_VALUE))
+        );
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        Agrupador.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
+
+        panelPeliculas.setBackground(new java.awt.Color(255, 255, 255));
+        panelPeliculas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Agrupador.add(panelPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 790, 360));
+
+        btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 470, 100, 40));
+
+        btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 100, 40));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("1");
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +215,13 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Agrupador;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel panelMenu;
+    private javax.swing.JPanel panelPeliculas;
     // End of variables declaration//GEN-END:variables
 }
