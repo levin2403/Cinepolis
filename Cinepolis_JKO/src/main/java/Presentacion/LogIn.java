@@ -19,9 +19,9 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         personalizador();
     }
-    
-    public void personalizador(){
-    Agrupador.setBackground(Color.decode("#07285B"));
+
+    public void personalizador() {
+        Agrupador.setBackground(Color.decode("#07285B"));
     }
 
     /**
@@ -50,18 +50,18 @@ public class LogIn extends javax.swing.JFrame {
         Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         etiquetaUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        etiquetaUsuario.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaUsuario.setForeground(new java.awt.Color(255, 255, 255));
         etiquetaUsuario.setText("Correo:");
-        Agrupador.add(etiquetaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+        Agrupador.add(etiquetaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, -1, -1));
 
         etiquetaContrasena.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        etiquetaContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        etiquetaContrasena.setForeground(new java.awt.Color(255, 255, 255));
         etiquetaContrasena.setText("Contraseña:");
-        Agrupador.add(etiquetaContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+        Agrupador.add(etiquetaContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
 
         txtContrasena.setBackground(new java.awt.Color(234, 234, 234));
         txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
-        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 180, -1));
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
 
         txtCorreo.setBackground(new java.awt.Color(234, 234, 234));
         txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
@@ -70,7 +70,7 @@ public class LogIn extends javax.swing.JFrame {
                 txtCorreoActionPerformed(evt);
             }
         });
-        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 180, -1));
+        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, -1));
 
         btnIniciarSesion.setBackground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
@@ -80,7 +80,7 @@ public class LogIn extends javax.swing.JFrame {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        Agrupador.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 120, 40));
+        Agrupador.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 120, 40));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setForeground(new java.awt.Color(0, 0, 0));
@@ -90,29 +90,29 @@ public class LogIn extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        Agrupador.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 120, 40));
+        Agrupador.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 120, 40));
 
         lblRegistrarse.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        lblRegistrarse.setForeground(new java.awt.Color(0, 102, 153));
+        lblRegistrarse.setForeground(new java.awt.Color(153, 153, 255));
         lblRegistrarse.setText("Registrarse");
-        Agrupador.add(lblRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+        Agrupador.add(lblRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("¿No tienes una cuenta?");
-        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
-        Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 160, 160));
+        Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 160, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
         );
 
         pack();
@@ -124,7 +124,6 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
 
-       
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 

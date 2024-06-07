@@ -4,6 +4,8 @@
  */
 package Presentacion;
 
+import java.awt.Color;
+
 /**
  *
  * @author jesus
@@ -15,6 +17,12 @@ public class Registro extends javax.swing.JFrame {
      */
     public Registro() {
         initComponents();
+        personalizador();
+        
+    }
+    
+     public void personalizador() {
+        Agrupador.setBackground(Color.decode("#07285B"));
     }
 
     /**
@@ -26,21 +34,140 @@ public class Registro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Agrupador = new javax.swing.JPanel();
+        btnCancelar3 = new javax.swing.JButton();
+        btnRegistrarse3 = new javax.swing.JButton();
+        txtContrasena = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        dateNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        txtNombre2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtNombre3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Agrupador.setBackground(new java.awt.Color(0, 51, 102));
+        Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCancelar3.setText("Cancelar");
+        btnCancelar3.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar3.setForeground(new java.awt.Color(0, 0, 0));
+        btnCancelar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar3ActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnCancelar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, 150, 50));
+
+        btnRegistrarse3.setText("Registrarse");
+        btnRegistrarse3.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegistrarse3.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegistrarse3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarse3ActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnRegistrarse3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 150, 50));
+
+        txtContrasena.setBackground(new java.awt.Color(242, 242, 242));
+        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContrasenaActionPerformed(evt);
+            }
+        });
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 390, 30));
+
+        jLabel1.setText("REGISTRO");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 220, 50));
+
+        txtNombre.setBackground(new java.awt.Color(242, 242, 242));
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 180, 30));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
+        Agrupador.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 180, 190));
+        Agrupador.add(dateNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 210, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Apellido Materno");
+        Agrupador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 160, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nombre:");
+        Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 90, 20));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Contraseña");
+        Agrupador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, 30));
+
+        txtNombre1.setBackground(new java.awt.Color(242, 242, 242));
+        txtNombre1.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 390, 30));
+
+        txtNombre2.setBackground(new java.awt.Color(242, 242, 242));
+        txtNombre2.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 180, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Apellido Paterno");
+        Agrupador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 160, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Fecha Nacimiento");
+        Agrupador.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 160, 30));
+
+        txtNombre3.setBackground(new java.awt.Color(242, 242, 242));
+        txtNombre3.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 390, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Correo electronico");
+        Agrupador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 160, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar3ActionPerformed
+        LogIn inicio = new LogIn();
+        inicio.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCancelar3ActionPerformed
+
+    private void btnRegistrarse3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse3ActionPerformed
+
+    }//GEN-LAST:event_btnRegistrarse3ActionPerformed
+
+    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +205,22 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Agrupador;
+    private javax.swing.JButton btnCancelar3;
+    private javax.swing.JButton btnRegistrarse3;
+    private com.github.lgooddatepicker.components.DatePicker dateNacimiento;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtNombre3;
     // End of variables declaration//GEN-END:variables
 }
