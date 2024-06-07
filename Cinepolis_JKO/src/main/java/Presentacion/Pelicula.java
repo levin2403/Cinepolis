@@ -18,6 +18,7 @@ public class Pelicula extends javax.swing.JFrame {
     public Pelicula() {
         initComponents();
         personalizador();
+        
     }
     
       public void personalizador() {
@@ -138,7 +139,10 @@ public class Pelicula extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Este boton todavia no es funcinal");
+        Compra comprar = new Compra();
+        
+        comprar.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnComprarActionPerformed
 
     /**

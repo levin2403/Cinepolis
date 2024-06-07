@@ -31,14 +31,15 @@ public class Inicio extends javax.swing.JFrame {
         panelMenu.setBackground(Color.decode("#07285B"));
         btnAtras.setBackground(Color.decode("#07285B"));
         btnSiguiente.setBackground(Color.decode("#07285B"));
+        btnCercana.setBackground(Color.decode("#07285B"));
         
     }
     
      public void agregarLabelsEnPanel() {
-        panelPeliculas.setLayout(new GridLayout(2, 3, 10, 25)); // Filas, columnas, espaciado horizontal, espaciado vertical
+        panelPeliculas.setLayout(new GridLayout(2, 3, 50, 15)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
-        JLabel[] labels = new JLabel[6];
-        for (int i = 0; i < 6; i++) {
+        JLabel[] labels = new JLabel[10];
+        for (int i = 0; i < 10; i++) {
             labels[i] = new JLabel("Pelicula", SwingConstants.CENTER);
             labels[i].setOpaque(true);
             labels[i].setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
@@ -77,6 +78,8 @@ public class Inicio extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnCercana = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,9 +90,9 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo barra.png"))); // NOI18N
 
+        jLabel3.setText("inepolis");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("inepolis");
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
@@ -116,7 +119,7 @@ public class Inicio extends javax.swing.JFrame {
 
         panelPeliculas.setBackground(new java.awt.Color(255, 255, 255));
         panelPeliculas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Agrupador.add(panelPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 790, 360));
+        Agrupador.add(panelPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 790, 320));
 
         btnSiguiente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,6 +145,12 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("1");
         Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 140, -1));
+
+        btnCercana.setText("Sucursal cercana");
+        Agrupador.add(btnCercana, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,7 +212,9 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnCercana;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
