@@ -4,7 +4,10 @@
  */
 package entidad;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -20,6 +23,7 @@ public class Cliente {
     private Date fechaNacimiento;
     private Double latitud;
     private Double longitud;
+    private String contrasena;
 
     public Cliente() {
     }
@@ -109,6 +113,82 @@ public class Cliente {
         this.longitud = longitud;
     }
     
+     private static String encriptar(String contrasena) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedPassword = md.digest(contrasena.getBytes());
+
+            // Convierte el hash a una representación hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashedPassword) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.idCliente;
+        hash = 47 * hash + Objects.hashCode(this.nombre);
+        hash = 47 * hash + Objects.hashCode(this.apellidoPaterno);
+        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
+        hash = 47 * hash + Objects.hashCode(this.correo);
+        hash = 47 * hash + Objects.hashCode(this.fechaNacimiento);
+        hash = 47 * hash + Objects.hashCode(this.latitud);
+        hash = 47 * hash + Objects.hashCode(this.longitud);
+        hash = 47 * hash + Objects.hashCode(this.contrasena);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (this.idCliente != other.idCliente) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellidoPaterno, other.apellidoPaterno)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
+            return false;
+        }
+        if (!Objects.equals(this.correo, other.correo)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitud, other.latitud)) {
+            return false;
+        }
+        return Objects.equals(this.longitud, other.longitud);
+    }
+    
+     
     
     
 }
