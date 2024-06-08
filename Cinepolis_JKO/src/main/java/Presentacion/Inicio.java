@@ -202,6 +202,9 @@ public class Inicio extends javax.swing.JFrame {
          MenuBarAdmin.add(menuSucursales);
     }
 
+    /*
+    Metodo apra poner los label acomodados con lso valores de una lista
+    */
     public void agregarLabelsEnPanel() {
         panelPeliculas.setLayout(new GridLayout(2, 3, 50, 15)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
