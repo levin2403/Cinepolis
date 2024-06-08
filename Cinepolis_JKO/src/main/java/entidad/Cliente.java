@@ -28,6 +28,10 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, Date fechaNacimiento, Double latitud, Double longitud) {
         this.idCliente = idCliente;
         this.nombre = nombre;

@@ -18,6 +18,11 @@ public class MensajeDTO {
     public MensajeDTO() {
     }
 
+    public MensajeDTO(String mensaje, int idSucursal) {
+        this.mensaje = mensaje;
+        this.idSucursal = idSucursal;
+    }
+
     public MensajeDTO(int idMensaje, String mensaje, int idSucursal) {
         this.idMensaje = idMensaje;
         this.mensaje = mensaje;

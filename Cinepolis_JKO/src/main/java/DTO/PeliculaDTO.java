@@ -24,6 +24,17 @@ public class PeliculaDTO {
     public PeliculaDTO() {
     }
 
+    public PeliculaDTO(String titulo, String sinopsis, int idPais, int duracion, String clasificacion, String trailer, String imagen, int idGenero) {
+        this.titulo = titulo;
+        this.sinopsis = sinopsis;
+        this.idPais = idPais;
+        this.duracion = duracion;
+        this.clasificacion = clasificacion;
+        this.trailer = trailer;
+        this.imagen = imagen;
+        this.idGenero = idGenero;
+    }
+    
     public PeliculaDTO(int idPelicula, String titulo, String sinopsis, int idPais, int duracion, String clasificacion, String trailer, String imagen, int idGenero) {
         this.idPelicula = idPelicula;
         this.titulo = titulo;
@@ -36,16 +47,6 @@ public class PeliculaDTO {
         this.idGenero = idGenero;
     }
 
-    public PeliculaDTO(String titulo, String sinopsis, int idPais, int duracion, String clasificacion, String trailer, String imagen, int idGenero) {
-        this.titulo = titulo;
-        this.sinopsis = sinopsis;
-        this.idPais = idPais;
-        this.duracion = duracion;
-        this.clasificacion = clasificacion;
-        this.trailer = trailer;
-        this.imagen = imagen;
-        this.idGenero = idGenero;
-    }
 
     public int getIdPelicula() {
         return idPelicula;

@@ -22,6 +22,13 @@ public class BoletoDTO {
     public BoletoDTO() {
     }
 
+    public BoletoDTO(LocalDate fechaCompra, boolean estado, int idCliente, int idFuncion) {
+        this.fechaCompra = fechaCompra;
+        this.estado = estado;
+        this.idCliente = idCliente;
+        this.idFuncion = idFuncion;
+    }
+    
     public BoletoDTO(int idBoleto, LocalDate fechaCompra, boolean estado, int idCliente, int idFuncion) {
         this.idBoleto = idBoleto;
         this.fechaCompra = fechaCompra;

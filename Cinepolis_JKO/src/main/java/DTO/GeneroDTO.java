@@ -11,11 +11,17 @@ package DTO;
  */
 public class GeneroDTO {
     
-     private int idGenero;
+    private int idGenero;
     private String nombre;
 
     public GeneroDTO() {
     }
+
+    
+    public GeneroDTO(String nombre) {
+        this.nombre = nombre;
+    }
+    
 
     public GeneroDTO(int idGenero, String nombre) {
         this.idGenero = idGenero;

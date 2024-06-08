@@ -28,7 +28,28 @@ public class ClienteDTO {
     public ClienteDTO() {
     }
 
-    public ClienteDTO(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, Date fechaNacimiento, Double latitud, Double longitud) {
+    public ClienteDTO(String correo, String contrasena) {
+        this.correo = correo;
+        this.contrasena = contrasena;
+    }
+    
+    public ClienteDTO(String nombre, String apellidoPaterno, 
+            String apellidoMaterno, String correo, Date fechaNacimiento, 
+            Double latitud, Double longitud, String contrasena) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.contrasena = contrasena;
+    }
+    
+    
+    public ClienteDTO(int idCliente, String nombre, String apellidoPaterno, 
+            String apellidoMaterno, String correo, Date fechaNacimiento, 
+            Double latitud, Double longitud) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -38,16 +59,7 @@ public class ClienteDTO {
         this.latitud = latitud;
         this.longitud = longitud;
     }
-
-    public ClienteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, Date fechaNacimiento, Double latitud, Double longitud) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.fechaNacimiento = fechaNacimiento;
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
+    
 
     public int getIdCliente() {
         return idCliente;

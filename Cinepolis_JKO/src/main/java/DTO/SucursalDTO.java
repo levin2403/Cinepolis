@@ -24,7 +24,20 @@ public class SucursalDTO {
     public SucursalDTO() {
     }
 
-    public SucursalDTO(int idSucursal, String nombre, Double latitud, Double longitud, Integer srid, String ciudad, String colonia, String calle, String numero) {
+    public SucursalDTO(String nombre, Double latitud, Double longitud, Integer srid, String ciudad, String colonia, String calle, String numero) {
+        this.nombre = nombre;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.srid = srid;
+        this.ciudad = ciudad;
+        this.colonia = colonia;
+        this.calle = calle;
+        this.numero = numero;
+    }
+
+    public SucursalDTO(int idSucursal, String nombre, Double latitud, 
+            Double longitud, Integer srid, String ciudad, String colonia, 
+            String calle, String numero) {
         this.idSucursal = idSucursal;
         this.nombre = nombre;
         this.latitud = latitud;

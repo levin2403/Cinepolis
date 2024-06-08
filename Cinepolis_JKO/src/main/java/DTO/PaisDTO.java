@@ -4,7 +4,6 @@
  */
 package DTO;
 
-import entidad.*;
 
 /**
  *
@@ -18,6 +17,10 @@ public class PaisDTO {
     public PaisDTO() {
     }
 
+    public PaisDTO(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public PaisDTO(int idPais, String nombre) {
         this.idPais = idPais;
         this.nombre = nombre;

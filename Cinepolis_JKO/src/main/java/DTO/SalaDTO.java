@@ -20,6 +20,13 @@ public class SalaDTO {
     public SalaDTO() {
     }
 
+    public SalaDTO(String nombre, int asientosDisponibles, int precioBoleto, int idSucursal) {
+        this.nombre = nombre;
+        this.asientosDisponibles = asientosDisponibles;
+        this.precioBoleto = precioBoleto;
+        this.idSucursal = idSucursal;
+    }
+    
     public SalaDTO(int idSala, String nombre, int asientosDisponibles, int precioBoleto, int idSucursal) {
         this.idSala = idSala;
         this.nombre = nombre;

@@ -4,7 +4,6 @@
  */
 package DTO;
 
-import entidad.*;
 import java.sql.Time;
 import java.time.LocalDate;
 
@@ -25,6 +24,17 @@ public class FuncionDTO {
     public FuncionDTO() {
     }
 
+    
+    public FuncionDTO(LocalDate horaInicio, LocalDate horaFin, LocalDate fecha, Time limpieza, int idPelicula, int idSala) {
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.fecha = fecha;
+        this.limpieza = limpieza;
+        this.idPelicula = idPelicula;
+        this.idSala = idSala;
+    }
+
+ 
     public FuncionDTO(int idFuncion, LocalDate horaInicio, LocalDate horaFin, LocalDate fecha, Time limpieza, int idPelicula, int idSala) {
         this.idFuncion = idFuncion;
         this.horaInicio = horaInicio;
