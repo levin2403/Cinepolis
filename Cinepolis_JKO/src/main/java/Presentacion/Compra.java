@@ -13,6 +13,8 @@ import Presentacion.Admin.Sucursales;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -38,10 +40,38 @@ public class Compra extends javax.swing.JFrame {
 
         btnComprar.setBackground(Color.decode("#07285B"));
         btnCancelar.setBackground(Color.decode("#07285B"));
+
+        // Agregar ActionListener al label de sumador
+        lblSumador.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                sumarUno();
+            }
+        });
+
+        // Agregar ActionListener al label de restador
+        lblRestador.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                restarUno();
+            }
+        });
     }
-    
-    
-    
+
+    private void sumarUno() {
+        int cantidadActual = Integer.parseInt(txtCantidadBoleto.getText());
+        cantidadActual++;
+        txtCantidadBoleto.setText(String.valueOf(cantidadActual));
+    }
+
+    private void restarUno() {
+        int cantidadActual = Integer.parseInt(txtCantidadBoleto.getText());
+        if (cantidadActual > 0) {
+            cantidadActual--;
+            txtCantidadBoleto.setText(String.valueOf(cantidadActual));
+        }
+    }
+
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Películas");
@@ -52,11 +82,11 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Inicio Inicio = new Inicio();
                 Inicio.setVisible(true);
-                
+
                 dispose();
             }
         });
-        
+
         JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
         verPeliculas.addActionListener(new ActionListener() {
             @Override
@@ -64,7 +94,7 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Peliculas Peliculas = new Peliculas();
                 Peliculas.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -79,7 +109,7 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -89,9 +119,9 @@ public class Compra extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Funciones Funciones = new Funciones();
+                Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -106,7 +136,7 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Sala Sala = new Sala();
                 Sala.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -118,9 +148,9 @@ public class Compra extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Pais Pais = new Pais();
+                Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -131,7 +161,7 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -146,7 +176,7 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Reportes Reportes = new Reportes();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -160,13 +190,13 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-        
-         JMenu menuSucursales = new JMenu("Sucursales");
+
+        JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -174,14 +204,11 @@ public class Compra extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
-        
-        
-        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
@@ -189,9 +216,8 @@ public class Compra extends javax.swing.JFrame {
         MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-         MenuBarAdmin.add(menuSucursales);
+        MenuBarAdmin.add(menuSucursales);
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -211,9 +237,9 @@ public class Compra extends javax.swing.JFrame {
         lblimagen = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        txtCantidadBoleto = new javax.swing.JTextField();
+        lblSumador = new javax.swing.JLabel();
+        lblRestador = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
@@ -293,22 +319,24 @@ public class Compra extends javax.swing.JFrame {
         jLabel4.setText("##");
         Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCantidadBoleto.setEditable(false);
+        txtCantidadBoleto.setText("0");
+        txtCantidadBoleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCantidadBoletoActionPerformed(evt);
             }
         });
-        Agrupador.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
+        Agrupador.add(txtCantidadBoleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("+");
-        Agrupador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 20, 20));
+        lblSumador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblSumador.setForeground(new java.awt.Color(0, 0, 0));
+        lblSumador.setText("+");
+        Agrupador.add(lblSumador, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 20, 20));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("-");
-        Agrupador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 20, 20));
+        lblRestador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRestador.setForeground(new java.awt.Color(0, 0, 0));
+        lblRestador.setText("-");
+        Agrupador.add(lblRestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 20, 20));
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Boletos:");
@@ -373,9 +401,9 @@ public class Compra extends javax.swing.JFrame {
         System.out.println("Este boton todavia no es funcinal");
     }//GEN-LAST:event_btnComprarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCantidadBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadBoletoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCantidadBoletoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,13 +455,13 @@ public class Compra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblRestador;
+    private javax.swing.JLabel lblSumador;
     private javax.swing.JLabel lblimagen;
     private javax.swing.JPanel panelMenu;
+    private javax.swing.JTextField txtCantidadBoleto;
     // End of variables declaration//GEN-END:variables
 }
