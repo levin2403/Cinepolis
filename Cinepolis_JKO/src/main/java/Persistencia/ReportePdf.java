@@ -1,56 +1,89 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import entidad.*;
+import com.itextpdf.text.Image;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.sql.SQLException;
-import java.util.List;
+import java.io.IOException;
 
 public class ReportePdf {
 
-    public void generarReportePeliculas() {
+    public void generarBoletoCine(String tituloPelicula, String fechaHoraFuncion, String nombreSala,
+                                   String numeroAsiento, String nombreSucursal, String direccionSucursal,
+                                   String rutaArchivo) {
+        Document document = new Document(PageSize.A4);
         try {
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("ReportePeliculas.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo));
             document.open();
 
-            Font fontTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
-            Font fontNormal = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            // Definir fuentes
+            Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.WHITE);
+            Font fontNormal = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK);
 
-            document.add(new Paragraph("Reporte de Películas\n\n", fontTitulo));
+            // Tabla para el boleto
+            PdfPTable table = new PdfPTable(2);
+            table.setWidthPercentage(100); // Porcentaje del ancho de la página
 
-            PeliculaDAO peliculaDAO = new PeliculaDAO(new ConexionBD());
-            List<Pelicula> peliculas = peliculaDAO.obtenerPeliculas();
+            // Celda para el título
+            PdfPCell cell;
+            cell = new PdfPCell(new Phrase("Cinépolis", fontTitulo));
+            cell.setColspan(2);
+            cell.setBackgroundColor(BaseColor.BLUE);
+            cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+            table.addCell(cell);
 
-            for (Pelicula pelicula : peliculas) {
-                document.add(new Paragraph("ID: " + pelicula.getIdPelicula(), fontNormal));
-                document.add(new Paragraph("Título: " + pelicula.getTitulo(), fontNormal));
-                document.add(new Paragraph("Género: " + pelicula.getIdGenero(), fontNormal));
-                document.add(new Paragraph("País: " + pelicula.getIdPais(), fontNormal));
-                document.add(new Paragraph("\n"));
-            }
+            // Contenido del boleto
+            table.addCell(new Phrase("Película:", fontNormal));
+            table.addCell(new Phrase(tituloPelicula, fontNormal));
+            table.addCell(new Phrase("Fecha y hora de función:", fontNormal));
+            table.addCell(new Phrase(fechaHoraFuncion, fontNormal));
+            table.addCell(new Phrase("Sala:", fontNormal));
+            table.addCell(new Phrase(nombreSala, fontNormal));
+            table.addCell(new Phrase("Asiento:", fontNormal));
+            table.addCell(new Phrase(numeroAsiento, fontNormal));
+            table.addCell(new Phrase("Sucursal:", fontNormal));
+            table.addCell(new Phrase(nombreSucursal, fontNormal));
+            table.addCell(new Phrase("Dirección:", fontNormal));
+            table.addCell(new Phrase(direccionSucursal, fontNormal));
+
+            // Agregar tabla al documento
+            document.add(table);
+
+            // Insertar imagen de código QR
+            Image qrImage = Image.getInstance("qr_code.png");
+            qrImage.setAlignment(Image.ALIGN_CENTER);
+            qrImage.scaleToFit(100, 100); // Ajustar tamaño
+            document.add(qrImage);
 
             document.close();
-            System.out.println("Reporte de películas generado correctamente.");
-
-        } catch (FileNotFoundException | DocumentException | SQLException e) {
+        } catch (DocumentException | IOException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
         ReportePdf reportePdf = new ReportePdf();
-        reportePdf.generarReportePeliculas();
+        reportePdf.generarBoletoCine("Pulp Fiction", "Miércoles, 12 de junio de 2024, 20:00 hrs",
+                "Sala 1", "A12", "Cinépolis Centro", "Av. Insurgentes Sur 123, Col. Roma, CDMX", "boleto_cine.pdf");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
