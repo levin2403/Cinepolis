@@ -18,7 +18,7 @@ public class ReportePdf {
 
     public void generarBoletoCine(String tituloPelicula, String fechaHoraFuncion, String nombreSala,
                                    String numeroAsiento, String nombreSucursal, String direccionSucursal,
-                                   String rutaArchivo) {
+                                   double precioBoleto, String rutaArchivo) {
         Document document = new Document(PageSize.A4);
         try {
             PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo));
@@ -54,6 +54,10 @@ public class ReportePdf {
             table.addCell(new Phrase("Dirección:", fontNormal));
             table.addCell(new Phrase(direccionSucursal, fontNormal));
 
+            // Nueva fila para el precio
+            table.addCell(new Phrase("Precio del boleto:", fontNormal));
+            table.addCell(new Phrase(String.valueOf(precioBoleto), fontNormal));
+
             // Agregar tabla al documento
             document.add(table);
 
@@ -72,7 +76,8 @@ public class ReportePdf {
     public static void main(String[] args) {
         ReportePdf reportePdf = new ReportePdf();
         reportePdf.generarBoletoCine("Pulp Fiction", "Miércoles, 12 de junio de 2024, 20:00 hrs",
-                "Sala 1", "A12", "Cinépolis Centro", "Av. Insurgentes Sur 123, Col. Roma, CDMX", "boleto_cine.pdf");
+                "Sala 1", "A12", "Cinépolis Centro", "Av. Insurgentes Sur 123, Col. Roma, CDMX",
+                150.0, "boleto_cine.pdf");
     }
 }
 
