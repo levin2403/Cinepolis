@@ -6,6 +6,7 @@ package entidad;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class Cliente {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private Double latitud;
     private Double longitud;
     private String contrasena;
@@ -32,7 +33,7 @@ public class Cliente {
         this.contrasena = contrasena;
     }
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, Date fechaNacimiento, Double latitud, Double longitud) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, Double latitud, Double longitud) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -43,7 +44,7 @@ public class Cliente {
         this.longitud = longitud;
     }
 
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, Date fechaNacimiento, Double latitud, Double longitud) {
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, Double latitud, Double longitud) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -93,11 +94,11 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -116,6 +117,16 @@ public class Cliente {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = encriptar(contrasena);
+    }
+    
+    
     
      private static String encriptar(String contrasena) {
         try {

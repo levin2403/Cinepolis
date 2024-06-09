@@ -6,6 +6,7 @@ package Persistencia;
 
 import entidad.Cliente;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,16 +21,17 @@ public class ClienteDAO {
         this.conexionBD = conexionBD;
     }
 
-    public void agregarCliente(Cliente cliente) throws SQLException {
-        String query = "INSERT INTO Cliente (Nombre, ApellidoPaterno, ApellidoMaterno, Correo, FechaNacimiento, Latitud, Longitud) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void crear(Cliente cliente) throws SQLException {
+        String query = "INSERT INTO clientes (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, latitud, longitud, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, cliente.getNombre());
+             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
             stmt.setString(3, cliente.getApellidoMaterno());
             stmt.setString(4, cliente.getCorreo());
-            stmt.setDate(5, new java.sql.Date(cliente.getFechaNacimiento().getTime()));
+            stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
             stmt.setDouble(6, cliente.getLatitud());
             stmt.setDouble(7, cliente.getLongitud());
+            stmt.setString(8, cliente.getContrasena());
             stmt.executeUpdate();
         }
     }
@@ -53,5 +55,31 @@ public class ClienteDAO {
         }
         return clientes;
     }
+    
+
+    public void actualizar(Cliente cliente) throws SQLException {
+        String sql = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
+        try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, cliente.getNombre());
+            stmt.setString(2, cliente.getApellidoPaterno());
+            stmt.setString(3, cliente.getApellidoMaterno());
+            stmt.setString(4, cliente.getCorreo());
+            stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
+            stmt.setDouble(6, cliente.getLatitud());
+            stmt.setDouble(7, cliente.getLongitud());
+            stmt.setString(8, cliente.getContrasena());
+            stmt.setInt(9, cliente.getIdCliente());
+            stmt.executeUpdate();
+        }
+    }
+
+    public void borrar(int idCliente) throws SQLException {
+        String sql = "DELETE FROM clientes WHERE idCliente = ?";
+        try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, idCliente);
+            stmt.executeUpdate();
+        }
+    }
+
 
 }

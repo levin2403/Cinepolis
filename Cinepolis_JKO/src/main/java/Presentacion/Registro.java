@@ -5,6 +5,7 @@
 package Presentacion;
 
 import java.awt.Color;
+import java.time.LocalDate;
 
 /**
  *
@@ -39,17 +40,17 @@ public class Registro extends javax.swing.JFrame {
         btnRegistrarse3 = new javax.swing.JButton();
         txtContrasena = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtAMaterno = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dateNacimiento = new com.github.lgooddatepicker.components.DatePicker();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
-        txtNombre2 = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        txtAPaterno = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtNombre3 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,9 +92,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 220, 50));
 
-        txtNombre.setBackground(new java.awt.Color(242, 242, 242));
-        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
-        Agrupador.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 180, 30));
+        txtAMaterno.setBackground(new java.awt.Color(242, 242, 242));
+        txtAMaterno.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 180, 30));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
         Agrupador.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 180, 190));
@@ -114,13 +115,13 @@ public class Registro extends javax.swing.JFrame {
         jLabel5.setText("Contraseña");
         Agrupador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, 160, 30));
 
-        txtNombre1.setBackground(new java.awt.Color(242, 242, 242));
-        txtNombre1.setForeground(new java.awt.Color(0, 0, 0));
-        Agrupador.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 390, 30));
+        txtCorreo.setBackground(new java.awt.Color(242, 242, 242));
+        txtCorreo.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 390, 30));
 
-        txtNombre2.setBackground(new java.awt.Color(242, 242, 242));
-        txtNombre2.setForeground(new java.awt.Color(0, 0, 0));
-        Agrupador.add(txtNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 180, 30));
+        txtAPaterno.setBackground(new java.awt.Color(242, 242, 242));
+        txtAPaterno.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 180, 30));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,9 +133,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setText("Fecha Nacimiento");
         Agrupador.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 160, 30));
 
-        txtNombre3.setBackground(new java.awt.Color(242, 242, 242));
-        txtNombre3.setForeground(new java.awt.Color(0, 0, 0));
-        Agrupador.add(txtNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 390, 30));
+        txtNombre.setBackground(new java.awt.Color(242, 242, 242));
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 390, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,7 +163,14 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelar3ActionPerformed
 
     private void btnRegistrarse3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse3ActionPerformed
-
+        
+        String nombre = txtNombre.getText();
+        String Materno = txtAMaterno.getText();
+        String Paterno = txtAPaterno.getText();
+        LocalDate nacimiento = dateNacimiento.getDate();
+        
+        String correo = txtCorreo.getText();
+        String contrasena = txtContrasena.getText();
     }//GEN-LAST:event_btnRegistrarse3ActionPerformed
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
@@ -217,10 +225,10 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField txtAMaterno;
+    private javax.swing.JTextField txtAPaterno;
     private javax.swing.JTextField txtContrasena;
+    private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
-    private javax.swing.JTextField txtNombre3;
     // End of variables declaration//GEN-END:variables
 }

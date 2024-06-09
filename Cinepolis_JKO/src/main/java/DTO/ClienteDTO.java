@@ -6,6 +6,7 @@ package DTO;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,7 +21,7 @@ public class ClienteDTO {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
     private Double latitud;
     private Double longitud;
     private String contrasena;
@@ -34,7 +35,7 @@ public class ClienteDTO {
     }
     
     public ClienteDTO(String nombre, String apellidoPaterno, 
-            String apellidoMaterno, String correo, Date fechaNacimiento, 
+            String apellidoMaterno, String correo, LocalDate fechaNacimiento, 
             Double latitud, Double longitud, String contrasena) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -48,7 +49,7 @@ public class ClienteDTO {
     
     
     public ClienteDTO(int idCliente, String nombre, String apellidoPaterno, 
-            String apellidoMaterno, String correo, Date fechaNacimiento, 
+            String apellidoMaterno, String correo, LocalDate fechaNacimiento, 
             Double latitud, Double longitud) {
         this.idCliente = idCliente;
         this.nombre = nombre;
@@ -101,11 +102,11 @@ public class ClienteDTO {
         this.correo = correo;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -124,6 +125,16 @@ public class ClienteDTO {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    
     
      private static String encriptar(String contrasena) {
         try {
