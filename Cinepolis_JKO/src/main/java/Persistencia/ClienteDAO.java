@@ -24,7 +24,7 @@ public class ClienteDAO {
     public void crear(Cliente cliente) throws SQLException {
         String query = "INSERT INTO clientes (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, latitud, longitud, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
-             stmt.setString(1, cliente.getNombre());
+            stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
             stmt.setString(3, cliente.getApellidoMaterno());
             stmt.setString(4, cliente.getCorreo());
@@ -47,7 +47,7 @@ public class ClienteDAO {
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 cliente.setCorreo(rs.getString("Correo"));
-                cliente.setFechaNacimiento(rs.getDate("FechaNacimiento"));
+                cliente.setFechaNacimiento(rs.);
                 cliente.setLatitud(rs.getDouble("Latitud"));
                 cliente.setLongitud(rs.getDouble("Longitud"));
                 clientes.add(cliente);
@@ -58,7 +58,7 @@ public class ClienteDAO {
     
 
     public void actualizar(Cliente cliente) throws SQLException {
-        String sql = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
+        String query = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
@@ -74,12 +74,10 @@ public class ClienteDAO {
     }
 
     public void borrar(int idCliente) throws SQLException {
-        String sql = "DELETE FROM clientes WHERE idCliente = ?";
+        String query = "DELETE FROM clientes WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, idCliente);
             stmt.executeUpdate();
         }
     }
-
-
 }

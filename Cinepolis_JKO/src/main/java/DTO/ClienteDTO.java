@@ -131,12 +131,13 @@ public class ClienteDTO {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        // Se encripta la contraseña antes de almacenarla
+        this.contrasena = encriptar(contrasena);
     }
     
     
     
-     private static String encriptar(String contrasena) {
+    private static String encriptar(String contrasena) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedPassword = md.digest(contrasena.getBytes());
@@ -190,28 +191,4 @@ public class ClienteDTO {
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.apellidoPaterno, other.apellidoPaterno)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
-            return false;
-        }
-        if (!Objects.equals(this.correo, other.correo)) {
-            return false;
-        }
-        if (!Objects.equals(this.contrasena, other.contrasena)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
-            return false;
-        }
-        if (!Objects.equals(this.latitud, other.latitud)) {
-            return false;
-        }
-        return Objects.equals(this.longitud, other.longitud);
-    }
-    
-     
-    
-    
-}
+        if (!Objects.equals(this.apellidoPaterno, other.apellido
