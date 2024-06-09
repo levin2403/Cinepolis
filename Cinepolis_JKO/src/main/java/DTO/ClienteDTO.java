@@ -1,13 +1,8 @@
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -131,8 +126,7 @@ public class ClienteDTO {
     }
 
     public void setContrasena(String contrasena) {
-        // Se encripta la contraseña antes de almacenarla
-        this.contrasena = encriptar(contrasena);
+        this.contrasena = contrasena;
     }
     
     
@@ -191,4 +185,24 @@ public class ClienteDTO {
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.apellidoPaterno, other.apellido
+        if (!Objects.equals(this.apellidoPaterno, other.apellidoPaterno)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellidoMaterno, other.apellidoMaterno)) {
+            return false;
+        }
+        if (!Objects.equals(this.correo, other.correo)) {
+            return false;
+        }
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaNacimiento, other.fechaNacimiento)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitud, other.latitud)) {
+            return false;
+        }
+        return Objects.equals(this.longitud, other.longitud);
+    }
+}

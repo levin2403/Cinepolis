@@ -47,7 +47,7 @@ public class ClienteDAO {
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 cliente.setCorreo(rs.getString("Correo"));
-                cliente.setFechaNacimiento(rs.);
+                cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                 cliente.setLatitud(rs.getDouble("Latitud"));
                 cliente.setLongitud(rs.getDouble("Longitud"));
                 clientes.add(cliente);
