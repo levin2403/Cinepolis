@@ -7,6 +7,9 @@ import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;
 import Persistencia.PersistenciaException;
 import convertidores.ClienteCVR;
+import entidad.Cliente;
+import java.util.List;
+
 
 
 public class ClienteNegocio {
@@ -30,5 +33,10 @@ public class ClienteNegocio {
             
         }
         
+    }
+
+    public List<Cliente> obtenerClientes() throws PersistenciaException {
+        return clienteDAO.obtenerClientesSinUBI();
+
     }
 }

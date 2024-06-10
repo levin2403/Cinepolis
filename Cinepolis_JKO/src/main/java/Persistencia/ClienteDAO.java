@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
 
 import entidad.Cliente;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +29,7 @@ public class ClienteDAO {
         }
         catch(SQLException e){
             throw new PersistenciaException();
-        }
+        }    
     }
 
     public List<Cliente> obtenerClientes() throws PersistenciaException {
@@ -51,18 +43,41 @@ public class ClienteDAO {
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 cliente.setCorreo(rs.getString("Correo"));
+                cliente.setContrasena("contrasena");
                 cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                 cliente.setLatitud(rs.getDouble("Latitud"));
                 cliente.setLongitud(rs.getDouble("Longitud"));
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al obtener clientes de la base de datos: " + ex.getMessage());
         }
         return clientes;
     }
+
+   public List<Cliente> obtenerClientesSinUBI() throws PersistenciaException {
+    List<Cliente> clientes = new ArrayList<>();
+    String query = "SELECT ID_Cliente, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, contrasena, FechaNacimiento FROM Cliente";
+    try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getInt("ID_Cliente"));
+            cliente.setNombre(rs.getString("Nombre"));
+            cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+            cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+            cliente.setCorreo(rs.getString("Correo"));
+            cliente.setContrasena(rs.getString("contrasena")); // Usar la contraseña correcta de la base de datos
+            cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+
+            clientes.add(cliente);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+        throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+    }
+    return clientes;
+}
+
 
     public void actualizar(Cliente cliente) throws PersistenciaException {
         String query = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
@@ -78,9 +93,7 @@ public class ClienteDAO {
             stmt.setInt(9, cliente.getIdCliente());
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al actualizar un cliente en la base de datos: " + ex.getMessage());
         }
     }
 
@@ -90,9 +103,7 @@ public class ClienteDAO {
             stmt.setInt(1, idCliente);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al borrar un cliente en la base de datos: " + ex.getMessage());
         }
     }
 }

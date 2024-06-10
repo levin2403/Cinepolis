@@ -4,9 +4,19 @@
  */
 package Presentacion;
 
+import Negocio.ClienteNegocio;
+import Persistencia.PersistenciaException;
+import entidad.Cliente;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,20 +24,22 @@ import java.awt.event.MouseEvent;
  */
 public class LogIn extends javax.swing.JFrame {
 
+    ClienteNegocio clienteNegocio = new ClienteNegocio();
+
     /**
      * Creates new form LogIn
      */
     public LogIn() {
         initComponents();
-        
-         // creamos lo de el label registro clickeable
+
+        // creamos lo de el label registro clickeable
         lblRegistrarse.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //abrimos los eventos de click en los label
-               Registro registro = new Registro();
-               registro.setVisible(true);
-               dispose();
+                Registro registro = new Registro();
+                registro.setVisible(true);
+                dispose();
             }
         });
         personalizador();
@@ -35,6 +47,85 @@ public class LogIn extends javax.swing.JFrame {
 
     public void personalizador() {
         Agrupador.setBackground(Color.decode("#07285B"));
+    }
+
+    public void validarUsuario() throws PersistenciaException {
+        // Verificar si el campo de correo está vacío
+        if (txtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese su correo");
+            System.out.println("El campo de correo está vacío.");
+            return;
+        }
+
+        // Verificar si el campo de contraseña está vacío
+        if (txtContrasena.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese su contraseña");
+            System.out.println("El campo de contraseña está vacío.");
+            return;
+        }
+
+        // Obtener la lista de clientes
+        List<Cliente> clientes = clienteNegocio.obtenerClientes();
+        System.out.println("Clientes obtenidos: " + clientes.size());
+        Cliente usuarioEncontrado = null;
+
+        // Obtener el correo y la contraseña encriptada del formulario
+        String correoIngresado = txtCorreo.getText();
+        String contrasenaIngresada = encriptar(txtContrasena.getText());
+        System.out.println("Correo ingresado: " + correoIngresado);
+        System.out.println("Contraseña ingresada (encriptada): " + contrasenaIngresada);
+
+        // Recorrer la lista de clientes para encontrar coincidencias
+        for (Cliente user : clientes) {
+            System.out.println("Verificando usuario: " + user.getCorreo());
+            // Verificar si el correo coincide
+            if (user.getCorreo().equals(correoIngresado)) {
+                System.out.println("Correo coincide: " + user.getCorreo());
+                // Verificar si la contraseña coincide
+                if (user.getContrasena() != null && user.getContrasena().equals(contrasenaIngresada)) {
+                    System.out.println("Contraseña coincide para el usuario: " + user.getCorreo());
+                    usuarioEncontrado = user;
+                    break;
+                } else {
+                    System.out.println("Contraseña no coincide para el usuario: " + user.getCorreo());
+                }
+            } else {
+                System.out.println("Correo no coincide: " + user.getCorreo());
+            }
+        }
+
+        // Si se encontró un usuario válido, abrir la ventana de inicio
+        if (usuarioEncontrado != null) {
+            System.out.println("Usuario encontrado: " + usuarioEncontrado.getCorreo());
+            Inicio inicio = new Inicio();
+            inicio.setVisible(true);
+            this.dispose();
+        } else {
+            System.out.println("Usuario no encontrado.");
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+        }
+    }
+
+    private String encriptar(String contrasenia) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedPassword = md.digest(contrasenia.getBytes(StandardCharsets.UTF_8)); // Usar UTF-8 para codificar
+
+            // Convierte el hash a una representación hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte hashByte : hashedPassword) {
+                String hex = Integer.toHexString(0xff & hashByte);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            System.out.println("Contraseña encriptada: " + hexString.toString());
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -49,13 +140,13 @@ public class LogIn extends javax.swing.JFrame {
         Agrupador = new javax.swing.JPanel();
         etiquetaUsuario = new javax.swing.JLabel();
         etiquetaContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblRegistrarse = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,10 +163,6 @@ public class LogIn extends javax.swing.JFrame {
         etiquetaContrasena.setText("Contraseña:");
         Agrupador.add(etiquetaContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
 
-        txtContrasena.setBackground(new java.awt.Color(234, 234, 234));
-        txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
-        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
-
         txtCorreo.setBackground(new java.awt.Color(234, 234, 234));
         txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +170,7 @@ public class LogIn extends javax.swing.JFrame {
                 txtCorreoActionPerformed(evt);
             }
         });
-        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 180, -1));
+        Agrupador.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 190, -1));
 
         btnIniciarSesion.setBackground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,6 +203,7 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
         Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 160, 160));
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 190, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,12 +224,12 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        
-        Inicio inicio = new Inicio();
-        
-        inicio.setVisible(true);
-        
-        dispose();
+
+        try {
+            validarUsuario();
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
@@ -193,7 +281,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblRegistrarse;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

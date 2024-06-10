@@ -1,85 +1,134 @@
 package Persistencia;
 
-import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.Image;
-
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ReportePdf {
 
-    public void generarBoletoCine(String tituloPelicula, String fechaHoraFuncion, String nombreSala,
-                                   String numeroAsiento, String nombreSucursal, String direccionSucursal,
-                                   double precioBoleto, String rutaArchivo) {
-        Document document = new Document(PageSize.A4);
-        try {
-            PdfWriter.getInstance(document, new FileOutputStream(rutaArchivo));
-            document.open();
+    public void generarReporte(String rutaPDF) throws BadElementException, IOException {
+ 
+        ConexionBD conexionBD = new ConexionBD();
 
-            // Definir fuentes
-            Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.WHITE);
-            Font fontNormal = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK);
+        try (Connection conexion = conexionBD.crearConexion()) {
 
-            // Tabla para el boleto
-            PdfPTable table = new PdfPTable(2);
-            table.setWidthPercentage(100); // Porcentaje del ancho de la página
+            String consulta = "SELECT b.ID_Boleto, b.FechaCompra, b.Estado, c.Nombre AS NombreCliente, "
+                            + "p.Titulo, s.Nombre AS Sucursal, f.Fecha, f.HoraInicio, f.HoraFin "
+                            + "FROM Boleto b "
+                            + "INNER JOIN Funcion f ON b.ID_Funcion = f.ID_Funcion "
+                            + "INNER JOIN Pelicula p ON f.ID_Pelicula = p.ID_Pelicula "
+                            + "INNER JOIN Sala s ON f.ID_Sala = s.ID_Sala "
+                            + "INNER JOIN Cliente c ON b.ID_Cliente = c.ID_Cliente";
 
-            // Celda para el título
-            PdfPCell cell;
-            cell = new PdfPCell(new Phrase("Cinépolis", fontTitulo));
-            cell.setColspan(2);
-            cell.setBackgroundColor(BaseColor.BLUE);
-            cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
-            table.addCell(cell);
+           
+            Document documento = new Document();
+            PdfWriter.getInstance(documento, new FileOutputStream(rutaPDF));
+            documento.open();
 
-            // Contenido del boleto
-            table.addCell(new Phrase("Película:", fontNormal));
-            table.addCell(new Phrase(tituloPelicula, fontNormal));
-            table.addCell(new Phrase("Fecha y hora de función:", fontNormal));
-            table.addCell(new Phrase(fechaHoraFuncion, fontNormal));
-            table.addCell(new Phrase("Sala:", fontNormal));
-            table.addCell(new Phrase(nombreSala, fontNormal));
-            table.addCell(new Phrase("Asiento:", fontNormal));
-            table.addCell(new Phrase(numeroAsiento, fontNormal));
-            table.addCell(new Phrase("Sucursal:", fontNormal));
-            table.addCell(new Phrase(nombreSucursal, fontNormal));
-            table.addCell(new Phrase("Dirección:", fontNormal));
-            table.addCell(new Phrase(direccionSucursal, fontNormal));
+            Image imagen = Image.getInstance("cinepolis_logo.png");
+            imagen.scaleToFit(150, 150);
+            documento.add(imagen);
 
-            // Nueva fila para el precio
-            table.addCell(new Phrase("Precio del boleto:", fontNormal));
-            table.addCell(new Phrase(String.valueOf(precioBoleto), fontNormal));
+       
+            documento.add(new Paragraph("Boleto de Cinépolis"));
 
-            // Agregar tabla al documento
-            document.add(table);
+          
+            try (PreparedStatement ps = conexion.prepareStatement(consulta);
+                 ResultSet rs = ps.executeQuery()) {
 
-            // Insertar imagen de código QR
-            Image qrImage = Image.getInstance("qr_code.png");
-            qrImage.setAlignment(Image.ALIGN_CENTER);
-            qrImage.scaleToFit(100, 100); // Ajustar tamaño
-            document.add(qrImage);
+             
+                while (rs.next()) {
+                                        PdfPTable tabla = new PdfPTable(2);
+                    tabla.setWidthPercentage(100);
+                    tabla.setSpacingBefore(10f);
+                    tabla.setSpacingAfter(10f);
 
-            document.close();
-        } catch (DocumentException | IOException e) {
-            e.printStackTrace();
+                    
+                    agregarCelda(tabla, "Boleto", String.valueOf(rs.getInt("ID_Boleto")));
+                    agregarCelda(tabla, "Fecha de Compra", rs.getTimestamp("FechaCompra").toString());
+                    agregarCelda(tabla, "Estado", rs.getBoolean("Estado") ? "Activo" : "Inactivo");
+                    agregarCelda(tabla, "Nombre Cliente", rs.getString("NombreCliente"));
+                    agregarCelda(tabla, "Pelicula", rs.getString("Titulo"));
+                    agregarCelda(tabla, "Sucursal", rs.getString("Sucursal"));
+                    agregarCelda(tabla, "Fecha de la Funcion", rs.getDate("Fecha").toString());
+                    agregarCelda(tabla, "Hora de Inicio", rs.getTime("HoraInicio").toString());
+                    agregarCelda(tabla, "Hora de Fin", rs.getTime("HoraFin").toString());
+
+                 
+                    documento.add(tabla);
+
+                   
+                    Image qrCode = Image.getInstance("qr_code.png");
+                    qrCode.scaleToFit(100, 100);
+                    qrCode.setAlignment(Element.ALIGN_CENTER);
+                    documento.add(qrCode);
+
+                 
+                    documento.add(new Paragraph("\n\n"));
+
+                    documento.newPage(); 
+                }
+            }
+
+           
+            documento.close();
+        } catch (SQLException | DocumentException | FileNotFoundException ex) {
+            ex.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
+    private void agregarCelda(PdfPTable tabla, String etiqueta, String valor) {
+        PdfPCell celdaEtiqueta = new PdfPCell(new Paragraph(etiqueta));
+        PdfPCell celdaValor = new PdfPCell(new Paragraph(valor));
+        tabla.addCell(celdaEtiqueta);
+        tabla.addCell(celdaValor);
+    }
+
+    public static void main(String[] args) throws BadElementException, IOException {
+      
+        String rutaPDF = "C:\\Users\\oribi\\Documents\\GitHub\\Cinepolis\\Cinepolis_JKO\\reporte_boletos.pdf";
+
+        
         ReportePdf reportePdf = new ReportePdf();
-        reportePdf.generarBoletoCine("Pulp Fiction", "Miércoles, 12 de junio de 2024, 20:00 hrs",
-                "Sala 1", "A12", "Cinépolis Centro", "Av. Insurgentes Sur 123, Col. Roma, CDMX",
-                150.0, "boleto_cine.pdf");
+
+      
+        reportePdf.generarReporte(rutaPDF);
+
+      
+        System.out.println("Se ha generado el reporte PDF en la ruta: " + rutaPDF);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
