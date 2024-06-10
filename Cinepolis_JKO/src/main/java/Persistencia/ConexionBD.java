@@ -17,7 +17,11 @@ public class ConexionBD implements IConexionBD {
     final String BASE_DATOS = "Cinepolis";
     private final String CADENA_CONEXION = "jdbc:mysql://" + SERVER + "/" + BASE_DATOS;
     final String USUARIO = "root";
+<<<<<<< Updated upstream
     final String CONTRASEÑA = "1234";
+=======
+    final String CONTRASEÑA = "123hueningkai";
+>>>>>>> Stashed changes
 
     @Override
     public Connection crearConexion() throws SQLException {
