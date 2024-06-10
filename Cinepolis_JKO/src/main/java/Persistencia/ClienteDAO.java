@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
 
 import entidad.Cliente;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +25,7 @@ public class ClienteDAO {
             stmt.setString(6, cliente.getContrasena());
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al crear un cliente en la base de datos: " + ex.getMessage());
         }
     }
 
@@ -55,9 +46,7 @@ public class ClienteDAO {
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al obtener clientes de la base de datos: " + ex.getMessage());
         }
         return clientes;
     }
@@ -76,9 +65,7 @@ public class ClienteDAO {
             stmt.setInt(9, cliente.getIdCliente());
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al actualizar un cliente en la base de datos: " + ex.getMessage());
         }
     }
 
@@ -88,9 +75,7 @@ public class ClienteDAO {
             stmt.setInt(1, idCliente);
             stmt.executeUpdate();
         } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+            throw new PersistenciaException("Error al borrar un cliente en la base de datos: " + ex.getMessage());
         }
     }
 }
