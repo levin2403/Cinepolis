@@ -40,6 +40,7 @@ public class ClienteDAO {
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 cliente.setCorreo(rs.getString("Correo"));
+                cliente.setContrasena("contrasena");
                 cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                 cliente.setLatitud(rs.getDouble("Latitud"));
                 cliente.setLongitud(rs.getDouble("Longitud"));
@@ -50,6 +51,30 @@ public class ClienteDAO {
         }
         return clientes;
     }
+
+   public List<Cliente> obtenerClientesSinUBI() throws PersistenciaException {
+    List<Cliente> clientes = new ArrayList<>();
+    String query = "SELECT ID_Cliente, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, contrasena, FechaNacimiento FROM Cliente";
+    try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+        while (rs.next()) {
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getInt("ID_Cliente"));
+            cliente.setNombre(rs.getString("Nombre"));
+            cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
+            cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+            cliente.setCorreo(rs.getString("Correo"));
+            cliente.setContrasena(rs.getString("contrasena")); // Usar la contraseña correcta de la base de datos
+            cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+
+            clientes.add(cliente);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+        throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+    }
+    return clientes;
+}
+
 
     public void actualizar(Cliente cliente) throws PersistenciaException {
         String query = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";

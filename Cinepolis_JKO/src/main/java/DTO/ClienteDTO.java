@@ -166,17 +166,11 @@ public class ClienteDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.idCliente;
-        hash = 47 * hash + Objects.hashCode(this.nombre);
-        hash = 47 * hash + Objects.hashCode(this.apellidoPaterno);
-        hash = 47 * hash + Objects.hashCode(this.apellidoMaterno);
-        hash = 47 * hash + Objects.hashCode(this.correo);
-        hash = 47 * hash + Objects.hashCode(this.fechaNacimiento);
-        hash = 47 * hash + Objects.hashCode(this.latitud);
-        hash = 47 * hash + Objects.hashCode(this.longitud);
-        hash = 47 * hash + Objects.hashCode(this.contrasena);
+        hash = 97 * hash + this.idCliente;
         return hash;
     }
+
+    
 
     @Override
     public boolean equals(Object obj) {
