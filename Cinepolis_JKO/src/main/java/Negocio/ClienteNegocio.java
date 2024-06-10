@@ -8,7 +8,6 @@ import entidad.Cliente;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,10 +76,5 @@ public class ClienteNegocio {
 
         // Registro del cliente
         clienteDAO.crear(cliente);
-    }
-
-    public List<Cliente> obtenerClientes() throws PersistenciaException {
-        return clienteDAO.obtenerClientesSinUBI();
-
     }
 }
