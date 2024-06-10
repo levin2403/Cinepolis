@@ -29,9 +29,6 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String contrasena) {
-        this.contrasena = contrasena;
-    }
 
     public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, Double latitud, Double longitud) {
         this.idCliente = idCliente;
@@ -53,6 +50,17 @@ public class Cliente {
         this.latitud = latitud;
         this.longitud = longitud;
     }
+
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, String contrasena) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.contrasena = contrasena;
+    }
+    
+    
 
     public int getIdCliente() {
         return idCliente;

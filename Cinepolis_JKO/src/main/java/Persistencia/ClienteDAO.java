@@ -17,26 +17,28 @@ public class ClienteDAO {
 
     private IConexionBD conexionBD;
 
-    public ClienteDAO(IConexionBD conexionBD) {
+    public ClienteDAO(ConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
 
-    public void crear(Cliente cliente) throws SQLException {
-        String query = "INSERT INTO clientes (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, latitud, longitud, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public void crear(Cliente cliente) throws PersistenciaException {
+        String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
             stmt.setString(3, cliente.getApellidoMaterno());
             stmt.setString(4, cliente.getCorreo());
             stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
-            stmt.setDouble(6, cliente.getLatitud());
-            stmt.setDouble(7, cliente.getLongitud());
-            stmt.setString(8, cliente.getContrasena());
+            stmt.setString(6, cliente.getContrasena());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
         }
     }
 
-    public List<Cliente> obtenerClientes() throws SQLException {
+    public List<Cliente> obtenerClientes() throws PersistenciaException {
         List<Cliente> clientes = new ArrayList<>();
         String query = "SELECT * FROM Cliente";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
@@ -52,12 +54,15 @@ public class ClienteDAO {
                 cliente.setLongitud(rs.getDouble("Longitud"));
                 clientes.add(cliente);
             }
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
         }
         return clientes;
     }
-    
 
-    public void actualizar(Cliente cliente) throws SQLException {
+    public void actualizar(Cliente cliente) throws PersistenciaException {
         String query = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, cliente.getNombre());
@@ -70,14 +75,22 @@ public class ClienteDAO {
             stmt.setString(8, cliente.getContrasena());
             stmt.setInt(9, cliente.getIdCliente());
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
         }
     }
 
-    public void borrar(int idCliente) throws SQLException {
+    public void borrar(int idCliente) throws PersistenciaException {
         String query = "DELETE FROM clientes WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, idCliente);
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            // hacer uso de Logger
+            System.out.println(ex.getMessage());
+            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
         }
     }
 }

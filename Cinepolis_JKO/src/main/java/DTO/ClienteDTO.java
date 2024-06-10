@@ -55,6 +55,17 @@ public class ClienteDTO {
         this.latitud = latitud;
         this.longitud = longitud;
     }
+
+    public ClienteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, String contrasena) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.contrasena = contrasena;
+    }
+    
+    
     
 
     public int getIdCliente() {
