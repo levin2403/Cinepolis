@@ -21,6 +21,13 @@ public class Boleto {
     public Boleto() {
     }
 
+    public Boleto(LocalDate fechaCompra, boolean estado, int idCliente, int idFuncion) {
+        this.fechaCompra = fechaCompra;
+        this.estado = estado;
+        this.idCliente = idCliente;
+        this.idFuncion = idFuncion;
+    }
+
     public Boleto(int idBoleto, LocalDate fechaCompra, boolean estado, int idCliente, int idFuncion) {
         this.idBoleto = idBoleto;
         this.fechaCompra = fechaCompra;
@@ -45,7 +52,7 @@ public class Boleto {
         this.fechaCompra = fechaCompra;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
     }
 

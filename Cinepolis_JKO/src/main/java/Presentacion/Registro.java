@@ -7,14 +7,8 @@ package Presentacion;
 import DTO.ClienteDTO;
 import Negocio.ClienteNegocio;
 import Negocio.NegocioException;
-import Persistencia.PersistenciaException;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Registro extends javax.swing.JFrame {
 
-    ClienteNegocio clienteNegocio;
+    
 
     /**
      * Creates new form Registro
@@ -32,7 +26,7 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
         personalizador();
 
-        clienteNegocio = new ClienteNegocio();
+        
 
     }
 
@@ -40,7 +34,7 @@ public class Registro extends javax.swing.JFrame {
         Agrupador.setBackground(Color.decode("#07285B"));
     }
 
-    public void registrar() {
+    public boolean validarDatos() {
         String nombre = txtNombre.getText();
         String materno = txtAMaterno.getText();
         String paterno = txtAPaterno.getText();
@@ -51,76 +45,30 @@ public class Registro extends javax.swing.JFrame {
         // Validación de campos de texto obligatorios
         if (nombre == null || nombre.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El nombre es obligatorio.");
-            return;
+            return false;
         }
         if (paterno == null || paterno.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El apellido paterno es obligatorio.");
-            return;
+            return false;
         }
         if (materno == null || materno.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El apellido materno es obligatorio.");
-            return;
+            return false;
         }
         if (nacimiento == null) {
             JOptionPane.showMessageDialog(null, "La fecha de nacimiento es obligatoria.");
-            return;
+            return false;
         }
         if (correo == null || correo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El correo electrónico es obligatorio.");
-            return;
+            return false;
         }
         if (contrasena == null || contrasena.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "La contraseña es obligatoria.");
-            return;
+            JOptionPane.showMessageDialog(null, "La contraseña es obligatoria.");   
+            return false;
         }
-
-        // Validación de formato del correo electrónico
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(correo);
-        if (!matcher.matches()) {
-            JOptionPane.showMessageDialog(null, "El formato del correo electrónico no es válido.");
-            return;
-        }
-
-        // Validación de fecha de nacimiento (mayor de 18 años)
-        LocalDate ahora = LocalDate.now();
-        if (Period.between(nacimiento, ahora).getYears() < 18) {
-            JOptionPane.showMessageDialog(null, "El cliente debe ser mayor de 18 años.");
-            return;
-        }
-
-        // Validación de contraseña (mínimo 8 caracteres, al menos una letra y un número)
-        if (contrasena.length() < 8 || !contrasena.matches(".*[a-zA-Z].*") || !contrasena.matches(".*\\d.*")) {
-            JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 8 caracteres, incluyendo letras y números.");
-            return;
-        }
-
-        // Creación del DTO del cliente
-        ClienteDTO clienteDTO = new ClienteDTO();
-        clienteDTO.setNombre(nombre);
-        clienteDTO.setApellidoPaterno(paterno);
-        clienteDTO.setApellidoMaterno(materno);
-        clienteDTO.setFechaNacimiento(nacimiento);
-        clienteDTO.setCorreo(correo);
-        clienteDTO.setContrasena(contrasena);
-
-        // Intentar registrar el cliente
-        try {
-            clienteNegocio.registrarCliente(clienteDTO);
-            JOptionPane.showMessageDialog(null, "Registro exitoso.");
-
-            LogIn login = new LogIn();
-
-            login.setVisible(true);
-            dispose();
-
-        } catch (NegocioException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error en el negocio: " + ex.getMessage());
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
+        else{
+            return true;
         }
     }
 
@@ -261,8 +209,33 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelar3ActionPerformed
 
     private void btnRegistrarse3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarse3ActionPerformed
+        try {
+            ClienteNegocio negocio = new ClienteNegocio();
+            
+        String nombre = txtNombre.getText();
+        String paterno = txtAPaterno.getText();
+        String materno = txtAMaterno.getText();
+        String correo = txtCorreo.getText();
+        LocalDate nacimiento = dateNacimiento.getDate();
+        Double latitud = 0.0;
+        Double longitud = 0.0;
+        String contrasena = txtContrasena.getText();
+            
+        ClienteDTO cliente = new ClienteDTO(nombre, paterno, materno, correo, nacimiento, latitud, longitud, contrasena);    
+            
+            if (validarDatos()) {
+                negocio.registrarCliente(cliente);
+                JOptionPane.showMessageDialog(null, "Registro exitoso.");
 
-        registrar();
+                LogIn login = new LogIn();
+
+                login.setVisible(true);
+                dispose();
+            }
+        } 
+        catch (NegocioException ex) {
+            System.out.println("error al regitrar");
+        }
     }//GEN-LAST:event_btnRegistrarse3ActionPerformed
 
     private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed

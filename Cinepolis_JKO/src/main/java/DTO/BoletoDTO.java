@@ -4,7 +4,6 @@
  */
 package DTO;
 
-import entidad.*;
 import java.time.LocalDate;
 
 /**
@@ -53,7 +52,7 @@ public class BoletoDTO {
         this.fechaCompra = fechaCompra;
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
     }
 

@@ -21,20 +21,22 @@ public class ClienteDAO {
         this.conexionBD = conexionBD;
     }
 
-    public void crear(Cliente cliente) throws PersistenciaException {
-        String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
+    public void agregar(Cliente cliente) throws PersistenciaException {
+        String query = "INSERT INTO Cliente (Nombre, ApellidoPaterno, ApellidoMaterno, Correo, FechaNacimiento, Latitud, Longitud, Contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
             stmt.setString(3, cliente.getApellidoMaterno());
             stmt.setString(4, cliente.getCorreo());
-            stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
-            stmt.setString(6, cliente.getContrasena());
+            stmt.setDate(5, java.sql.Date.valueOf(cliente.getFechaNacimiento()));
+            stmt.setDouble(6, cliente.getLatitud());
+            stmt.setDouble(7, cliente.getLongitud());
+            stmt.setString(8, cliente.getContrasena());
             stmt.executeUpdate();
-        } catch (SQLException ex) {
-            // hacer uso de Logger
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrio un error al leer la base de datos");
+        }
+        catch(SQLException e){
+            throw new PersistenciaException();
         }
     }
 

@@ -7,7 +7,6 @@ package entidad;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -29,8 +28,22 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, 
+            String correo, LocalDate fechaNacimiento, Double latitud, 
+            Double longitud, String contrasena) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.contrasena = contrasena;
+    }
 
-    public Cliente(int idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, Double latitud, Double longitud) {
+    public Cliente(int idCliente, String nombre, String apellidoPaterno, 
+            String apellidoMaterno, String correo, LocalDate fechaNacimiento, 
+            Double latitud, Double longitud, String contrasena) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -39,29 +52,11 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.latitud = latitud;
         this.longitud = longitud;
-    }
-
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, Double latitud, Double longitud) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.fechaNacimiento = fechaNacimiento;
-        this.latitud = latitud;
-        this.longitud = longitud;
-    }
-
-    public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, LocalDate fechaNacimiento, String contrasena) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.correo = correo;
-        this.fechaNacimiento = fechaNacimiento;
         this.contrasena = contrasena;
     }
-    
-    
 
+    
+       
     public int getIdCliente() {
         return idCliente;
     }
