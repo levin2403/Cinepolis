@@ -10,11 +10,15 @@ import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;
 import Presentacion.Admin.Sala;
 import Presentacion.Admin.Sucursales;
+import entidad.Pelicula;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -24,6 +28,8 @@ import javax.swing.JMenuItem;
  */
 public class Compra extends javax.swing.JFrame {
 
+    private Pelicula pelicula;
+
     /**
      * Creates new form Compra
      */
@@ -31,6 +37,39 @@ public class Compra extends javax.swing.JFrame {
         initComponents();
         personalizador();
         agregarOpcionesMenu();
+    }
+
+    // Constructor que recibe la película como parámetro
+    public Compra(Pelicula pelicula) {
+        this.pelicula = pelicula;
+        initComponents();
+        mostrarDetallesPelicula();
+        personalizador();
+    }
+
+    // Método para mostrar los detalles de la película en tu frame de Compra
+    private void mostrarDetallesPelicula() {
+        if (pelicula != null) {
+
+            try {
+                String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
+                URL imageUrl = new URL("file:" + imagePath);
+                ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+                Image img = imageIcon.getImage();
+                Image scaledImg = img.getScaledInstance(220, 310, Image.SCALE_SMOOTH);
+                lblimagen.setIcon(new ImageIcon(scaledImg));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Imprimir la información de la película en la consola nomas para confirmar si se obtuvo
+            System.out.println("ID:" + pelicula.getIdPelicula());
+            System.out.println("Titulo: " + pelicula.getTitulo());
+            System.out.println("Sinopsis: " + pelicula.getSinopsis());
+            System.out.println("Trailer: " + pelicula.getTrailer());
+            System.out.println("Imagen: " + pelicula.getImagen());
+        }
     }
 
     public void personalizador() {
@@ -390,10 +429,9 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        PeliculaVer pelicula = new PeliculaVer();
-
-        pelicula.setVisible(true);
-        dispose();
+        PeliculaVer peliculaVer = new PeliculaVer(pelicula); 
+        peliculaVer.setVisible(true); 
+        dispose(); 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed

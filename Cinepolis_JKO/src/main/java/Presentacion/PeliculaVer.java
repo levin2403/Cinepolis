@@ -31,16 +31,6 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     private Pelicula pelicula;
 
-    /**
-     * Creates new form Pelicula
-     */
-    public PeliculaVer() {
-        initComponents();
-        personalizador();
-        agregarOpcionesMenu();
-
-    }
-
     public PeliculaVer(Pelicula pelicula) {
         this.pelicula = pelicula;
 
@@ -53,35 +43,45 @@ public class PeliculaVer extends javax.swing.JFrame {
         personalizador();
         agregarOpcionesMenu();
     }
-private void mostrarDetallesPelicula() {
-    if (pelicula != null) {
-        lblNombre.setText(pelicula.getTitulo());
-        // Utilizar HTML para dar formato al texto de la sinopsis
-        lblSinopsis.setText("<html><body style='width: 250px'>" + pelicula.getSinopsis() + "</body></html>");
 
-        lblTrailer.setText(pelicula.getTrailer());
+    /**
+     * Creates new form Pelicula
+     */
+    public PeliculaVer() {
+        initComponents();
+        personalizador();
+        agregarOpcionesMenu();
 
-        try {
-            String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
-            URL imageUrl = new URL("file:" + imagePath);
-            ImageIcon imageIcon = new ImageIcon(imageUrl);
-
-            Image img = imageIcon.getImage();
-            Image scaledImg = img.getScaledInstance(220, 310, Image.SCALE_SMOOTH);
-            lblimagen.setIcon(new ImageIcon(scaledImg));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Imprimir la información de la película en la consola nomas para confirmar si se obtuvo
-        System.out.println("ID:" + pelicula.getIdPelicula());
-        System.out.println("Título: " + pelicula.getTitulo());
-        System.out.println("Sinopsis: " + pelicula.getSinopsis());
-        System.out.println("Trailer: " + pelicula.getTrailer());
-        System.out.println("Imagen: " + pelicula.getImagen());
     }
-}
 
+    private void mostrarDetallesPelicula() {
+        if (pelicula != null) {
+            lblNombre.setText(pelicula.getTitulo());
+            // Utilizar HTML para dar formato al texto de la sinopsis
+            lblSinopsis.setText("<html><body style='width: 250px'>" + pelicula.getSinopsis() + "</body></html>");
+
+            lblTrailer.setText(pelicula.getTrailer());
+
+            try {
+                String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
+                URL imageUrl = new URL("file:" + imagePath);
+                ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+                Image img = imageIcon.getImage();
+                Image scaledImg = img.getScaledInstance(220, 310, Image.SCALE_SMOOTH);
+                lblimagen.setIcon(new ImageIcon(scaledImg));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Imprimir la información de la película en la consola nomas para confirmar si se obtuvo
+            System.out.println("ID:" + pelicula.getIdPelicula());
+            System.out.println("Titulo: " + pelicula.getTitulo());
+            System.out.println("Sinopsis: " + pelicula.getSinopsis());
+            System.out.println("Trailer: " + pelicula.getTrailer());
+            System.out.println("Imagen: " + pelicula.getImagen());
+        }
+    }
 
     public void personalizador() {
         panelMenu.setBackground(Color.decode("#07285B"));
@@ -379,7 +379,7 @@ private void mostrarDetallesPelicula() {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        Compra comprar = new Compra();
+        Compra comprar = new Compra(pelicula);
 
         comprar.setVisible(true);
 
