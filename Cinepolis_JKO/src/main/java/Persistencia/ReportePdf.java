@@ -97,7 +97,19 @@ public class ReportePdf {
         tabla.addCell(celdaValor);
     }
 
-  
+    public static void main(String[] args) throws BadElementException, IOException {
+      
+        String rutaPDF = "C:\\Users\\oribi\\Documents\\GitHub\\Cinepolis\\Cinepolis_JKO\\reporte_boletos.pdf";
+
+        
+        ReportePdf reportePdf = new ReportePdf();
+
+      
+        reportePdf.generarReporte(rutaPDF);
+
+      
+        System.out.println("Se ha generado el reporte PDF en la ruta: " + rutaPDF);
+    }
 }
 
 
