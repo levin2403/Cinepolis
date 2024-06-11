@@ -77,13 +77,18 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public void borrar(int idCliente) throws PersistenciaException {
+    public void borrar(Cliente cliente) throws PersistenciaException {
         String query = "DELETE FROM clientes WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, idCliente);
+            stmt.setInt(1, cliente.getIdCliente());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             throw new PersistenciaException("Error al borrar un cliente en la base de datos: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public Cliente buscarPorCorreo() throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
