@@ -256,7 +256,7 @@ public class Inicio extends javax.swing.JFrame {
                 label.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        abrirNuevoFrame();
+                        abrirNuevoFrame(pelicula);
                     }
                 });
 
@@ -271,8 +271,8 @@ public class Inicio extends javax.swing.JFrame {
         panelPeliculas.repaint(); // Volver a pintar el panel
     }
 
-    public void abrirNuevoFrame() {
-        PeliculaVer peliculaVer = new PeliculaVer();
+    public void abrirNuevoFrame(Pelicula pelicula) {
+        PeliculaVer peliculaVer = new PeliculaVer(pelicula);
         peliculaVer.setVisible(true);
 
         dispose();

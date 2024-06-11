@@ -10,17 +10,26 @@ import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;
 import Presentacion.Admin.Sala;
 import Presentacion.Admin.Sucursales;
+import entidad.Pelicula;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author jesus
  */
 public class PeliculaVer extends javax.swing.JFrame {
+
+    private Pelicula pelicula;
 
     /**
      * Creates new form Pelicula
@@ -29,22 +38,62 @@ public class PeliculaVer extends javax.swing.JFrame {
         initComponents();
         personalizador();
         agregarOpcionesMenu();
-        
+
     }
-    
-      public void personalizador() {
+
+    public PeliculaVer(Pelicula pelicula) {
+        this.pelicula = pelicula;
+
+        setTitle("Detalles de la Película");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(400, 300);
+
+        initComponents();
+        mostrarDetallesPelicula();
+        personalizador();
+        agregarOpcionesMenu();
+    }
+private void mostrarDetallesPelicula() {
+    if (pelicula != null) {
+        lblNombre.setText(pelicula.getTitulo());
+        // Utilizar HTML para dar formato al texto de la sinopsis
+        lblSinopsis.setText("<html><body style='width: 250px'>" + pelicula.getSinopsis() + "</body></html>");
+
+        lblTrailer.setText(pelicula.getTrailer());
+
+        try {
+            String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
+            URL imageUrl = new URL("file:" + imagePath);
+            ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+            Image img = imageIcon.getImage();
+            Image scaledImg = img.getScaledInstance(220, 310, Image.SCALE_SMOOTH);
+            lblimagen.setIcon(new ImageIcon(scaledImg));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Imprimir la información de la película en la consola nomas para confirmar si se obtuvo
+        System.out.println("ID:" + pelicula.getIdPelicula());
+        System.out.println("Título: " + pelicula.getTitulo());
+        System.out.println("Sinopsis: " + pelicula.getSinopsis());
+        System.out.println("Trailer: " + pelicula.getTrailer());
+        System.out.println("Imagen: " + pelicula.getImagen());
+    }
+}
+
+
+    public void personalizador() {
         panelMenu.setBackground(Color.decode("#07285B"));
-        
+
         lblimagen.setOpaque(true);
         lblimagen.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
-        
+
         btnComprar.setBackground(Color.decode("#07285B"));
         btnVolver.setBackground(Color.decode("#07285B"));
-        
+
     }
-      
-      
-   
+
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Películas");
@@ -55,11 +104,11 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Inicio Inicio = new Inicio();
                 Inicio.setVisible(true);
-                
+
                 dispose();
             }
         });
-        
+
         JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
         verPeliculas.addActionListener(new ActionListener() {
             @Override
@@ -67,7 +116,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Peliculas Peliculas = new Peliculas();
                 Peliculas.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -82,7 +131,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -92,9 +141,9 @@ public class PeliculaVer extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Funciones Funciones = new Funciones();
+                Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -109,7 +158,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Sala Sala = new Sala();
                 Sala.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -121,9 +170,9 @@ public class PeliculaVer extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Pais Pais = new Pais();
+                Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -134,7 +183,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -149,7 +198,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Reportes Reportes = new Reportes();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -163,13 +212,13 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-        
-         JMenu menuSucursales = new JMenu("Sucursales");
+
+        JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -177,14 +226,11 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
-        
-        
-        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
@@ -192,10 +238,8 @@ public class PeliculaVer extends javax.swing.JFrame {
         MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-         MenuBarAdmin.add(menuSucursales);
+        MenuBarAdmin.add(menuSucursales);
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,13 +252,17 @@ public class PeliculaVer extends javax.swing.JFrame {
 
         Agrupador = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
-        etiquetaDescripcion = new javax.swing.JLabel();
+        lblSinopsis = new javax.swing.JLabel();
         btnComprar = new javax.swing.JButton();
-        lblNombre = new javax.swing.JLabel();
+        lblTrailer = new javax.swing.JLabel();
         panelMenu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblimagen = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -232,9 +280,10 @@ public class PeliculaVer extends javax.swing.JFrame {
         });
         Agrupador.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 240, 30));
 
-        etiquetaDescripcion.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion.setText("Sinopsis");
-        Agrupador.add(etiquetaDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 290, 140));
+        lblSinopsis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSinopsis.setForeground(new java.awt.Color(0, 0, 0));
+        lblSinopsis.setText("Sinopsis");
+        Agrupador.add(lblSinopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 330, 100));
 
         btnComprar.setText("Comprar boletos");
         btnComprar.setBackground(new java.awt.Color(0, 102, 153));
@@ -246,9 +295,10 @@ public class PeliculaVer extends javax.swing.JFrame {
         });
         Agrupador.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 240, 30));
 
-        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
-        lblNombre.setText("Titulo");
-        Agrupador.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 270, 40));
+        lblTrailer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTrailer.setForeground(new java.awt.Color(0, 0, 0));
+        lblTrailer.setText("Trailer");
+        Agrupador.add(lblTrailer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 270, 40));
 
         panelMenu.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -282,6 +332,26 @@ public class PeliculaVer extends javax.swing.JFrame {
         Agrupador.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
         Agrupador.add(lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 220, 310));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Trailer");
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 290, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Titulo");
+        Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 290, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Sinopsis");
+        Agrupador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 290, -1));
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombre.setText("Titulo");
+        Agrupador.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 270, 40));
+
         setJMenuBar(MenuBarAdmin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,22 +369,22 @@ public class PeliculaVer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-      Inicio inicio = new Inicio();
-      
-      inicio.setVisible(true);
-      
-      dispose();
-      
+        Inicio inicio = new Inicio();
+
+        inicio.setVisible(true);
+
+        dispose();
+
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
         Compra comprar = new Compra();
-        
+
         comprar.setVisible(true);
-        
+
         dispose();
-       
+
     }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
@@ -358,10 +428,14 @@ public class PeliculaVer extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuBarAdmin;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JLabel etiquetaDescripcion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblSinopsis;
+    private javax.swing.JLabel lblTrailer;
     private javax.swing.JLabel lblimagen;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
