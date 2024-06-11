@@ -186,18 +186,19 @@ public class Inicio extends javax.swing.JFrame {
         menuReportes.add(GenerarReporte);
 
         JMenu menuBoletos = new JMenu("Boletos");
-        JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
-        ComprarBoleto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Compra comprar = new Compra();
-                comprar.setVisible(true);
+JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
+ComprarBoleto.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Abre la ventana de compra aquí
+        Compra comprar = new Compra();
+        comprar.setVisible(true);
 
-                dispose();
-            }
-        });
-        menuBoletos.add(ComprarBoleto);
+        dispose(); // Cierra la ventana actual
+    }
+});
+menuBoletos.add(ComprarBoleto);
+
 
         JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");

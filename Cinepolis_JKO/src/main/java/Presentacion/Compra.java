@@ -1,8 +1,10 @@
 package Presentacion;
 
+import Persistencia.ConexionBD;
 import Persistencia.ReportePdf;
 import Presentacion.PeliculaVer;
 import com.itextpdf.text.BadElementException;
+import entidad.Boleto;
 import entidad.Pelicula;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -268,7 +272,50 @@ public class Compra extends javax.swing.JFrame {
         pelicula.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-private void generarReportePDF() {
+    public void guardarBoletoEnBD(Boleto boleto) {
+        ConexionBD conexionBD = new ConexionBD(); // Instancia de la clase de conexión a la base de datos
+        Connection conexion = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Crear la conexión a la base de datos
+            conexion = conexionBD.crearConexion();
+            
+            // Preparar la consulta SQL para insertar el boleto en la tabla correspondiente
+            String query = "INSERT INTO tabla_boletos (campo1, campo2, campo3) VALUES (?, ?, ?)"; // Reemplaza con tu consulta SQL y campos correspondientes
+            preparedStatement = conexion.prepareStatement(query);
+            
+            // Establecer los valores de los parámetros de la consulta
+            preparedStatement.setInt(1, boleto.getIdBoleto()); // Reemplaza con los métodos adecuados para obtener los valores del boleto
+           preparedStatement.setInt(2, boleto.getIdBoleto()); // Reemplaza con los métodos adecuados para obtener los valores del boleto
+           preparedStatement.setInt(3, boleto.getIdBoleto()); // Reemplaza con los métodos adecuados para obtener los valores del boleto
+            
+            // Ejecutar la consulta para insertar el boleto en la base de datos
+            preparedStatement.executeUpdate();
+            
+            System.out.println("Boleto guardado exitosamente en la base de datos.");
+        } catch (SQLException e) {
+            // Manejo de excepciones en caso de error al guardar el boleto en la base de datos
+            System.out.println("Error al intentar guardar el boleto en la base de datos: " + e.getMessage());
+        } finally {
+            // Cerrar los recursos utilizados
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    private void generarReportePDF() {
     // Ruta donde se guardará el PDF
     String rutaPDF = "C:\\\\Users\\\\oribi\\\\Documents\\\\Disenio\\\\reporte_boletos.pdf";
     // Crea una instancia de la clase ReportePdf
