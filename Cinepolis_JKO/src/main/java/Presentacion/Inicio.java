@@ -29,6 +29,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import entidad.Pelicula;
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -40,7 +42,11 @@ public class Inicio extends javax.swing.JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
 
+    private int indiceInicio = 0;
+    private int peliculasPorPagina = 10;
+
     private List<Pelicula> listaPeliculas;
+    private int paginaActual = 1;
 
     /**
      * Creates new form Inicio
@@ -216,40 +222,53 @@ public class Inicio extends javax.swing.JFrame {
         MenuBarAdmin.add(menuSucursales);
     }
 
-    /*
-     * Método para poner los labels acomodados con los valores de una lista
-     */
     public void agregarLabelsEnPanel() {
+        panelPeliculas.removeAll(); // Limpiar el panel antes de agregar los nuevos elementos
         panelPeliculas.setLayout(new GridLayout(2, 3, 50, 15)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
-        if (listaPeliculas != null) {
-            for (Pelicula pelicula : listaPeliculas) {
+        if (listaPeliculas != null && listaPeliculas.size() > 0) {
+            int indiceFin = Math.min(indiceInicio + peliculasPorPagina, listaPeliculas.size());
+            for (int i = indiceInicio; i < indiceFin; i++) {
+                Pelicula pelicula = listaPeliculas.get(i);
                 JLabel label = new JLabel("", SwingConstants.CENTER);
                 label.setOpaque(true);
                 label.setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
                 label.setForeground(java.awt.Color.WHITE); // Blanco
 
-                // Cargar la imagen de la película
                 try {
-                    // Usa el nombre del archivo de imagen almacenado en la base de datos
-                    String imagePath = "src\\main\\resources\\portadas" + pelicula.getImagen();
-                    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
-                    Image img = icon.getImage();
-                    Image scaledImg = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH); // Escalar la imagen
-                    label.setIcon(new ImageIcon(scaledImg));
+                    String imagePath = "src\\main\\resources\\portadas\\" + pelicula.getImagen();
+                    File imageFile = new File(imagePath);
+                    if (imageFile.exists()) {
+                        URL imageUrl = imageFile.toURI().toURL(); // Convertir la ruta a URL
+                        ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+                        Image img = imageIcon.getImage();
+                        Image scaledImg = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH); // Escalar la imagen
+                        label.setIcon(new ImageIcon(scaledImg));
+                    } else {
+                        System.out.println("La imagen no existe en la ruta especificada: " + imagePath);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
+                // Agregar el listener de clic al label
                 label.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         abrirNuevoFrame();
                     }
                 });
+
                 panelPeliculas.add(label);
             }
         }
+        // Calcular el número total de páginas
+        int totalPaginas = (int) Math.ceil((double) listaPeliculas.size() / peliculasPorPagina);
+        lblPagina.setText("Página " + paginaActual + " de " + totalPaginas);
+
+        panelPeliculas.revalidate(); // Actualizar el panel para que se muestren los cambios
+        panelPeliculas.repaint(); // Volver a pintar el panel
     }
 
     public void abrirNuevoFrame() {
@@ -269,6 +288,22 @@ public class Inicio extends javax.swing.JFrame {
         }
     }
 
+    public void siguientePagina() {
+        if (indiceInicio + peliculasPorPagina < listaPeliculas.size()) {
+            indiceInicio += peliculasPorPagina;
+            paginaActual++;
+            agregarLabelsEnPanel();
+        }
+    }
+
+    public void paginaAnterior() {
+        if (indiceInicio - peliculasPorPagina >= 0) {
+            indiceInicio -= peliculasPorPagina;
+            paginaActual--;
+            agregarLabelsEnPanel();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -285,7 +320,7 @@ public class Inicio extends javax.swing.JFrame {
         panelPeliculas = new javax.swing.JPanel();
         btnSiguiente = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblPagina = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnCercana = new javax.swing.JButton();
         MenuBarAdmin = new javax.swing.JMenuBar();
@@ -350,10 +385,10 @@ public class Inicio extends javax.swing.JFrame {
         });
         Agrupador.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 100, 40));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("1");
-        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, -1, -1));
+        lblPagina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblPagina.setForeground(new java.awt.Color(0, 0, 0));
+        lblPagina.setText("1");
+        Agrupador.add(lblPagina, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 180, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, -1));
@@ -380,10 +415,14 @@ public class Inicio extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
+
+        siguientePagina();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
+
+        paginaAnterior();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     /**
@@ -429,8 +468,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblPagina;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel panelPeliculas;
     // End of variables declaration//GEN-END:variables
