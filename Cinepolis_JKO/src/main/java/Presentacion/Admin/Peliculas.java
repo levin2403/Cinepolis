@@ -4,7 +4,7 @@
  */
 package Presentacion.Admin;
 
-import Negocio.NegocioException;
+import Negocio.excepcion.NegocioException;
 import Presentacion.Compra;
 import Presentacion.Inicio;
 import java.awt.Image;

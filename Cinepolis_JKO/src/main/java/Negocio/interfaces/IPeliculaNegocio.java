@@ -2,21 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Negocio;
+package Negocio.interfaces;
 
-import DTO.ClienteDTO;
+import Negocio.excepcion.NegocioException;
+import Persistencia.PeliculaDAO;
 import Persistencia.PersistenciaException;
-import entidad.Cliente;
+import entidad.Pelicula;
 import java.util.List;
 
 /**
  *
  * @author jesus
  */
-public interface IClienteNegocio {
-
-    public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException, PersistenciaException;
-
-    public List<Cliente> obtenerCliente() throws PersistenciaException;
-
+public interface IPeliculaNegocio {
+      
+    
+    public List<Pelicula> obtenerPeliculas() throws NegocioException, PersistenciaException;
 }

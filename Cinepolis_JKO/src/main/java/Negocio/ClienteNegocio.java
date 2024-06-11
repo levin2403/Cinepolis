@@ -1,5 +1,7 @@
 package Negocio;
 
+import Negocio.excepcion.NegocioException;
+import Negocio.interfaces.IClienteNegocio;
 import DTO.ClienteDTO;
 import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;

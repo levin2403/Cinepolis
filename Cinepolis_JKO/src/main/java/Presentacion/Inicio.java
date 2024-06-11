@@ -4,7 +4,7 @@
  */
 package Presentacion;
 
-import Negocio.NegocioException;
+import Negocio.excepcion.NegocioException;
 import Negocio.PeliculaNegocio;
 import Persistencia.PersistenciaException;
 import Presentacion.Admin.Funciones;

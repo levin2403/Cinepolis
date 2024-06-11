@@ -5,8 +5,8 @@
 package Presentacion;
 
 import Negocio.ClienteNegocio;
-import Negocio.IClienteNegocio;
-import Negocio.NegocioException;
+import Negocio.interfaces.IClienteNegocio;
+import Negocio.excepcion.NegocioException;
 import Persistencia.PersistenciaException;
 import entidad.Cliente;
 import java.awt.Color;

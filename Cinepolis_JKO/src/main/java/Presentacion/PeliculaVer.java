@@ -4,7 +4,7 @@
  */
 package Presentacion;
 
-import Negocio.NegocioException;
+import Negocio.excepcion.NegocioException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;
@@ -97,7 +97,9 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     }
 
+
     public void cargarPelicula() {
+
         // Verificar si Desktop es soportado
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
@@ -121,7 +123,7 @@ public class PeliculaVer extends javax.swing.JFrame {
             System.out.println("La clase Desktop no está soportada en esta plataforma.");
         }
     }
-
+    
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Peliculas");

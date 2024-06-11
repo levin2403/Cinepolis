@@ -6,8 +6,8 @@ package Presentacion;
 
 import DTO.ClienteDTO;
 import Negocio.ClienteNegocio;
-import Negocio.IClienteNegocio;
-import Negocio.NegocioException;
+import Negocio.interfaces.IClienteNegocio;
+import Negocio.excepcion.NegocioException;
 import Persistencia.PersistenciaException;
 import java.awt.Color;
 import java.time.LocalDate;

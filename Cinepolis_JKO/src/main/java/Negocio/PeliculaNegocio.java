@@ -4,6 +4,8 @@
  */
 package Negocio;
 
+import Negocio.excepcion.NegocioException;
+import Negocio.interfaces.IPeliculaNegocio;
 import Persistencia.ConexionBD;
 import Persistencia.IPeliculaDAO;
 import Persistencia.PeliculaDAO;
