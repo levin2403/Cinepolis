@@ -6,12 +6,15 @@ package Presentacion;
 
 import Negocio.ClienteNegocio;
 import Negocio.IClienteNegocio;
+import Negocio.NegocioException;
 import Persistencia.PersistenciaException;
 import entidad.Cliente;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,7 +47,7 @@ public class LogIn extends javax.swing.JFrame {
         Agrupador.setBackground(Color.decode("#07285B"));
     }
     
-     public void validarUsuario() throws PersistenciaException {
+     public void validarUsuario() throws PersistenciaException, NegocioException {
         if (txtCorreo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese su correo");
             return;
@@ -191,11 +194,15 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         
-        Inicio inicio = new Inicio();
-        
-        inicio.setVisible(true);
-        
-        dispose();
+        try {
+            Inicio inicio = new Inicio();
+            
+            inicio.setVisible(true);
+            
+            dispose();
+        } catch (NegocioException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 

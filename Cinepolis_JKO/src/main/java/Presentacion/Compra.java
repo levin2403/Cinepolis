@@ -33,6 +33,12 @@ public class Compra extends javax.swing.JFrame {
         personalizador();
         agregarOpcionesMenu();
     }
+    
+     public Compra(Pelicula pelicula) {
+        initComponents();
+        personalizador();
+        agregarOpcionesMenu();
+    }
 
     public void personalizador() {
         lblimagen.setOpaque(true);

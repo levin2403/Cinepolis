@@ -4,10 +4,13 @@
  */
 package Presentacion.Admin;
 
+import Negocio.NegocioException;
 import Presentacion.Compra;
 import Presentacion.Inicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -34,11 +37,15 @@ public class Funciones extends javax.swing.JFrame {
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-                
-                dispose();
+                try {
+                    // Open your frame here
+                    Inicio Inicio = new Inicio();
+                    Inicio.setVisible(true);
+                    
+                    dispose();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(Funciones.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
      
@@ -259,11 +266,15 @@ public class Funciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Inicio inicio = new Inicio();
-
-        inicio.setVisible(true);
-
-        dispose();
+        try {
+            Inicio inicio = new Inicio();
+            
+            inicio.setVisible(true);
+            
+            dispose();
+        } catch (NegocioException ex) {
+            Logger.getLogger(Funciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnVolverActionPerformed
 

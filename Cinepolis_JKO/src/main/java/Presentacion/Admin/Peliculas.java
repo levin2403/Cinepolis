@@ -4,12 +4,15 @@
  */
 package Presentacion.Admin;
 
+import Negocio.NegocioException;
 import Presentacion.Compra;
 import Presentacion.Inicio;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -45,11 +48,15 @@ public class Peliculas extends javax.swing.JFrame {
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-                
-                dispose();
+                try {
+                    // Open your frame here
+                    Inicio Inicio = new Inicio();
+                    Inicio.setVisible(true);
+                    
+                    dispose();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
      
@@ -270,11 +277,15 @@ public class Peliculas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Inicio inicio = new Inicio();
-
-        inicio.setVisible(true);
-
-        dispose();
+        try {
+            Inicio inicio = new Inicio();
+            
+            inicio.setVisible(true);
+            
+            dispose();
+        } catch (NegocioException ex) {
+            Logger.getLogger(Peliculas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed

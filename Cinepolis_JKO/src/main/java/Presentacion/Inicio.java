@@ -31,6 +31,8 @@ import entidad.Pelicula;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,7 +52,7 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    public Inicio() throws NegocioException {
         initComponents();
         personalizador();
         this.listaPeliculas = obtenerPeliculasDesdeBaseDeDatos();
@@ -73,7 +75,7 @@ public class Inicio extends javax.swing.JFrame {
         btnCercana.setBackground(Color.decode("#07285B"));
 
     }
- 
+
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Películas");
@@ -82,13 +84,20 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-                
-                dispose();
+
+                try {
+                    Inicio Inicio = new Inicio();
+
+                    Inicio.setVisible(true);
+
+                    dispose();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
-     
+
         menuPeliculas.add(verPeliculas);
 
         JMenu menuFunciones = new JMenu("Funciones");
@@ -99,7 +108,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -109,15 +118,14 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Funciones Funciones = new Funciones();
+                Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
         menuFunciones.add(verFunciones);
         menuFunciones.add(agregarFunciones);
-
 
         JMenu menuReportes = new JMenu("Reportes");
         JMenuItem GenerarReporte = new JMenuItem("Ganancias Sucursales");
@@ -127,11 +135,11 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Reportes = new Sucursales();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
-        
+
         JMenuItem reportePeliculas = new JMenuItem("Ganancias Peliculas");
         reportePeliculas.addActionListener(new ActionListener() {
             @Override
@@ -139,7 +147,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Peliculas Reportes = new Peliculas();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -154,13 +162,13 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-        
-         JMenu menuSucursales = new JMenu("Sucursales");
+
+        JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -168,20 +176,17 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
-        
-        
-        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-         MenuBarAdmin.add(menuSucursales);
+        MenuBarAdmin.add(menuSucursales);
     }
 
     public void agregarLabelsEnPanel() {
@@ -417,7 +422,11 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                try {
+                    new Inicio().setVisible(true);
+                } catch (NegocioException ex) {
+                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

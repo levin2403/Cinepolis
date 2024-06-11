@@ -4,10 +4,13 @@
  */
 package Presentacion.Admin;
 
+import Negocio.NegocioException;
 import Presentacion.Compra;
 import Presentacion.Inicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -34,11 +37,15 @@ public class Reportes extends javax.swing.JFrame {
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-                
-                dispose();
+                try {
+                    // Open your frame here
+                    Inicio Inicio = new Inicio();
+                    Inicio.setVisible(true);
+                    
+                    dispose();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
      

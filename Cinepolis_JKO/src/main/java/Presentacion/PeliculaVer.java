@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Negocio.NegocioException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;
@@ -16,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -94,9 +97,7 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     }
 
-<<<<<<< Updated upstream
-=======
-    public void cargarPelicula(){
+    public void cargarPelicula() {
         // Verificar si Desktop es soportado
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
@@ -106,7 +107,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 try {
                     // Crear el URI del hipervínculo
                     URI uri = new URI(pelicula.getTrailer());
-                    
+
                     // Abrir el hipervínculo en el navegador predeterminado
                     desktop.browse(uri);
                 } catch (Exception e) {
@@ -120,23 +121,28 @@ public class PeliculaVer extends javax.swing.JFrame {
             System.out.println("La clase Desktop no está soportada en esta plataforma.");
         }
     }
->>>>>>> Stashed changes
-    
+
     public void agregarOpcionesMenu() {
 
-        JMenu menuPeliculas = new JMenu("Películas");
-        JMenuItem verPeliculas = new JMenuItem("Ver Películas");
+        JMenu menuPeliculas = new JMenu("Peliculas");
+        JMenuItem verPeliculas = new JMenuItem("Ver Peliculas");
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-                
-                dispose();
+                Inicio Inicio;
+                try {
+                    Inicio = new Inicio();
+                    Inicio.setVisible(true);
+
+                    dispose();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(PeliculaVer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
-     
+
         menuPeliculas.add(verPeliculas);
 
         JMenu menuFunciones = new JMenu("Funciones");
@@ -147,7 +153,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -157,15 +163,14 @@ public class PeliculaVer extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Funciones Funciones = new Funciones();
+                Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
         menuFunciones.add(verFunciones);
         menuFunciones.add(agregarFunciones);
-
 
         JMenu menuReportes = new JMenu("Reportes");
         JMenuItem GenerarReporte = new JMenuItem("Ganancias Sucursales");
@@ -175,11 +180,11 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Reportes = new Sucursales();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
-        
+
         JMenuItem reportePeliculas = new JMenuItem("Ganancias Peliculas");
         reportePeliculas.addActionListener(new ActionListener() {
             @Override
@@ -187,7 +192,7 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Peliculas Reportes = new Peliculas();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -202,13 +207,13 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-        
-         JMenu menuSucursales = new JMenu("Sucursales");
+
+        JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -216,20 +221,17 @@ public class PeliculaVer extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
-        
-        
-        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-         MenuBarAdmin.add(menuSucursales);
+        MenuBarAdmin.add(menuSucursales);
     }
 
     /**
@@ -365,11 +367,15 @@ public class PeliculaVer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Inicio inicio = new Inicio();
-
-        inicio.setVisible(true);
-
-        dispose();
+        try {
+            Inicio inicio = new Inicio();
+            
+            inicio.setVisible(true);
+            
+            dispose();
+        } catch (NegocioException ex) {
+            Logger.getLogger(PeliculaVer.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -384,9 +390,9 @@ public class PeliculaVer extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void lblTrailerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrailerMouseClicked
-        
+
         cargarPelicula();
-                
+
     }//GEN-LAST:event_lblTrailerMouseClicked
 
     /**
