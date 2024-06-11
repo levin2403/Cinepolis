@@ -6,6 +6,7 @@ import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +89,33 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente buscarPorCorreo() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente buscarPorCorreo(String correo) throws PersistenciaException {
+        
+        String query = "SELECT * FROM Cliente WHERE Correo = ?";
+        
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setString(1, correo);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int idCliente = resultSet.getInt("ID_Cliente");
+                    String nombre = resultSet.getString("Nombre");
+                    String apellidoPaterno = resultSet.getString("ApellidoPaterno");
+                    String apellidoMaterno = resultSet.getString("ApellidoMaterno");
+                    LocalDate fechaNacimiento = resultSet.getDate("FechaNacimiento").toLocalDate();
+                    Double latitud = resultSet.getDouble("Latitud");
+                    Double longitud = resultSet.getDouble("Longitud");
+                    String contrasena = resultSet.getString("Contrasena");
+                    
+                    return new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno, 
+                                       correo, fechaNacimiento, latitud, longitud, contrasena);
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenciaException("Error al buscar cliente por correo");
+        }
     }
+    
 }

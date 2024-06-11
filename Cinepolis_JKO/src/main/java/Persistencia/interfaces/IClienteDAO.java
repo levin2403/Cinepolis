@@ -22,6 +22,6 @@ public interface IClienteDAO {
 
     public void borrar(Cliente cliente) throws PersistenciaException;
     
-    public Cliente buscarPorCorreo()throws PersistenciaException;
+    public Cliente buscarPorCorreo(String correo)throws PersistenciaException;
 
 }
