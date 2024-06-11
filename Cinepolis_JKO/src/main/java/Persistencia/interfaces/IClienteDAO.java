@@ -21,5 +21,7 @@ public interface IClienteDAO {
     public void actualizar(Cliente cliente) throws PersistenciaException;
 
     public void borrar(int idCliente) throws PersistenciaException;
+    
+    public Cliente buscarPorCorreo()throws PersistenciaException;
 
 }
