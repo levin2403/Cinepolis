@@ -31,7 +31,7 @@ public class ClienteDAO {
 
     public List<Cliente> obtenerClientes() throws PersistenciaException {
         List<Cliente> clientes = new ArrayList<>();
-        String query = "SELECT * FROM Cliente";
+        String query = "SELECT ID_Cliente, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, contrasena, FechaNacimiento, Latitud, Longitud FROM Cliente";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Cliente cliente = new Cliente();
@@ -40,6 +40,7 @@ public class ClienteDAO {
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 cliente.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 cliente.setCorreo(rs.getString("Correo"));
+                cliente.setContrasena(rs.getString("contrasena"));
                 cliente.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
                 cliente.setLatitud(rs.getDouble("Latitud"));
                 cliente.setLongitud(rs.getDouble("Longitud"));

@@ -57,10 +57,7 @@ public class Registro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El apellido paterno es obligatorio.");
             return;
         }
-        if (materno == null || materno.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El apellido materno es obligatorio.");
-            return;
-        }
+
         if (nacimiento == null) {
             JOptionPane.showMessageDialog(null, "La fecha de nacimiento es obligatoria.");
             return;
@@ -136,7 +133,6 @@ public class Registro extends javax.swing.JFrame {
         Agrupador = new javax.swing.JPanel();
         btnCancelar3 = new javax.swing.JButton();
         btnRegistrarse3 = new javax.swing.JButton();
-        txtContrasena = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtAMaterno = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -150,6 +146,8 @@ public class Registro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,15 +173,6 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         Agrupador.add(btnRegistrarse3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 150, 50));
-
-        txtContrasena.setBackground(new java.awt.Color(242, 242, 242));
-        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
-        txtContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContrasenaActionPerformed(evt);
-            }
-        });
-        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 390, 30));
 
         jLabel1.setText("REGISTRO");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -240,6 +229,19 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setText("Correo electronico");
         Agrupador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, 160, 30));
 
+        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 386, 390, 30));
+
+        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Ver");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        Agrupador.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -265,9 +267,15 @@ public class Registro extends javax.swing.JFrame {
         registrar();
     }//GEN-LAST:event_btnRegistrarse3ActionPerformed
 
-    private void txtContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContrasenaActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtContrasenaActionPerformed
+        
+          if (jCheckBox1.isSelected()) {
+            txtContrasena.setEchoChar((char) 0);
+        } else {
+            txtContrasena.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +317,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar3;
     private javax.swing.JButton btnRegistrarse3;
     private com.github.lgooddatepicker.components.DatePicker dateNacimiento;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
@@ -319,7 +328,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtAMaterno;
     private javax.swing.JTextField txtAPaterno;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

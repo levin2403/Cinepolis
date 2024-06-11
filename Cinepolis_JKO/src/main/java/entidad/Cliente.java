@@ -131,7 +131,7 @@ public class Cliente {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = encriptar(contrasena);
+        this.contrasena = contrasena;
     }
     
     

@@ -8,6 +8,7 @@ import entidad.Cliente;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,9 +31,6 @@ public class ClienteNegocio {
         }
         if (clienteDTO.getApellidoPaterno() == null || clienteDTO.getApellidoPaterno().isEmpty()) {
             throw new NegocioException("El apellido paterno es obligatorio.");
-        }
-        if (clienteDTO.getApellidoMaterno() == null || clienteDTO.getApellidoMaterno().isEmpty()) {
-            throw new NegocioException("El apellido materno es obligatorio.");
         }
         if (clienteDTO.getCorreo() == null || clienteDTO.getCorreo().isEmpty()) {
             throw new NegocioException("El correo electrónico es obligatorio.");
@@ -76,5 +74,11 @@ public class ClienteNegocio {
 
         // Registro del cliente
         clienteDAO.crear(cliente);
+    }
+
+    public List<Cliente> obtenerCliente() throws PersistenciaException {
+
+        return clienteDAO.obtenerClientes();
+
     }
 }

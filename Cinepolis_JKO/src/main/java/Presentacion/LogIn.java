@@ -4,9 +4,14 @@
  */
 package Presentacion;
 
+import Negocio.ClienteNegocio;
+import Persistencia.PersistenciaException;
+import entidad.Cliente;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +19,7 @@ import java.awt.event.MouseEvent;
  */
 public class LogIn extends javax.swing.JFrame {
 
+    ClienteNegocio negocio = new ClienteNegocio();
     /**
      * Creates new form LogIn
      */
@@ -36,6 +42,43 @@ public class LogIn extends javax.swing.JFrame {
     public void personalizador() {
         Agrupador.setBackground(Color.decode("#07285B"));
     }
+    
+     public void validarUsuario() throws PersistenciaException {
+        if (txtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese su correo");
+            return;
+        }
+
+        if (txtContrasena.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ingrese su contraseña");
+            return;
+        }
+
+        List<Cliente> usuarios = negocio.obtenerCliente();
+
+        Cliente usuario = null;
+        Cliente usuarioIngresado = new Cliente();
+        usuarioIngresado.setCorreo(txtCorreo.getText());
+        // Desencriptar la contraseña ingresada antes de compararla
+        usuarioIngresado.setContrasena((txtContrasena.getText()));
+
+        for (Cliente user : usuarios) {
+            if (user.getCorreo().equals(usuarioIngresado.getCorreo())) {
+                if (user.getContrasena()!= null && user.getContrasena().equals(usuarioIngresado.getContrasena())) {
+                    usuario = user;
+                    break;
+                }
+            }
+        }
+
+        if (usuario != null) {
+            Inicio inicio = new Inicio();
+            inicio.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,13 +92,14 @@ public class LogIn extends javax.swing.JFrame {
         Agrupador = new javax.swing.JPanel();
         etiquetaUsuario = new javax.swing.JLabel();
         etiquetaContrasena = new javax.swing.JLabel();
-        txtContrasena = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblRegistrarse = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtContrasena = new javax.swing.JPasswordField();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,10 +115,6 @@ public class LogIn extends javax.swing.JFrame {
         etiquetaContrasena.setForeground(new java.awt.Color(255, 255, 255));
         etiquetaContrasena.setText("Contraseña:");
         Agrupador.add(etiquetaContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
-
-        txtContrasena.setBackground(new java.awt.Color(234, 234, 234));
-        txtContrasena.setForeground(new java.awt.Color(51, 51, 51));
-        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 180, -1));
 
         txtCorreo.setBackground(new java.awt.Color(234, 234, 234));
         txtCorreo.setForeground(new java.awt.Color(51, 51, 51));
@@ -117,6 +157,19 @@ public class LogIn extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo.png"))); // NOI18N
         Agrupador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 160, 160));
 
+        txtContrasena.setBackground(new java.awt.Color(255, 255, 255));
+        txtContrasena.setForeground(new java.awt.Color(0, 0, 0));
+        Agrupador.add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 170, -1));
+
+        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Ver");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        Agrupador.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,6 +201,16 @@ public class LogIn extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+
+        if (jCheckBox1.isSelected()) {
+            txtContrasena.setEchoChar((char) 0);
+        } else {
+            txtContrasena.setEchoChar('*');
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,10 +253,11 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel etiquetaContrasena;
     private javax.swing.JLabel etiquetaUsuario;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblRegistrarse;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
