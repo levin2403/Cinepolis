@@ -116,9 +116,6 @@ public class Registro extends javax.swing.JFrame {
         } catch (NegocioException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error en el negocio: " + ex.getMessage());
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos: " + ex.getMessage());
         }
     }
 
