@@ -20,4 +20,6 @@ public interface IClienteNegocio {
 
     public List<Cliente> obtenerCliente() throws PersistenciaException;
 
+    public Cliente buscarPorCorreo(String correo)throws PersistenciaException;
+    
 }
