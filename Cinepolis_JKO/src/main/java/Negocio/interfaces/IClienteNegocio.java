@@ -6,7 +6,6 @@ package Negocio.interfaces;
 
 import DTO.ClienteDTO;
 import Negocio.excepcion.NegocioException;
-import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 import java.util.List;
 
@@ -16,10 +15,10 @@ import java.util.List;
  */
 public interface IClienteNegocio {
 
-    public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException, PersistenciaException;
+    public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException;
 
-    public List<Cliente> obtenerCliente() throws PersistenciaException;
+    public List<Cliente> obtenerCliente() throws NegocioException;
 
-    public Cliente buscarPorCorreo(String correo)throws PersistenciaException;
+    public Cliente buscarPorCorreo(String correo) throws NegocioException;
     
 }

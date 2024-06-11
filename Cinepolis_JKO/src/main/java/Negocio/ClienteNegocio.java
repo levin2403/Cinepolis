@@ -8,7 +8,6 @@ import Persistencia.ConexionBD;
 import Persistencia.interfaces.IClienteDAO;
 import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -28,7 +27,8 @@ public class ClienteNegocio implements IClienteNegocio {
     }
 
     @Override
-    public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException, PersistenciaException {
+    public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException{
+        try{
         // Validaciones de campos obligatorios
         if (clienteDTO.getNombre() == null || clienteDTO.getNombre().isEmpty()) {
             throw new NegocioException("El nombre es obligatorio.");
@@ -78,12 +78,29 @@ public class ClienteNegocio implements IClienteNegocio {
 
         // Registro del cliente
         clienteDAO.crear(cliente);
+        }
+        catch(PersistenciaException e){
+            throw new NegocioException(e.getMessage());
+        }
     }
 
     @Override
-    public List<Cliente> obtenerCliente() throws PersistenciaException {
-
+    public List<Cliente> obtenerCliente() throws NegocioException {
+        try{
         return clienteDAO.obtenerClientes();
+        }
+        catch(PersistenciaException e){
+            throw new NegocioException(e.getMessage());
+        }
+    }
 
+    @Override
+    public Cliente buscarPorCorreo(String correo) throws NegocioException {
+        try{
+            return clienteDAO.buscarPorCorreo(correo);
+        }
+        catch(PersistenciaException e){
+            throw new NegocioException(e.getMessage());
+        }
     }
 }
