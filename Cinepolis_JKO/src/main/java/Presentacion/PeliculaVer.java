@@ -10,9 +10,11 @@ import Presentacion.Admin.Reportes;
 import Presentacion.Admin.Sucursales;
 import entidad.Pelicula;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -58,7 +60,7 @@ public class PeliculaVer extends javax.swing.JFrame {
             // Utilizar HTML para dar formato al texto de la sinopsis
             lblSinopsis.setText("<html><body style='width: 250px'>" + pelicula.getSinopsis() + "</body></html>");
 
-            lblTrailer.setText(pelicula.getTrailer());
+            lblTrailer.setText("Presiona para ver el trailer de la pelicula");
 
             try {
                 String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
@@ -92,6 +94,33 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     }
 
+<<<<<<< Updated upstream
+=======
+    public void cargarPelicula(){
+        // Verificar si Desktop es soportado
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+
+            // Verificar si BROWSE es soportado
+            if (desktop.isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    // Crear el URI del hipervínculo
+                    URI uri = new URI(pelicula.getTrailer());
+                    
+                    // Abrir el hipervínculo en el navegador predeterminado
+                    desktop.browse(uri);
+                } catch (Exception e) {
+                    // Manejar excepciones de URI y IO
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("La acción BROWSE no está soportada en esta plataforma.");
+            }
+        } else {
+            System.out.println("La clase Desktop no está soportada en esta plataforma.");
+        }
+    }
+>>>>>>> Stashed changes
     
     public void agregarOpcionesMenu() {
 
@@ -232,9 +261,9 @@ public class PeliculaVer extends javax.swing.JFrame {
         Agrupador.setBackground(new java.awt.Color(255, 255, 255));
         Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnVolver.setText("Volver");
         btnVolver.setBackground(new java.awt.Color(0, 102, 153));
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -247,9 +276,9 @@ public class PeliculaVer extends javax.swing.JFrame {
         lblSinopsis.setText("Sinopsis");
         Agrupador.add(lblSinopsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 330, 100));
 
-        btnComprar.setText("Comprar boletos");
         btnComprar.setBackground(new java.awt.Color(0, 102, 153));
         btnComprar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComprar.setText("Comprar boletos");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
@@ -260,6 +289,11 @@ public class PeliculaVer extends javax.swing.JFrame {
         lblTrailer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTrailer.setForeground(new java.awt.Color(0, 0, 0));
         lblTrailer.setText("Trailer");
+        lblTrailer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblTrailerMouseClicked(evt);
+            }
+        });
         Agrupador.add(lblTrailer, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 270, 40));
 
         panelMenu.setBackground(new java.awt.Color(0, 51, 102));
@@ -348,6 +382,12 @@ public class PeliculaVer extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_btnComprarActionPerformed
+
+    private void lblTrailerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTrailerMouseClicked
+        
+        cargarPelicula();
+                
+    }//GEN-LAST:event_lblTrailerMouseClicked
 
     /**
      * @param args the command line arguments
