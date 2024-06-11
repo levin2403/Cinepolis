@@ -7,10 +7,8 @@ package Presentacion;
 import Negocio.PeliculaNegocio;
 import Persistencia.PersistenciaException;
 import Presentacion.Admin.Funciones;
-import Presentacion.Admin.Pais;
 import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;
-import Presentacion.Admin.Sala;
 import Presentacion.Admin.Sucursales;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -74,7 +72,7 @@ public class Inicio extends javax.swing.JFrame {
         btnCercana.setBackground(Color.decode("#07285B"));
 
     }
-
+ 
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Películas");
@@ -85,24 +83,12 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Inicio Inicio = new Inicio();
                 Inicio.setVisible(true);
-
+                
                 dispose();
             }
         });
-
-        JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
-        verPeliculas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Peliculas Peliculas = new Peliculas();
-                Peliculas.setVisible(true);
-
-                dispose();
-            }
-        });
+     
         menuPeliculas.add(verPeliculas);
-        menuPeliculas.add(agregarPeliculas);
 
         JMenu menuFunciones = new JMenu("Funciones");
         JMenuItem verFunciones = new JMenuItem("Ver Funciones");
@@ -112,7 +98,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-
+                
                 dispose();
             }
         });
@@ -122,68 +108,42 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Funciones Funciones = new Funciones();
+                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-
+                
                 dispose();
             }
         });
         menuFunciones.add(verFunciones);
         menuFunciones.add(agregarFunciones);
 
-        JMenu menuSalas = new JMenu("Salas");
-        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
-        agregarSalas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Sala Sala = new Sala();
-                Sala.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuSalas.add(agregarSalas);
-
-        JMenu menuPais = new JMenu("Pais");
-        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
-        agregarPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-
-                dispose();
-            }
-        });
-        JMenuItem verPais = new JMenuItem("Ver Pais");
-        verPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuPais.add(agregarPais);
-        menuPais.add(verPais);
 
         JMenu menuReportes = new JMenu("Reportes");
-        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Ganancias Sucursales");
         GenerarReporte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Reportes Reportes = new Reportes();
+                Sucursales Reportes = new Sucursales();
                 Reportes.setVisible(true);
-
+            
+                dispose();
+            }
+        });
+        
+        JMenuItem reportePeliculas = new JMenuItem("Ganancias Peliculas");
+        reportePeliculas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open your frame here
+                Peliculas Reportes = new Peliculas();
+                Reportes.setVisible(true);
+            
                 dispose();
             }
         });
         menuReportes.add(GenerarReporte);
+        menuReportes.add(reportePeliculas);
 
         JMenu menuBoletos = new JMenu("Boletos");
         JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
@@ -193,13 +153,13 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-
+            
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-
-        JMenu menuSucursales = new JMenu("Sucursales");
+        
+         JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -207,19 +167,20 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-
+            
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
+        
+        
+        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
-        MenuBarAdmin.add(menuSalas);
-        MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-        MenuBarAdmin.add(menuSucursales);
+         MenuBarAdmin.add(menuSucursales);
     }
 
     public void agregarLabelsEnPanel() {

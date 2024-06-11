@@ -41,20 +41,8 @@ public class Sucursales extends javax.swing.JFrame {
                 dispose();
             }
         });
-        
-        JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
-        verPeliculas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Peliculas Peliculas = new Peliculas();
-                Peliculas.setVisible(true);
-                
-                dispose();
-            }
-        });
+     
         menuPeliculas.add(verPeliculas);
-        menuPeliculas.add(agregarPeliculas);
 
         JMenu menuFunciones = new JMenu("Funciones");
         JMenuItem verFunciones = new JMenuItem("Ver Funciones");
@@ -83,59 +71,33 @@ public class Sucursales extends javax.swing.JFrame {
         menuFunciones.add(verFunciones);
         menuFunciones.add(agregarFunciones);
 
-        JMenu menuSalas = new JMenu("Salas");
-        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
-        agregarSalas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Sala Sala = new Sala();
-                Sala.setVisible(true);
-            
-                dispose();
-            }
-        });
-        menuSalas.add(agregarSalas);
-
-        JMenu menuPais = new JMenu("Pais");
-        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
-        agregarPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                 Pais Pais = new Pais();
-                Pais.setVisible(true);
-            
-                dispose();
-            }
-        });
-        JMenuItem verPais = new JMenuItem("Ver Pais");
-        verPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-            
-                dispose();
-            }
-        });
-        menuPais.add(agregarPais);
-        menuPais.add(verPais);
 
         JMenu menuReportes = new JMenu("Reportes");
-        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Ganancias Sucursales");
         GenerarReporte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Reportes Reportes = new Reportes();
+                Sucursales Reportes = new Sucursales();
+                Reportes.setVisible(true);
+            
+                dispose();
+            }
+        });
+        
+        JMenuItem reportePeliculas = new JMenuItem("Ganancias Peliculas");
+        reportePeliculas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open your frame here
+                Peliculas Reportes = new Peliculas();
                 Reportes.setVisible(true);
             
                 dispose();
             }
         });
         menuReportes.add(GenerarReporte);
+        menuReportes.add(reportePeliculas);
 
         JMenu menuBoletos = new JMenu("Boletos");
         JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
@@ -170,8 +132,6 @@ public class Sucursales extends javax.swing.JFrame {
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
-        MenuBarAdmin.add(menuSalas);
-        MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
          MenuBarAdmin.add(menuSucursales);
@@ -187,24 +147,133 @@ public class Sucursales extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Agrupador = new javax.swing.JPanel();
+        btnVolver = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
+        panelMenu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
         MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Agrupador.setBackground(new java.awt.Color(255, 255, 255));
+        Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnVolver.setBackground(new java.awt.Color(0, 102, 153));
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 130, 30));
+
+        btnComprar.setBackground(new java.awt.Color(0, 102, 153));
+        btnComprar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComprar.setText("Generar Reporte");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
+        Agrupador.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 130, 30));
+
+        panelMenu.setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cinepolis logo barra.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("inepolis");
+
+        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
+        panelMenu.setLayout(panelMenuLayout);
+        panelMenuLayout.setHorizontalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 490, Short.MAX_VALUE))
+        );
+        panelMenuLayout.setVerticalGroup(
+            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+            .addGroup(panelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        Agrupador.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        Agrupador.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 770, 290));
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Buscar por Sucursal:");
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 190, -1));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Ganancias Sucursales");
+        Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
         setJMenuBar(MenuBarAdmin);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Inicio inicio = new Inicio();
+
+        inicio.setVisible(true);
+
+        dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        // TODO add your handling code here:
+        Compra comprar = new Compra();
+
+        comprar.setVisible(true);
+
+        dispose();
+    }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +311,17 @@ public class Sucursales extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Agrupador;
     private javax.swing.JMenuBar MenuBarAdmin;
+    private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,7 +37,7 @@ public class Peliculas extends javax.swing.JFrame {
         agregarOpcionesMenu();
     }
     
-    
+     
     public void agregarOpcionesMenu() {
 
         JMenu menuPeliculas = new JMenu("Películas");
@@ -52,20 +52,8 @@ public class Peliculas extends javax.swing.JFrame {
                 dispose();
             }
         });
-        
-        JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
-        verPeliculas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Peliculas Peliculas = new Peliculas();
-                Peliculas.setVisible(true);
-                
-                dispose();
-            }
-        });
+     
         menuPeliculas.add(verPeliculas);
-        menuPeliculas.add(agregarPeliculas);
 
         JMenu menuFunciones = new JMenu("Funciones");
         JMenuItem verFunciones = new JMenuItem("Ver Funciones");
@@ -94,59 +82,33 @@ public class Peliculas extends javax.swing.JFrame {
         menuFunciones.add(verFunciones);
         menuFunciones.add(agregarFunciones);
 
-        JMenu menuSalas = new JMenu("Salas");
-        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
-        agregarSalas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Sala Sala = new Sala();
-                Sala.setVisible(true);
-            
-                dispose();
-            }
-        });
-        menuSalas.add(agregarSalas);
-
-        JMenu menuPais = new JMenu("Pais");
-        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
-        agregarPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                 Pais Pais = new Pais();
-                Pais.setVisible(true);
-            
-                dispose();
-            }
-        });
-        JMenuItem verPais = new JMenuItem("Ver Pais");
-        verPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-            
-                dispose();
-            }
-        });
-        menuPais.add(agregarPais);
-        menuPais.add(verPais);
 
         JMenu menuReportes = new JMenu("Reportes");
-        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
+        JMenuItem GenerarReporte = new JMenuItem("Ganancias Sucursales");
         GenerarReporte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                Reportes Reportes = new Reportes();
+                Sucursales Reportes = new Sucursales();
+                Reportes.setVisible(true);
+            
+                dispose();
+            }
+        });
+        
+        JMenuItem reportePeliculas = new JMenuItem("Ganancias Peliculas");
+        reportePeliculas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open your frame here
+                Peliculas Reportes = new Peliculas();
                 Reportes.setVisible(true);
             
                 dispose();
             }
         });
         menuReportes.add(GenerarReporte);
+        menuReportes.add(reportePeliculas);
 
         JMenu menuBoletos = new JMenu("Boletos");
         JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
@@ -181,8 +143,6 @@ public class Peliculas extends javax.swing.JFrame {
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
-        MenuBarAdmin.add(menuSalas);
-        MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
          MenuBarAdmin.add(menuSucursales);
@@ -199,33 +159,16 @@ public class Peliculas extends javax.swing.JFrame {
     private void initComponents() {
 
         Agrupador = new javax.swing.JPanel();
-        btnCancelar = new javax.swing.JButton();
-        etiquetaDescripcion = new javax.swing.JLabel();
-        btnSubir = new javax.swing.JButton();
-        lblNombre = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
         panelMenu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblimagen = new javax.swing.JLabel();
-        lblDireccionIMG = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        etiquetaDescripcion1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        etiquetaDescripcion2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTable1 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        etiquetaDescripcion3 = new javax.swing.JLabel();
-        etiquetaDescripcion4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        etiquetaDescripcion5 = new javax.swing.JLabel();
-        btnVolver1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
         MenuBarAdmin = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -233,33 +176,25 @@ public class Peliculas extends javax.swing.JFrame {
         Agrupador.setBackground(new java.awt.Color(255, 255, 255));
         Agrupador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancelar.setBackground(new java.awt.Color(0, 102, 153));
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(0, 102, 153));
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        Agrupador.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 150, 30));
+        Agrupador.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 490, 130, 30));
 
-        etiquetaDescripcion.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion.setText("Trailer");
-        Agrupador.add(etiquetaDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 60, 20));
-
-        btnSubir.setBackground(new java.awt.Color(0, 102, 153));
-        btnSubir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSubir.setText("SubirI Imagen");
-        btnSubir.addActionListener(new java.awt.event.ActionListener() {
+        btnComprar.setBackground(new java.awt.Color(0, 102, 153));
+        btnComprar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComprar.setText("Generar Reporte");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubirActionPerformed(evt);
+                btnComprarActionPerformed(evt);
             }
         });
-        Agrupador.add(btnSubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 130, 30));
-
-        lblNombre.setForeground(new java.awt.Color(0, 0, 0));
-        lblNombre.setText("Titulo");
-        Agrupador.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 80, 20));
+        Agrupador.add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 130, 30));
 
         panelMenu.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -292,76 +227,31 @@ public class Peliculas extends javax.swing.JFrame {
 
         Agrupador.add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
 
-        lblimagen.setText("IMAGEN");
-        Agrupador.add(lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 180, 260));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        lblDireccionIMG.setText("jLabel2");
-        Agrupador.add(lblDireccionIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 190, -1));
-        Agrupador.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 210, -1));
+        Agrupador.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 770, 290));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        Agrupador.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, -1, -1));
-
-        etiquetaDescripcion1.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion1.setText("Sinopsis");
-        Agrupador.add(etiquetaDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 120, 20));
-        Agrupador.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 220, -1));
-
-        etiquetaDescripcion2.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion2.setText("Genero");
-        Agrupador.add(etiquetaDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 60, 20));
-        Agrupador.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Buscar por Pelicula:");
+        Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 130, -1));
+        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 190, -1));
 
-        etiquetaDescripcion3.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion3.setText("Duracion:");
-        Agrupador.add(etiquetaDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 60, 20));
-
-        etiquetaDescripcion4.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion4.setText("Pais");
-        Agrupador.add(etiquetaDescripcion4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 60, 20));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Agrupador.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 130, -1));
-
-        etiquetaDescripcion5.setForeground(new java.awt.Color(102, 102, 102));
-        etiquetaDescripcion5.setText("Clasificacion");
-        Agrupador.add(etiquetaDescripcion5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 80, 20));
-
-        btnVolver1.setBackground(new java.awt.Color(0, 102, 153));
-        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver1.setText("Guardar");
-        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver1ActionPerformed(evt);
-            }
-        });
-        Agrupador.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 150, 30));
-
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox1.setText("Musical");
-        Agrupador.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, -1, -1));
-
-        jCheckBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox2.setText("Terror");
-        Agrupador.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, -1, -1));
-
-        jCheckBox3.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox3.setText("Drama");
-        Agrupador.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 450, -1, -1));
-
-        jCheckBox4.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox4.setText("Ciencia Ficcion");
-        Agrupador.add(jCheckBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, -1, -1));
-
-        jCheckBox5.setForeground(new java.awt.Color(0, 0, 0));
-        jCheckBox5.setText("Comedia");
-        Agrupador.add(jCheckBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 500, -1, -1));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Ganancias Pelicula:");
+        Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         setJMenuBar(MenuBarAdmin);
 
@@ -373,55 +263,28 @@ public class Peliculas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(Agrupador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         Inicio inicio = new Inicio();
 
         inicio.setVisible(true);
 
         dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-       int resultado;
+        Compra comprar = new Compra();
 
-        FrmBuscarImg buscar = new FrmBuscarImg();
+        comprar.setVisible(true);
 
-        FileNameExtensionFilter formato = new FileNameExtensionFilter("JPG,PNG Y GIF", "jpg", "png", "gif");
-
-        buscar.JFCImg.setFileFilter(formato);
-
-        resultado = buscar.JFCImg.showOpenDialog(null);
-
-        if (JFileChooser.APPROVE_OPTION == resultado) {
-            archivo = buscar.JFCImg.getSelectedFile();
-
-            lblDireccionIMG.setText(archivo.getAbsolutePath());
-
-        }
-        try {
-            ImageIcon ImgIcon = new ImageIcon(archivo.toString());
-
-            Icon icono = new ImageIcon(ImgIcon.getImage().getScaledInstance(lblimagen.getWidth(), lblimagen.getHeight(), Image.SCALE_DEFAULT));
-
-            lblimagen.setIcon(icono);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al abrir" + e);
-        }
-
-
-    }//GEN-LAST:event_btnSubirActionPerformed
-
-    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnComprarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,32 +324,15 @@ public class Peliculas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
     private javax.swing.JMenuBar MenuBarAdmin;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnSubir;
-    private javax.swing.JButton btnVolver1;
-    private javax.swing.JLabel etiquetaDescripcion;
-    private javax.swing.JLabel etiquetaDescripcion1;
-    private javax.swing.JLabel etiquetaDescripcion2;
-    private javax.swing.JLabel etiquetaDescripcion3;
-    private javax.swing.JLabel etiquetaDescripcion4;
-    private javax.swing.JLabel etiquetaDescripcion5;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JLabel lblDireccionIMG;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblimagen;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }
