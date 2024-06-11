@@ -4,6 +4,8 @@
  */
 package Presentacion;
 
+import Negocio.PeliculaNegocio;
+import Persistencia.PersistenciaException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Pais;
 import Presentacion.Admin.Peliculas;
@@ -13,16 +15,21 @@ import Presentacion.Admin.Sucursales;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import entidad.Pelicula;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,15 +40,25 @@ public class Inicio extends javax.swing.JFrame {
     private JPanel cardPanel;
     private CardLayout cardLayout;
 
+    private List<Pelicula> listaPeliculas;
+
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         initComponents();
         personalizador();
+        this.listaPeliculas = obtenerPeliculasDesdeBaseDeDatos();
         agregarLabelsEnPanel();
         agregarOpcionesMenu();
+    }
 
+    public Inicio(List<Pelicula> listaPeliculas) {
+        this.listaPeliculas = listaPeliculas;
+        initComponents();
+        personalizador();
+        agregarLabelsEnPanel();
+        agregarOpcionesMenu();
     }
 
     public void personalizador() {
@@ -62,11 +79,11 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Inicio Inicio = new Inicio();
                 Inicio.setVisible(true);
-                
+
                 dispose();
             }
         });
-        
+
         JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
         verPeliculas.addActionListener(new ActionListener() {
             @Override
@@ -74,7 +91,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Peliculas Peliculas = new Peliculas();
                 Peliculas.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -89,7 +106,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -99,9 +116,9 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Funciones Funciones = new Funciones();
+                Funciones Funciones = new Funciones();
                 Funciones.setVisible(true);
-                
+
                 dispose();
             }
         });
@@ -116,7 +133,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Sala Sala = new Sala();
                 Sala.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -128,9 +145,9 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-                 Pais Pais = new Pais();
+                Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -141,7 +158,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Pais Pais = new Pais();
                 Pais.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -156,7 +173,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Reportes Reportes = new Reportes();
                 Reportes.setVisible(true);
-            
+
                 dispose();
             }
         });
@@ -170,13 +187,13 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Compra comprar = new Compra();
                 comprar.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuBoletos.add(ComprarBoleto);
-        
-         JMenu menuSucursales = new JMenu("Sucursales");
+
+        JMenu menuSucursales = new JMenu("Sucursales");
         JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
         verSucursales.addActionListener(new ActionListener() {
             @Override
@@ -184,14 +201,11 @@ public class Inicio extends javax.swing.JFrame {
                 // Open your frame here
                 Sucursales Sucursales = new Sucursales();
                 Sucursales.setVisible(true);
-            
+
                 dispose();
             }
         });
         menuSucursales.add(verSucursales);
-        
-        
-        
 
         MenuBarAdmin.add(menuPeliculas);
         MenuBarAdmin.add(menuFunciones);
@@ -199,36 +213,60 @@ public class Inicio extends javax.swing.JFrame {
         MenuBarAdmin.add(menuPais);
         MenuBarAdmin.add(menuReportes);
         MenuBarAdmin.add(menuBoletos);
-         MenuBarAdmin.add(menuSucursales);
+        MenuBarAdmin.add(menuSucursales);
     }
 
     /*
-    Metodo apra poner los label acomodados con lso valores de una lista
-    */
+     * Método para poner los labels acomodados con los valores de una lista
+     */
     public void agregarLabelsEnPanel() {
         panelPeliculas.setLayout(new GridLayout(2, 3, 50, 15)); // Filas, columnas, espaciado horizontal, espaciado vertical
 
-        JLabel[] labels = new JLabel[10];
-        for (int i = 0; i < 10; i++) {
-            labels[i] = new JLabel("Pelicula", SwingConstants.CENTER);
-            labels[i].setOpaque(true);
-            labels[i].setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
-            labels[i].setForeground(java.awt.Color.WHITE); // Blanco
-            labels[i].addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    abrirNuevoFrame();
+        if (listaPeliculas != null) {
+            for (Pelicula pelicula : listaPeliculas) {
+                JLabel label = new JLabel("", SwingConstants.CENTER);
+                label.setOpaque(true);
+                label.setBackground(new java.awt.Color(0x07, 0x28, 0x5B)); // #07285B
+                label.setForeground(java.awt.Color.WHITE); // Blanco
+
+                // Cargar la imagen de la película
+                try {
+                    // Usa el nombre del archivo de imagen almacenado en la base de datos
+                    String imagePath = "src\\main\\resources\\portadas" + pelicula.getImagen();
+                    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+                    Image img = icon.getImage();
+                    Image scaledImg = img.getScaledInstance(100, 150, Image.SCALE_SMOOTH); // Escalar la imagen
+                    label.setIcon(new ImageIcon(scaledImg));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-            panelPeliculas.add(labels[i]);
+
+                label.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        abrirNuevoFrame();
+                    }
+                });
+                panelPeliculas.add(label);
+            }
         }
     }
 
     public void abrirNuevoFrame() {
-        Pelicula pelicula = new Pelicula();
-        pelicula.setVisible(true);
+        PeliculaVer peliculaVer = new PeliculaVer();
+        peliculaVer.setVisible(true);
 
         dispose();
+    }
+
+    private List<Pelicula> obtenerPeliculasDesdeBaseDeDatos() {
+        PeliculaNegocio peliculaNegocio = new PeliculaNegocio();
+        try {
+            return peliculaNegocio.obtenerPeliculas();
+        } catch (PersistenciaException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
     /**

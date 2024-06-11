@@ -297,8 +297,6 @@ public class Peliculas extends javax.swing.JFrame {
 
         lblDireccionIMG.setText("jLabel2");
         Agrupador.add(lblDireccionIMG, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 190, -1));
-
-        jTextField1.setText("jTextField1");
         Agrupador.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 210, -1));
 
         jTextArea1.setColumns(20);
@@ -310,15 +308,11 @@ public class Peliculas extends javax.swing.JFrame {
         etiquetaDescripcion1.setForeground(new java.awt.Color(102, 102, 102));
         etiquetaDescripcion1.setText("Sinopsis");
         Agrupador.add(etiquetaDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 120, 20));
-
-        jTextField2.setText("jTextField2");
         Agrupador.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 220, -1));
 
         etiquetaDescripcion2.setForeground(new java.awt.Color(102, 102, 102));
         etiquetaDescripcion2.setText("Genero");
         Agrupador.add(etiquetaDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 60, 20));
-
-        jTextField3.setText("jTextField2");
         Agrupador.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));

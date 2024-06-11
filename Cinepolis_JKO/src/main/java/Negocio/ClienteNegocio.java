@@ -3,6 +3,7 @@ package Negocio;
 import DTO.ClienteDTO;
 import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;
+import Persistencia.IClienteDAO;
 import Persistencia.PersistenciaException;
 import entidad.Cliente;
 import java.sql.SQLException;
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ClienteNegocio {
+public class ClienteNegocio implements IClienteNegocio {
 
-    ClienteDAO clienteDAO = new ClienteDAO(new ConexionBD());
+    IClienteDAO clienteDAO = new ClienteDAO(new ConexionBD());
 
     public ClienteNegocio() {
 
@@ -24,6 +25,7 @@ public class ClienteNegocio {
         this.clienteDAO = clienteDAO;
     }
 
+    @Override
     public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException, PersistenciaException {
         // Validaciones de campos obligatorios
         if (clienteDTO.getNombre() == null || clienteDTO.getNombre().isEmpty()) {
@@ -76,6 +78,7 @@ public class ClienteNegocio {
         clienteDAO.crear(cliente);
     }
 
+    @Override
     public List<Cliente> obtenerCliente() throws PersistenciaException {
 
         return clienteDAO.obtenerClientes();

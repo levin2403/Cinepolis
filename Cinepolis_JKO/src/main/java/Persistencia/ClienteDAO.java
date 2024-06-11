@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO {
 
     private IConexionBD conexionBD;
 
@@ -14,6 +14,7 @@ public class ClienteDAO {
         this.conexionBD = conexionBD;
     }
 
+    @Override
     public void crear(Cliente cliente) throws PersistenciaException {
         String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -29,6 +30,7 @@ public class ClienteDAO {
         }
     }
 
+    @Override
     public List<Cliente> obtenerClientes() throws PersistenciaException {
         List<Cliente> clientes = new ArrayList<>();
         String query = "SELECT ID_Cliente, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, contrasena, FechaNacimiento, Latitud, Longitud FROM Cliente";
@@ -52,6 +54,7 @@ public class ClienteDAO {
         return clientes;
     }
 
+    @Override
     public void actualizar(Cliente cliente) throws PersistenciaException {
         String query = "UPDATE clientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, correo = ?, fechaNacimiento = ?, latitud = ?, longitud = ?, contrasena = ? WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -70,6 +73,7 @@ public class ClienteDAO {
         }
     }
 
+    @Override
     public void borrar(int idCliente) throws PersistenciaException {
         String query = "DELETE FROM clientes WHERE idCliente = ?";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {

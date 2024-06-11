@@ -6,6 +6,7 @@ package Presentacion;
 
 import DTO.ClienteDTO;
 import Negocio.ClienteNegocio;
+import Negocio.IClienteNegocio;
 import Negocio.NegocioException;
 import Persistencia.PersistenciaException;
 import java.awt.Color;
@@ -23,7 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class Registro extends javax.swing.JFrame {
 
-    ClienteNegocio clienteNegocio;
+    IClienteNegocio clienteNegocio = new ClienteNegocio();
 
     /**
      * Creates new form Registro

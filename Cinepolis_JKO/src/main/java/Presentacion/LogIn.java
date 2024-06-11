@@ -5,6 +5,7 @@
 package Presentacion;
 
 import Negocio.ClienteNegocio;
+import Negocio.IClienteNegocio;
 import Persistencia.PersistenciaException;
 import entidad.Cliente;
 import java.awt.Color;
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class LogIn extends javax.swing.JFrame {
 
-    ClienteNegocio negocio = new ClienteNegocio();
+    IClienteNegocio negocio = new ClienteNegocio();
     /**
      * Creates new form LogIn
      */

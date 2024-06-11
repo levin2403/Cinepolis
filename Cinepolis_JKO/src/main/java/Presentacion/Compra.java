@@ -390,7 +390,7 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Pelicula pelicula = new Pelicula();
+        PeliculaVer pelicula = new PeliculaVer();
 
         pelicula.setVisible(true);
         dispose();
