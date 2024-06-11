@@ -7,7 +7,7 @@ package Presentacion;
 import Negocio.ClienteNegocio;
 import Negocio.interfaces.IClienteNegocio;
 import Negocio.excepcion.NegocioException;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;

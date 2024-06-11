@@ -6,7 +6,7 @@ package Negocio.interfaces;
 
 import DTO.ClienteDTO;
 import Negocio.excepcion.NegocioException;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 import java.util.List;
 

@@ -6,7 +6,7 @@ package Presentacion;
 
 import Negocio.excepcion.NegocioException;
 import Negocio.PeliculaNegocio;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Peliculas;
 import Presentacion.Admin.Reportes;

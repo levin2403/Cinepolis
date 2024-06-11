@@ -1,5 +1,8 @@
 package Persistencia;
 
+import Persistencia.interfaces.IConexionBD;
+import Persistencia.interfaces.IClienteDAO;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 
 import java.sql.*;

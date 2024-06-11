@@ -4,6 +4,9 @@
  */
 package Persistencia;
 
+import Persistencia.interfaces.IFuncionDAO;
+import Persistencia.interfaces.IConexionBD;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Funcion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

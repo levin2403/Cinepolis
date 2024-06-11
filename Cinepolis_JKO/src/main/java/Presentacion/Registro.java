@@ -8,7 +8,7 @@ import DTO.ClienteDTO;
 import Negocio.ClienteNegocio;
 import Negocio.interfaces.IClienteNegocio;
 import Negocio.excepcion.NegocioException;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.Period;

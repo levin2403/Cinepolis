@@ -6,7 +6,7 @@ package Negocio.interfaces;
 
 import Negocio.excepcion.NegocioException;
 import Persistencia.PeliculaDAO;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Pelicula;
 import java.util.List;
 

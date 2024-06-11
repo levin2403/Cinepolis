@@ -7,9 +7,9 @@ package Negocio;
 import Negocio.excepcion.NegocioException;
 import Negocio.interfaces.IPeliculaNegocio;
 import Persistencia.ConexionBD;
-import Persistencia.IPeliculaDAO;
+import Persistencia.interfaces.IPeliculaDAO;
 import Persistencia.PeliculaDAO;
-import Persistencia.PersistenciaException;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Pelicula;
 import java.util.List;
 
