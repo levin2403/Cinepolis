@@ -102,9 +102,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblNombre">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Titulo"/>
           </Properties>
           <Constraints>
@@ -358,9 +355,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox1">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Musical"/>
           </Properties>
           <Constraints>
@@ -371,9 +365,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox2">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Terror"/>
           </Properties>
           <Constraints>
@@ -384,9 +375,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox3">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Drama"/>
           </Properties>
           <Constraints>
@@ -397,9 +385,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox4">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Ciencia Ficcion"/>
           </Properties>
           <Constraints>
@@ -410,9 +395,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jCheckBox5">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Comedia"/>
           </Properties>
           <Constraints>

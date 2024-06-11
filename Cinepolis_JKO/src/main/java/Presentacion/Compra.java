@@ -1,32 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Presentacion;
 
-import Presentacion.Admin.Funciones;
-import Presentacion.Admin.Pais;
-import Presentacion.Admin.Peliculas;
-import Presentacion.Admin.Reportes;
-import Presentacion.Admin.Sala;
-import Presentacion.Admin.Sucursales;
+import Persistencia.ReportePdf;
+import Presentacion.PeliculaVer;
+import com.itextpdf.text.BadElementException;
+import entidad.Pelicula;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author jesus
- */
 public class Compra extends javax.swing.JFrame {
+ private String imagenSeleccionada;
+   
+  
 
-    /**
-     * Creates new form Compra
-     */
     public Compra() {
         initComponents();
         personalizador();
@@ -34,9 +35,8 @@ public class Compra extends javax.swing.JFrame {
     }
 
     public void personalizador() {
-
         lblimagen.setOpaque(true);
-        lblimagen.setBackground(new java.awt.Color(0x07, 0x28, 0x5B));
+        lblimagen.setBackground(new Color(0x07, 0x28, 0x5B));
 
         btnComprar.setBackground(Color.decode("#07285B"));
         btnCancelar.setBackground(Color.decode("#07285B"));
@@ -73,157 +73,31 @@ public class Compra extends javax.swing.JFrame {
     }
 
     public void agregarOpcionesMenu() {
-
         JMenu menuPeliculas = new JMenu("Películas");
         JMenuItem verPeliculas = new JMenuItem("Ver Películas");
+        JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
+        // Agregar acciones a los elementos del menú
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Inicio Inicio = new Inicio();
-                Inicio.setVisible(true);
-
-                dispose();
+                // Aquí colocas la lógica para ver las películas
             }
         });
-
-        JMenuItem agregarPeliculas = new JMenuItem("Agregar Películas");
-        verPeliculas.addActionListener(new ActionListener() {
+        agregarPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Peliculas Peliculas = new Peliculas();
-                Peliculas.setVisible(true);
-
-                dispose();
+                // Aquí colocas la lógica para agregar películas
             }
         });
         menuPeliculas.add(verPeliculas);
         menuPeliculas.add(agregarPeliculas);
 
-        JMenu menuFunciones = new JMenu("Funciones");
-        JMenuItem verFunciones = new JMenuItem("Ver Funciones");
-        verFunciones.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Funciones Funciones = new Funciones();
-                Funciones.setVisible(true);
-
-                dispose();
-            }
-        });
-
-        JMenuItem agregarFunciones = new JMenuItem("Agregar Funciones");
-        agregarFunciones.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Funciones Funciones = new Funciones();
-                Funciones.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuFunciones.add(verFunciones);
-        menuFunciones.add(agregarFunciones);
-
-        JMenu menuSalas = new JMenu("Salas");
-        JMenuItem agregarSalas = new JMenuItem("Agregar Salas");
-        agregarSalas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Sala Sala = new Sala();
-                Sala.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuSalas.add(agregarSalas);
-
-        JMenu menuPais = new JMenu("Pais");
-        JMenuItem agregarPais = new JMenuItem("Agregar Pais");
-        agregarPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-
-                dispose();
-            }
-        });
-        JMenuItem verPais = new JMenuItem("Ver Pais");
-        verPais.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Pais Pais = new Pais();
-                Pais.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuPais.add(agregarPais);
-        menuPais.add(verPais);
-
-        JMenu menuReportes = new JMenu("Reportes");
-        JMenuItem GenerarReporte = new JMenuItem("Generar Reportes");
-        GenerarReporte.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Reportes Reportes = new Reportes();
-                Reportes.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuReportes.add(GenerarReporte);
-
-        JMenu menuBoletos = new JMenu("Boletos");
-        JMenuItem ComprarBoleto = new JMenuItem("Comprar Boleto");
-        ComprarBoleto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Compra comprar = new Compra();
-                comprar.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuBoletos.add(ComprarBoleto);
-
-        JMenu menuSucursales = new JMenu("Sucursales");
-        JMenuItem verSucursales = new JMenuItem("Ver Sucursales");
-        verSucursales.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open your frame here
-                Sucursales Sucursales = new Sucursales();
-                Sucursales.setVisible(true);
-
-                dispose();
-            }
-        });
-        menuSucursales.add(verSucursales);
+        // Aquí agregas más menús y elementos de menú según tu aplicación
 
         MenuBarAdmin.add(menuPeliculas);
-        MenuBarAdmin.add(menuFunciones);
-        MenuBarAdmin.add(menuSalas);
-        MenuBarAdmin.add(menuPais);
-        MenuBarAdmin.add(menuReportes);
-        MenuBarAdmin.add(menuBoletos);
-        MenuBarAdmin.add(menuSucursales);
+        // Aquí agregas más menús al menú bar según tu aplicación
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -390,15 +264,30 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        PeliculaVer pelicula = new PeliculaVer();
-
+    PeliculaVer pelicula = new PeliculaVer();
         pelicula.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+private void generarReportePDF() {
+    // Ruta donde se guardará el PDF
+    String rutaPDF = "C:\\\\Users\\\\oribi\\\\Documents\\\\Disenio\\\\reporte_boletos.pdf";
+    // Crea una instancia de la clase ReportePdf
+    ReportePdf reportePdf = new ReportePdf();
+    try {
+        // Genera el reporte PDF
+        reportePdf.generarReporte(rutaPDF);
+    } catch (BadElementException | IOException e) {
+        // Maneja cualquier excepción que pueda ocurrir al generar el reporte PDF
+        e.printStackTrace();
+        // Muestra un mensaje de error si ocurre alguna excepción
+        JOptionPane.showMessageDialog(this, "Error al generar el reporte PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Este boton todavia no es funcinal");
+ // Llama al método para generar el reporte PDF
+    generarReportePDF();
+    // Muestra un mensaje de confirmación
+    JOptionPane.showMessageDialog(this, "Compra realizada con éxito");
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void txtCantidadBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadBoletoActionPerformed
@@ -408,37 +297,24 @@ public class Compra extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+public static void main(String args[]) {
+    // Crear una instancia de la clase Compra
+    Compra compra = new Compra();
+    
+    // Llamar a los métodos necesarios desde la instancia
+    compra.initComponents();
+    compra.agregarOpcionesMenu();
+    
+    // Hacer visible la ventana de Compra
+    compra.setVisible(true);
+}
+ 
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Compra().setVisible(true);
-            }
-        });
-    }
+
+
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Agrupador;
