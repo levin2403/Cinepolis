@@ -5,11 +5,13 @@ import Presentacion.PeliculaVer;
 import com.itextpdf.text.BadElementException;
 import entidad.Pelicula;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,20 +26,50 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Compra extends javax.swing.JFrame {
- private String imagenSeleccionada;
-   
-  
+
+    private String imagenSeleccionada;
+
+    private Pelicula pelicula;
 
     public Compra() {
+        this.pelicula = pelicula;
+
         initComponents();
         personalizador();
         agregarOpcionesMenu();
+        mostrarDetallesPelicula();
     }
-    
-     public Compra(Pelicula pelicula) {
+
+    public Compra(Pelicula pelicula) {
+        this.pelicula = pelicula;
         initComponents();
         personalizador();
         agregarOpcionesMenu();
+        mostrarDetallesPelicula();
+    }
+
+    private void mostrarDetallesPelicula() {
+        if (pelicula != null) {
+
+            try {
+                String imagePath = "src/main/resources/portadas/" + pelicula.getImagen();
+                URL imageUrl = new URL("file:" + imagePath);
+                ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+                Image img = imageIcon.getImage();
+                Image scaledImg = img.getScaledInstance(220, 310, Image.SCALE_SMOOTH);
+                lblimagen.setIcon(new ImageIcon(scaledImg));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Imprimir la información de la película en la consola nomas para confirmar si se obtuvo
+            System.out.println("ID:" + pelicula.getIdPelicula());
+            System.out.println("Titulo: " + pelicula.getTitulo());
+            System.out.println("Sinopsis: " + pelicula.getSinopsis());
+            System.out.println("Trailer: " + pelicula.getTrailer());
+            System.out.println("Imagen: " + pelicula.getImagen());
+        }
     }
 
     public void personalizador() {
@@ -99,7 +131,6 @@ public class Compra extends javax.swing.JFrame {
         menuPeliculas.add(agregarPeliculas);
 
         // Aquí agregas más menús y elementos de menú según tu aplicación
-
         MenuBarAdmin.add(menuPeliculas);
         // Aquí agregas más menús al menú bar según tu aplicación
     }
@@ -191,16 +222,15 @@ public class Compra extends javax.swing.JFrame {
         Agrupador.add(lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 160, 250));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Ttitulo");
         Agrupador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 120, 30));
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("##");
         Agrupador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
         txtCantidadBoleto.setEditable(false);
         txtCantidadBoleto.setText("0");
+        txtCantidadBoleto.setEnabled(false);
         txtCantidadBoleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadBoletoActionPerformed(evt);
@@ -209,49 +239,37 @@ public class Compra extends javax.swing.JFrame {
         Agrupador.add(txtCantidadBoleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 90, -1));
 
         lblSumador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblSumador.setForeground(new java.awt.Color(0, 0, 0));
         lblSumador.setText("+");
         Agrupador.add(lblSumador, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 20, 20));
 
         lblRestador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRestador.setForeground(new java.awt.Color(0, 0, 0));
         lblRestador.setText("-");
         Agrupador.add(lblRestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 20, 20));
 
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Boletos:");
         Agrupador.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 120, -1));
 
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Funcion");
         Agrupador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
 
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("$$$$");
         Agrupador.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
 
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Sala:");
         Agrupador.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, -1));
 
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("-----------------------------------------------------------------------------------------------------");
         Agrupador.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, -1));
 
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Precio Boleto:");
         Agrupador.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
 
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Total:");
         Agrupador.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
-
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("$$$$$$");
-        Agrupador.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
+        Agrupador.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 110, 20));
 
         setJMenuBar(MenuBarAdmin);
 
@@ -270,30 +288,30 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-    PeliculaVer pelicula = new PeliculaVer();
-        pelicula.setVisible(true);
+        PeliculaVer peliculavr = new PeliculaVer(pelicula);
+        peliculavr.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-private void generarReportePDF() {
-    // Ruta donde se guardará el PDF
-    String rutaPDF = "C:\\\\Users\\\\oribi\\\\Documents\\\\Disenio\\\\reporte_boletos.pdf";
-    // Crea una instancia de la clase ReportePdf
-    ReportePdf reportePdf = new ReportePdf();
-    try {
-        // Genera el reporte PDF
-        reportePdf.generarReporte(rutaPDF);
-    } catch (BadElementException | IOException e) {
-        // Maneja cualquier excepción que pueda ocurrir al generar el reporte PDF
-        e.printStackTrace();
-        // Muestra un mensaje de error si ocurre alguna excepción
-        JOptionPane.showMessageDialog(this, "Error al generar el reporte PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    private void generarReportePDF() {
+        // Ruta donde se guardará el PDF
+        String rutaPDF = "C:\\\\Users\\\\oribi\\\\Documents\\\\Disenio\\\\reporte_boletos.pdf";
+        // Crea una instancia de la clase ReportePdf
+        ReportePdf reportePdf = new ReportePdf();
+        try {
+            // Genera el reporte PDF
+            reportePdf.generarReporte(rutaPDF);
+        } catch (BadElementException | IOException e) {
+            // Maneja cualquier excepción que pueda ocurrir al generar el reporte PDF
+            e.printStackTrace();
+            // Muestra un mensaje de error si ocurre alguna excepción
+            JOptionPane.showMessageDialog(this, "Error al generar el reporte PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
- // Llama al método para generar el reporte PDF
-    generarReportePDF();
-    // Muestra un mensaje de confirmación
-    JOptionPane.showMessageDialog(this, "Compra realizada con éxito");
+        // Llama al método para generar el reporte PDF
+        generarReportePDF();
+        // Muestra un mensaje de confirmación
+        JOptionPane.showMessageDialog(this, "Compra realizada con éxito");
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void txtCantidadBoletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadBoletoActionPerformed
@@ -303,23 +321,17 @@ private void generarReportePDF() {
     /**
      * @param args the command line arguments
      */
-public static void main(String args[]) {
-    // Crear una instancia de la clase Compra
-    Compra compra = new Compra();
-    
-    // Llamar a los métodos necesarios desde la instancia
-    compra.initComponents();
-    compra.agregarOpcionesMenu();
-    
-    // Hacer visible la ventana de Compra
-    compra.setVisible(true);
-}
- 
+    public static void main(String args[]) {
+        // Crear una instancia de la clase Compra
+        Compra compra = new Compra();
 
+        // Llamar a los métodos necesarios desde la instancia
+        compra.initComponents();
+        compra.agregarOpcionesMenu();
 
-
-
-
+        // Hacer visible la ventana de Compra
+        compra.setVisible(true);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

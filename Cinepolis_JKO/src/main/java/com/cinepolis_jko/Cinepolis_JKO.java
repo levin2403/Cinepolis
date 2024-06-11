@@ -4,6 +4,8 @@
 
 package com.cinepolis_jko;
 
+import Presentacion.LogIn;
+
 /**
  *
  * @author jesus
@@ -11,6 +13,9 @@ package com.cinepolis_jko;
 public class Cinepolis_JKO {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+       
+        LogIn login = new LogIn();
+        
+        login.setVisible(true);
     }
 }
