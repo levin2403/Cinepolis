@@ -5,6 +5,7 @@
 package Negocio;
 
 import Persistencia.ConexionBD;
+import Persistencia.IPeliculaDAO;
 import Persistencia.PeliculaDAO;
 import Persistencia.PersistenciaException;
 import entidad.Pelicula;
@@ -14,9 +15,9 @@ import java.util.List;
  *
  * @author jesus
  */
-public class PeliculaNegocio {
+public class PeliculaNegocio implements IPeliculaNegocio {
 
-    PeliculaDAO peliculaDAO = new PeliculaDAO(new ConexionBD());
+    IPeliculaDAO peliculaDAO = new PeliculaDAO(new ConexionBD());
 
     public PeliculaNegocio() {
     }
@@ -26,7 +27,8 @@ public class PeliculaNegocio {
     }
     
     
-    public List<Pelicula> obtenerPeliculas() throws PersistenciaException {
+    @Override
+    public List<Pelicula> obtenerPeliculas() throws NegocioException, PersistenciaException {
 
         return peliculaDAO.obtenerPeliculas();
 

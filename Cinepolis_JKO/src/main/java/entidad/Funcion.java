@@ -14,22 +14,29 @@ import java.time.LocalDate;
 public class Funcion {
     
     private int idFuncion;
-    private LocalDate horaInicio;
-    private LocalDate horaFin;
+    private Time horaInicio;
+    private Time horaFin;
     private LocalDate fecha;
-    private Time limpieza;
     private int idPelicula;
     private int idSala;
 
     public Funcion() {
+ 
     }
 
-    public Funcion(int idFuncion, LocalDate horaInicio, LocalDate horaFin, LocalDate fecha, Time limpieza, int idPelicula, int idSala) {
+    public Funcion(int idFuncion, Time horaInicio, Time horaFin, LocalDate fecha, int idPelicula, int idSala) {
         this.idFuncion = idFuncion;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.fecha = fecha;
-        this.limpieza = limpieza;
+        this.idPelicula = idPelicula;
+        this.idSala = idSala;
+    }
+
+    public Funcion(Time horaInicio, Time horaFin, LocalDate fecha, int idPelicula, int idSala) {
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.fecha = fecha;
         this.idPelicula = idPelicula;
         this.idSala = idSala;
     }
@@ -42,19 +49,19 @@ public class Funcion {
         this.idFuncion = idFuncion;
     }
 
-    public LocalDate getHoraInicio() {
+    public Time getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalDate horaInicio) {
+    public void setHoraInicio(Time horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public LocalDate getHoraFin() {
+    public Time getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(LocalDate horaFin) {
+    public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -64,14 +71,6 @@ public class Funcion {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
-    }
-
-    public Time getLimpieza() {
-        return limpieza;
-    }
-
-    public void setLimpieza(Time limpieza) {
-        this.limpieza = limpieza;
     }
 
     public int getIdPelicula() {
@@ -89,7 +88,8 @@ public class Funcion {
     public void setIdSala(int idSala) {
         this.idSala = idSala;
     }
-    
-    
+
+
     
 }
+

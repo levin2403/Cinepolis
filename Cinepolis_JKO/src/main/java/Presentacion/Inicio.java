@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Negocio.NegocioException;
 import Negocio.PeliculaNegocio;
 import Persistencia.PersistenciaException;
 import Presentacion.Admin.Funciones;
@@ -239,7 +240,7 @@ public class Inicio extends javax.swing.JFrame {
         dispose();
     }
 
-    private List<Pelicula> obtenerPeliculasDesdeBaseDeDatos() {
+    private List<Pelicula> obtenerPeliculasDesdeBaseDeDatos() throws NegocioException {
         PeliculaNegocio peliculaNegocio = new PeliculaNegocio();
         try {
             return peliculaNegocio.obtenerPeliculas();
