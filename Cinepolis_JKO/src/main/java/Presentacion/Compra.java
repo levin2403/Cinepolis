@@ -1,5 +1,6 @@
 package Presentacion;
 
+import DTO.ClienteDTO;
 import Persistencia.ReportePdf;
 import Presentacion.PeliculaVer;
 import com.itextpdf.text.BadElementException;
@@ -30,6 +31,8 @@ public class Compra extends javax.swing.JFrame {
     private String imagenSeleccionada;
 
     private Pelicula pelicula;
+    
+    private ClienteDTO cliente;
 
     public Compra() {
         this.pelicula = pelicula;
@@ -38,16 +41,27 @@ public class Compra extends javax.swing.JFrame {
         personalizador();
         agregarOpcionesMenu();
         mostrarDetallesPelicula();
+        
     }
 
-    public Compra(Pelicula pelicula) {
+    public Compra(Pelicula pelicula, ClienteDTO cliente) {
         this.pelicula = pelicula;
+        this.cliente = cliente;
         initComponents();
         personalizador();
         agregarOpcionesMenu();
         mostrarDetallesPelicula();
+        clienteobtenido();
     }
 
+    
+     public void clienteobtenido(){
+        System.out.println("cliente:" + cliente.getIdCliente());
+        System.out.println("nombre:" + cliente.getNombre());
+        System.out.println("Correo:" + cliente.getCorreo());
+    
+        
+    }
     private void mostrarDetallesPelicula() {
         if (pelicula != null) {
 
@@ -288,7 +302,7 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        PeliculaVer peliculavr = new PeliculaVer(pelicula);
+        PeliculaVer peliculavr = new PeliculaVer(pelicula, cliente);
         peliculavr.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed

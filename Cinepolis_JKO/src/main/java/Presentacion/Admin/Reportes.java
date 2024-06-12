@@ -37,15 +37,10 @@ public class Reportes extends javax.swing.JFrame {
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    // Open your frame here
-                    Inicio Inicio = new Inicio();
-                    Inicio.setVisible(true);
-                    
-                    dispose();
-                } catch (NegocioException ex) {
-                    Logger.getLogger(Reportes.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                // Open your frame here
+                Inicio Inicio = new Inicio();
+                Inicio.setVisible(true);
+                dispose();
             }
         });
      

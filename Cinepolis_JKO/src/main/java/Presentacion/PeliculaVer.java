@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import DTO.ClienteDTO;
 import Negocio.excepcion.NegocioException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Peliculas;
@@ -33,6 +34,7 @@ import javax.swing.JTextArea;
 public class PeliculaVer extends javax.swing.JFrame {
 
     private Pelicula pelicula;
+    private ClienteDTO cliente;
 
     public PeliculaVer(Pelicula pelicula) {
         this.pelicula = pelicula;
@@ -45,6 +47,22 @@ public class PeliculaVer extends javax.swing.JFrame {
         mostrarDetallesPelicula();
         personalizador();
         agregarOpcionesMenu();
+        clienteobtenido();
+    }
+    
+    public PeliculaVer(Pelicula pelicula, ClienteDTO cliente) {
+        this.pelicula = pelicula;
+        this.cliente = cliente;
+
+        setTitle("Detalles de la Película");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(400, 300);
+
+        initComponents();
+        mostrarDetallesPelicula();
+        personalizador();
+        agregarOpcionesMenu();
+        clienteobtenido();
     }
 
     /**
@@ -52,9 +70,19 @@ public class PeliculaVer extends javax.swing.JFrame {
      */
     public PeliculaVer() {
         initComponents();
+        mostrarDetallesPelicula();
         personalizador();
         agregarOpcionesMenu();
+        clienteobtenido();
 
+    }
+    
+     public void clienteobtenido(){
+        System.out.println("cliente:" + cliente.getIdCliente());
+        System.out.println("nombre:" + cliente.getNombre());
+        System.out.println("Correo:" + cliente.getCorreo());
+    
+        
     }
 
     private void mostrarDetallesPelicula() {
@@ -133,14 +161,9 @@ public class PeliculaVer extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
                 Inicio Inicio;
-                try {
-                    Inicio = new Inicio();
-                    Inicio.setVisible(true);
-
-                    dispose();
-                } catch (NegocioException ex) {
-                    Logger.getLogger(PeliculaVer.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Inicio = new Inicio();
+                Inicio.setVisible(true);
+                dispose();
 
             }
         });
@@ -370,10 +393,8 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         try {
-            Inicio inicio = new Inicio();
-            
+            Inicio inicio = new Inicio(cliente);
             inicio.setVisible(true);
-            
             dispose();
         } catch (NegocioException ex) {
             Logger.getLogger(PeliculaVer.class.getName()).log(Level.SEVERE, null, ex);
@@ -383,7 +404,7 @@ public class PeliculaVer extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        Compra comprar = new Compra(pelicula);
+        Compra comprar = new Compra(pelicula, cliente);
 
         comprar.setVisible(true);
 

@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import DTO.ClienteDTO;
 import Negocio.ClienteNegocio;
 import Negocio.interfaces.IClienteNegocio;
 import Negocio.excepcion.NegocioException;
@@ -46,43 +47,42 @@ public class LogIn extends javax.swing.JFrame {
     public void personalizador() {
         Agrupador.setBackground(Color.decode("#07285B"));
     }
-    
-     public void validarUsuario() throws PersistenciaException, NegocioException {
-        if (txtCorreo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese su correo");
-            return;
-        }
+    public void validarUsuario() throws PersistenciaException, NegocioException {
+    if (txtCorreo.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese su correo");
+        return;
+    }
 
-        if (txtContrasena.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "ingrese su contraseña");
-            return;
-        }
+    if (txtContrasena.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ingrese su contraseña");
+        return;
+    }
 
-        List<Cliente> usuarios = negocio.obtenerCliente();
+    List<ClienteDTO> usuarios = negocio.obtenerClientes();
 
-        Cliente usuario = null;
-        Cliente usuarioIngresado = new Cliente();
-        usuarioIngresado.setCorreo(txtCorreo.getText());
-        // Desencriptar la contraseña ingresada antes de compararla
-        usuarioIngresado.setContrasena((txtContrasena.getText()));
+    ClienteDTO cliente = null;
+    ClienteDTO usuarioIngresado = new ClienteDTO();
+    usuarioIngresado.setCorreo(txtCorreo.getText());
+    // Desencriptar la contraseña ingresada antes de compararla
+    usuarioIngresado.setContrasena((txtContrasena.getText()));
 
-        for (Cliente user : usuarios) {
-            if (user.getCorreo().equals(usuarioIngresado.getCorreo())) {
-                if (user.getContrasena()!= null && user.getContrasena().equals(usuarioIngresado.getContrasena())) {
-                    usuario = user;
-                    break;
-                }
+    for (ClienteDTO user : usuarios) {
+        if (user.getCorreo().equals(usuarioIngresado.getCorreo())) {
+            if (user.getContrasena() != null && user.getContrasena().equals(usuarioIngresado.getContrasena())) {
+                cliente = user;
+                break;
             }
         }
-
-        if (usuario != null) {
-            Inicio inicio = new Inicio();
-            inicio.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
-        }
     }
+
+    if (cliente != null) {
+        Inicio inicio = new Inicio(cliente);
+        inicio.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,11 +195,9 @@ public class LogIn extends javax.swing.JFrame {
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         
         try {
-            Inicio inicio = new Inicio();
-            
-            inicio.setVisible(true);
-            
-            dispose();
+            validarUsuario();
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NegocioException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
         }

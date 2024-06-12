@@ -4,6 +4,7 @@
  */
 package Persistencia.interfaces;
 
+import DTO.ClienteDTO;
 import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 import java.util.List;
@@ -16,7 +17,7 @@ public interface IClienteDAO {
 
     public void crear(Cliente cliente) throws PersistenciaException;
 
-    public List<Cliente> obtenerClientes() throws PersistenciaException;
+    public List<ClienteDTO> obtenerClientes() throws PersistenciaException;
 
     public void actualizar(Cliente cliente) throws PersistenciaException;
 

@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import DTO.ClienteDTO;
 import Negocio.excepcion.NegocioException;
 import Negocio.PeliculaNegocio;
 import Persistencia.excepcion.PersistenciaException;
@@ -47,17 +48,20 @@ public class Inicio extends javax.swing.JFrame {
     private int peliculasPorPagina = 10;
 
     private List<Pelicula> listaPeliculas;
+    private ClienteDTO cliente;
     private int paginaActual = 1;
 
     /**
      * Creates new form Inicio
      */
-    public Inicio() throws NegocioException {
+    public Inicio(ClienteDTO cliente) throws NegocioException {
+        this.cliente = cliente;
         initComponents();
         personalizador();
         this.listaPeliculas = obtenerPeliculasDesdeBaseDeDatos();
         agregarLabelsEnPanel();
         agregarOpcionesMenu();
+        clienteobtenido();
     }
 
     public Inicio(List<Pelicula> listaPeliculas) {
@@ -66,8 +70,13 @@ public class Inicio extends javax.swing.JFrame {
         personalizador();
         agregarLabelsEnPanel();
         agregarOpcionesMenu();
+        clienteobtenido();
     }
 
+    public Inicio() {
+    }
+
+    
     public void personalizador() {
         panelMenu.setBackground(Color.decode("#07285B"));
         btnAtras.setBackground(Color.decode("#07285B"));
@@ -84,16 +93,9 @@ public class Inicio extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open your frame here
-
-                try {
-                    Inicio Inicio = new Inicio();
-
-                    Inicio.setVisible(true);
-
-                    dispose();
-                } catch (NegocioException ex) {
-                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Inicio Inicio = new Inicio();
+                Inicio.setVisible(true);
+                dispose();
 
             }
         });
@@ -223,7 +225,7 @@ public class Inicio extends javax.swing.JFrame {
                 label.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        abrirNuevoFrame(pelicula);
+                        abrirNuevoFrame(pelicula, cliente);
                     }
                 });
 
@@ -238,14 +240,15 @@ public class Inicio extends javax.swing.JFrame {
         panelPeliculas.repaint(); // Volver a pintar el panel
     }
 
-    public void abrirNuevoFrame(Pelicula pelicula) {
-        PeliculaVer peliculaVer = new PeliculaVer(pelicula);
+    public void abrirNuevoFrame(Pelicula pelicula, ClienteDTO cliente) {
+        PeliculaVer peliculaVer = new PeliculaVer(pelicula, cliente);
         peliculaVer.setVisible(true);
 
         dispose();
     }
 
     private List<Pelicula> obtenerPeliculasDesdeBaseDeDatos() throws NegocioException {
+        
         PeliculaNegocio peliculaNegocio = new PeliculaNegocio();
         try {
             return peliculaNegocio.obtenerPeliculas();
@@ -269,6 +272,14 @@ public class Inicio extends javax.swing.JFrame {
             paginaActual--;
             agregarLabelsEnPanel();
         }
+    }
+    
+    public void clienteobtenido(){
+        System.out.println("cliente:" + cliente.getIdCliente());
+        System.out.println("nombre:" + cliente.getNombre());
+        System.out.println("Correo:" + cliente.getCorreo());
+    
+        
     }
 
     /**
@@ -422,11 +433,7 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Inicio().setVisible(true);
-                } catch (NegocioException ex) {
-                    Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Inicio().setVisible(true);
             }
         });
     }

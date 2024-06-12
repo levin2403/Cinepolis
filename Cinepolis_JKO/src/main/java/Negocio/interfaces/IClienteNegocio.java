@@ -18,7 +18,7 @@ public interface IClienteNegocio {
 
     public void registrarCliente(ClienteDTO clienteDTO) throws NegocioException;
 
-    public List<Cliente> obtenerCliente() throws NegocioException;
+    public List<ClienteDTO> obtenerClientes() throws NegocioException;
 
     public Cliente buscarPorCorreo(String correo) throws NegocioException;
     

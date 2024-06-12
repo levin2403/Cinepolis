@@ -37,15 +37,10 @@ public class Funciones extends javax.swing.JFrame {
         verPeliculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    // Open your frame here
-                    Inicio Inicio = new Inicio();
-                    Inicio.setVisible(true);
-                    
-                    dispose();
-                } catch (NegocioException ex) {
-                    Logger.getLogger(Funciones.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                // Open your frame here
+                Inicio Inicio = new Inicio();
+                Inicio.setVisible(true);
+                dispose();
             }
         });
      
@@ -266,15 +261,9 @@ public class Funciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        try {
-            Inicio inicio = new Inicio();
-            
-            inicio.setVisible(true);
-            
-            dispose();
-        } catch (NegocioException ex) {
-            Logger.getLogger(Funciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Inicio inicio = new Inicio();
+        inicio.setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
