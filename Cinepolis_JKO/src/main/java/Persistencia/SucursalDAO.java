@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Persistencia;
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Sucursal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,8 @@ public class SucursalDAO {
         this.conexionBD = conexionBD;
     }
 
-    public void agregarSucursal(Sucursal sucursal) throws SQLException {
+    public void agregarSucursal(Sucursal sucursal) throws PersistenciaException {
+        try{
         String query = "INSERT INTO Sucursal (Nombre, Latitud, Longitud, SRID, Ciudad, Colonia, Calle, Numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = conexionBD.crearConexion();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -32,29 +34,42 @@ public class SucursalDAO {
             stmt.setString(8, sucursal.getNumero());
             stmt.executeUpdate();
         }
+        }
+        catch(SQLException e){
+            throw new PersistenciaException("error al agregar sucursal");
+        }
     }
 
-    public List<Sucursal> obtenerSucursales() throws SQLException {
-        List<Sucursal> sucursales = new ArrayList<>();
-        String query = "SELECT * FROM Sucursal";
-        try (Connection conn = conexionBD.crearConexion();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                Sucursal sucursal = new Sucursal();
-                sucursal.setIdSucursal(rs.getInt("ID_Sucursal"));
-                sucursal.setNombre(rs.getString("Nombre"));
-                sucursal.setLatitud(rs.getDouble("Latitud"));
-                sucursal.setLongitud(rs.getDouble("Longitud"));
-                sucursal.setSrid(rs.getInt("SRID"));
-                sucursal.setCiudad(rs.getString("Ciudad"));
-                sucursal.setColonia(rs.getString("Colonia"));
-                sucursal.setCalle(rs.getString("Calle"));
-                sucursal.setNumero(rs.getString("Numero"));
-                sucursales.add(sucursal);
-            }
+public List<Sucursal> obtenerSucursales() throws PersistenciaException {
+    List<Sucursal> sucursales = new ArrayList<>();
+    String query = "SELECT * FROM Sucursal";
+
+    try (Connection conn = conexionBD.crearConexion();
+         PreparedStatement stmt = conn.prepareStatement(query);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Sucursal sucursal = new Sucursal();
+            sucursal.setIdSucursal(rs.getInt("ID_Sucursal"));
+            sucursal.setNombre(rs.getString("Nombre"));
+            sucursal.setLatitud(rs.getDouble("Latitud"));
+            sucursal.setLongitud(rs.getDouble("Longitud"));
+            sucursal.setSrid(rs.getInt("SRID"));
+            sucursal.setCiudad(rs.getString("Ciudad"));
+            sucursal.setColonia(rs.getString("Colonia"));
+            sucursal.setCalle(rs.getString("Calle"));
+            sucursal.setNumero(rs.getString("Numero"));
+            sucursales.add(sucursal);
         }
-        return sucursales;
+
+    } catch (SQLException e) {
+        // Incluye el mensaje original de la excepción para facilitar la depuración
+        throw new PersistenciaException("Error al obtener las sucursales" );
     }
+
+    return sucursales;
+}
+    
+    
 
 }

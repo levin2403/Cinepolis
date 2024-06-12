@@ -10,7 +10,7 @@ package entidad;
  */
 public class Sucursal {
     
-     private int idSucursal;
+    private int idSucursal;
     private String nombre;
     private Double latitud;
     private Double longitud;
@@ -106,7 +106,5 @@ public class Sucursal {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    
-    
     
 }
