@@ -3,6 +3,7 @@ package Negocio;
 import Negocio.excepcion.NegocioException;
 import Negocio.interfaces.IClienteNegocio;
 import DTO.ClienteDTO;
+import Negocio.convertidores.ClienteCVR;
 import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;
 import Persistencia.interfaces.IClienteDAO;
@@ -10,16 +11,20 @@ import Persistencia.excepcion.PersistenciaException;
 import entidad.Cliente;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ClienteNegocio implements IClienteNegocio {
 
     IClienteDAO clienteDAO = new ClienteDAO(new ConexionBD());
-
+    ClienteCVR clienteCVR;
+    
     public ClienteNegocio() {
-
+        this.clienteCVR = new ClienteCVR();
     }
 
     public ClienteNegocio(ClienteDAO clienteDAO) {
@@ -103,4 +108,52 @@ public class ClienteNegocio implements IClienteNegocio {
             throw new NegocioException(e.getMessage());
         }
     }
+
+    @Override
+    public void obtenerClientesPaginados(JTable tabla, int numeroPagina, int tamanoPagina) throws NegocioException { 
+        try {
+            
+            List<ClienteDTO> libros = listaPaginada(numeroPagina, tamanoPagina);
+
+            // Definir columnas
+            String[] columnNames = {"ID", "Nombre", "ApellidoP", "apellidoM", "Correo"};
+            
+            // Crear modelo de la tabla
+            DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+            // Llenar la tabla con los datos de libros
+            for (ClienteDTO cliente : libros) {
+                Object[] rowData = {
+                    cliente.getIdCliente(),
+                    cliente.getApellidoPaterno(),
+                    cliente.getApellidoPaterno(),
+                    cliente.getApellidoMaterno(),
+                    cliente.getCorreo(),
+                };
+                tableModel.addRow(rowData);
+            }
+
+            // Establecer el modelo de la tabla
+            tabla.setModel(tableModel);
+            
+        } catch (NegocioException ex) {
+            System.out.println(ex.getMessage());;
+        }
+    }
+
+    private List<ClienteDTO> listaPaginada(int numeroPagina, int tamanoPagina) throws NegocioException{
+        try{
+            List<ClienteDTO> nuevaLista = new ArrayList<>();
+            List<Cliente> entidad = clienteDAO.obtenerClientesPaginados(numeroPagina, tamanoPagina);
+            
+            for (int i = 0; i < entidad.size(); i++) {
+                nuevaLista.add(clienteCVR.entidad_ClienteDTO(entidad.get(i)));
+            }
+            return nuevaLista;
+        }
+        catch(PersistenciaException e){
+            
+        }
+        return null;
+    }    
 }

@@ -8,6 +8,7 @@ import DTO.ClienteDTO;
 import Negocio.excepcion.NegocioException;
 import entidad.Cliente;
 import java.util.List;
+import javax.swing.JTable;
 
 /**
  *
@@ -20,5 +21,7 @@ public interface IClienteNegocio {
     public List<Cliente> obtenerCliente() throws NegocioException;
 
     public Cliente buscarPorCorreo(String correo) throws NegocioException;
+    
+    public void obtenerClientesPaginados(JTable tabla, int numeroPagina, int tamanoPagina) throws NegocioException;
     
 }
