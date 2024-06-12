@@ -118,4 +118,38 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
     
+    @Override
+    public List<Cliente> obtenerClientesPaginados(int numeroPagina, int tamanoPagina) throws PersistenciaException {
+        String query = "SELECT * FROM Cliente LIMIT ? OFFSET ?";
+        List<Cliente> clientes = new ArrayList<>();
+        int offset = (numeroPagina - 1) * tamanoPagina;
+
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement statement = conexion.prepareStatement(query)) {
+            statement.setInt(1, tamanoPagina);
+            statement.setInt(2, offset);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int idCliente = resultSet.getInt("ID_Cliente");
+                    String nombre = resultSet.getString("Nombre");
+                    String apellidoPaterno = resultSet.getString("ApellidoPaterno");
+                    String apellidoMaterno = resultSet.getString("ApellidoMaterno");
+                    String correo = resultSet.getString("Correo");
+                    LocalDate fechaNacimiento = resultSet.getDate("FechaNacimiento").toLocalDate();
+                    Double latitud = resultSet.getDouble("Latitud");
+                    Double longitud = resultSet.getDouble("Longitud");
+                    String contrasena = resultSet.getString("Contrasena");
+                    
+                    Cliente cliente = new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno, 
+                                                  correo, fechaNacimiento, latitud, longitud, contrasena);
+                    clientes.add(cliente);
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenciaException("Error al obtener clientes paginados");
+        }
+
+        return clientes;
+    }
+    
 }

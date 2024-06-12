@@ -23,5 +23,7 @@ public interface IClienteDAO {
     public void borrar(Cliente cliente) throws PersistenciaException;
     
     public Cliente buscarPorCorreo(String correo)throws PersistenciaException;
+    
+    public List<Cliente> obtenerClientesPaginados(int numeroPagina, int tamanoPagina) throws PersistenciaException;
 
 }
