@@ -4,6 +4,7 @@
  */
 package Persistencia;
 import Persistencia.excepcion.PersistenciaException;
+import Persistencia.interfaces.IConexionBD;
 import Persistencia.interfaces.ISucursalDAO;
 import entidad.Sucursal;
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SucursalDAO implements ISucursalDAO{
-    private ConexionBD conexionBD;
+    private IConexionBD conexionBD;
 
     public SucursalDAO(ConexionBD conexionBD) {
         this.conexionBD = conexionBD;

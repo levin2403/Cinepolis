@@ -5,8 +5,10 @@
 package Presentacion;
 
 import DTO.ClienteDTO;
+import DTO.SucursalDTO;
 import Negocio.excepcion.NegocioException;
 import Negocio.PeliculaNegocio;
+import Negocio.SucursalNegocio;
 import Persistencia.excepcion.PersistenciaException;
 import Presentacion.Admin.Funciones;
 import Presentacion.Admin.Peliculas;
@@ -34,6 +36,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,33 +54,77 @@ public class Inicio extends javax.swing.JFrame {
     private List<Pelicula> listaPeliculas;
     private ClienteDTO cliente;
     private int paginaActual = 1;
+    private SucursalNegocio sucursalNegocio;
 
     /**
      * Creates new form Inicio
      */
     public Inicio(ClienteDTO cliente) throws NegocioException {
         this.cliente = cliente;
+        this.sucursalNegocio = new SucursalNegocio();
+
         initComponents();
         personalizador();
         this.listaPeliculas = obtenerPeliculasDesdeBaseDeDatos();
         agregarLabelsEnPanel();
         agregarOpcionesMenu();
         clienteobtenido();
+
+        cbSucursal = new JComboBox<>();
+        cbSucursal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SucursalDTO sucursalSeleccionada = (SucursalDTO) cbSucursal.getSelectedItem();
+                if (sucursalSeleccionada != null) {
+                    mostrarInformacionSucursal(sucursalSeleccionada);
+                }
+            }
+        });
+        
+        llenarComboBoxSucursales();
     }
 
     public Inicio(List<Pelicula> listaPeliculas) {
         this.listaPeliculas = listaPeliculas;
+        this.sucursalNegocio = new SucursalNegocio();
+
         initComponents();
         personalizador();
         agregarLabelsEnPanel();
         agregarOpcionesMenu();
         clienteobtenido();
+
+        cbSucursal = new JComboBox<>();
+        cbSucursal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SucursalDTO sucursalSeleccionada = (SucursalDTO) cbSucursal.getSelectedItem();
+                if (sucursalSeleccionada != null) {
+                    mostrarInformacionSucursal(sucursalSeleccionada);
+                }
+            }
+        });
+        llenarComboBoxSucursales();
     }
 
     public Inicio() {
     }
 
-    
+    private void llenarComboBoxSucursales() {
+        try {
+            sucursalNegocio.llenarCMBX(cbSucursal);
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar las sucursales: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void mostrarInformacionSucursal(SucursalDTO sucursal) {
+        // Muestra la información de la sucursal seleccionada
+        System.out.println("Sucursal seleccionada: " + sucursal.getNombre());
+        System.out.println("Ciudad: " + sucursal.getCiudad());
+        // Aquí puedes agregar más información de la sucursal si es necesario
+    }
+
     public void personalizador() {
         panelMenu.setBackground(Color.decode("#07285B"));
         btnAtras.setBackground(Color.decode("#07285B"));
@@ -248,7 +296,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     private List<Pelicula> obtenerPeliculasDesdeBaseDeDatos() throws NegocioException {
-        
+
         PeliculaNegocio peliculaNegocio = new PeliculaNegocio();
         try {
             return peliculaNegocio.obtenerPeliculas();
@@ -273,13 +321,12 @@ public class Inicio extends javax.swing.JFrame {
             agregarLabelsEnPanel();
         }
     }
-    
-    public void clienteobtenido(){
+
+    public void clienteobtenido() {
         System.out.println("cliente:" + cliente.getIdCliente());
         System.out.println("nombre:" + cliente.getNombre());
         System.out.println("Correo:" + cliente.getCorreo());
-    
-        
+
     }
 
     /**
@@ -299,7 +346,7 @@ public class Inicio extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         lblPagina = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbSucursal = new javax.swing.JComboBox<>();
         btnCercana = new javax.swing.JButton();
         MenuBarAdmin = new javax.swing.JMenuBar();
 
@@ -364,12 +411,11 @@ public class Inicio extends javax.swing.JFrame {
         Agrupador.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, 100, 40));
 
         lblPagina.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblPagina.setForeground(new java.awt.Color(0, 0, 0));
         lblPagina.setText("1");
         Agrupador.add(lblPagina, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 180, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Agrupador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, -1));
+        cbSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Agrupador.add(cbSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 140, -1));
 
         btnCercana.setForeground(new java.awt.Color(255, 255, 255));
         btnCercana.setText("Sucursal cercana");
@@ -444,7 +490,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCercana;
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbSucursal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblPagina;
