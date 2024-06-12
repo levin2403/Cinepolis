@@ -6,13 +6,16 @@ import Presentacion.PeliculaVer;
 import com.itextpdf.text.BadElementException;
 import entidad.Pelicula;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +34,7 @@ public class Compra extends javax.swing.JFrame {
     private String imagenSeleccionada;
 
     private Pelicula pelicula;
-    
+
     private ClienteDTO cliente;
 
     public Compra() {
@@ -41,7 +44,7 @@ public class Compra extends javax.swing.JFrame {
         personalizador();
         agregarOpcionesMenu();
         mostrarDetallesPelicula();
-        
+
     }
 
     public Compra(Pelicula pelicula, ClienteDTO cliente) {
@@ -54,14 +57,13 @@ public class Compra extends javax.swing.JFrame {
         clienteobtenido();
     }
 
-    
-     public void clienteobtenido(){
+    public void clienteobtenido() {
         System.out.println("cliente:" + cliente.getIdCliente());
         System.out.println("nombre:" + cliente.getNombre());
         System.out.println("Correo:" + cliente.getCorreo());
-    
-        
+
     }
+
     private void mostrarDetallesPelicula() {
         if (pelicula != null) {
 
@@ -307,18 +309,27 @@ public class Compra extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void generarReportePDF() {
-        // Ruta donde se guardará el PDF
-        String rutaPDF = "C:\\\\Users\\\\oribi\\\\Documents\\\\Disenio\\\\reporte_boletos.pdf";
+        // Utiliza una ruta temporal en lugar de una ruta fija
+        String rutaPDF = Paths.get(System.getProperty("java.io.tmpdir"), "reporte_boletos.pdf").toString();
         // Crea una instancia de la clase ReportePdf
         ReportePdf reportePdf = new ReportePdf();
         try {
             // Genera el reporte PDF
             reportePdf.generarReporte(rutaPDF);
+            System.out.println("Reporte generado en: " + rutaPDF);
+
+            // Abrir el archivo PDF generado
+            File archivoPDF = new File(rutaPDF);
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(archivoPDF);
+            } else {
+                System.out.println("Abrir el archivo no es compatible en este sistema.");
+            }
         } catch (BadElementException | IOException e) {
             // Maneja cualquier excepción que pueda ocurrir al generar el reporte PDF
             e.printStackTrace();
             // Muestra un mensaje de error si ocurre alguna excepción
-            JOptionPane.showMessageDialog(this, "Error al generar el reporte PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al generar el reporte PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
