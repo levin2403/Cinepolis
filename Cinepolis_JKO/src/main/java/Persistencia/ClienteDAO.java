@@ -1,5 +1,6 @@
 package Persistencia;
 
+import DTO.ClienteDTO;
 import Persistencia.interfaces.IConexionBD;
 import Persistencia.interfaces.IClienteDAO;
 import Persistencia.excepcion.PersistenciaException;
@@ -21,7 +22,14 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public void crear(Cliente cliente) throws PersistenciaException {
         String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            conn = conexionBD.crearConexion();
+            conn.setAutoCommit(false); // Desactivar el auto-commit para iniciar la transacción
+
+            stmt = conn.prepareStatement(query);
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellidoPaterno());
             stmt.setString(3, cliente.getApellidoMaterno());
@@ -29,18 +37,44 @@ public class ClienteDAO implements IClienteDAO {
             stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
             stmt.setString(6, cliente.getContrasena());
             stmt.executeUpdate();
+
+            conn.commit(); // Confirmar la transacción
+
         } catch (SQLException ex) {
+            if (conn != null) {
+                try {
+                    conn.rollback(); // Deshacer la transacción en caso de error
+                } catch (SQLException rollbackEx) {
+                    throw new PersistenciaException("Error al deshacer la transacción: " + rollbackEx.getMessage());
+                }
+            }
             throw new PersistenciaException("Error al crear un cliente en la base de datos: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException ex) {
+                    throw new PersistenciaException("Error al cerrar el PreparedStatement: " + ex.getMessage());
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true); // Restaurar el auto-commit
+                    conn.close();
+                } catch (SQLException ex) {
+                    throw new PersistenciaException("Error al cerrar la conexión: " + ex.getMessage());
+                }
+            }
         }
     }
 
     @Override
-    public List<Cliente> obtenerClientes() throws PersistenciaException {
-        List<Cliente> clientes = new ArrayList<>();
+    public List<ClienteDTO> obtenerClientes() throws PersistenciaException {
+        List<ClienteDTO> clientes = new ArrayList<>();
         String query = "SELECT ID_Cliente, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, contrasena, FechaNacimiento, Latitud, Longitud FROM Cliente";
         try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                Cliente cliente = new Cliente();
+                ClienteDTO cliente = new ClienteDTO();
                 cliente.setIdCliente(rs.getInt("ID_Cliente"));
                 cliente.setNombre(rs.getString("Nombre"));
                 cliente.setApellidoPaterno(rs.getString("ApellidoPaterno"));
@@ -90,11 +124,10 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public Cliente buscarPorCorreo(String correo) throws PersistenciaException {
-        
+
         String query = "SELECT * FROM Cliente WHERE Correo = ?";
-        
-        try (Connection conexion = conexionBD.crearConexion();
-             PreparedStatement statement = conexion.prepareStatement(query)) {
+
+        try (Connection conexion = conexionBD.crearConexion(); PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setString(1, correo);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -106,9 +139,9 @@ public class ClienteDAO implements IClienteDAO {
                     Double latitud = resultSet.getDouble("Latitud");
                     Double longitud = resultSet.getDouble("Longitud");
                     String contrasena = resultSet.getString("Contrasena");
-                    
-                    return new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno, 
-                                       correo, fechaNacimiento, latitud, longitud, contrasena);
+
+                    return new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno,
+                            correo, fechaNacimiento, latitud, longitud, contrasena);
                 } else {
                     return null;
                 }
@@ -117,15 +150,14 @@ public class ClienteDAO implements IClienteDAO {
             throw new PersistenciaException("Error al buscar cliente por correo");
         }
     }
-    
+
     @Override
     public List<Cliente> obtenerClientesPaginados(int numeroPagina, int tamanoPagina) throws PersistenciaException {
         String query = "SELECT * FROM Cliente LIMIT ? OFFSET ?";
         List<Cliente> clientes = new ArrayList<>();
         int offset = (numeroPagina - 1) * tamanoPagina;
 
-        try (Connection conexion = conexionBD.crearConexion();
-             PreparedStatement statement = conexion.prepareStatement(query)) {
+        try (Connection conexion = conexionBD.crearConexion(); PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, tamanoPagina);
             statement.setInt(2, offset);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -139,9 +171,9 @@ public class ClienteDAO implements IClienteDAO {
                     Double latitud = resultSet.getDouble("Latitud");
                     Double longitud = resultSet.getDouble("Longitud");
                     String contrasena = resultSet.getString("Contrasena");
-                    
-                    Cliente cliente = new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno, 
-                                                  correo, fechaNacimiento, latitud, longitud, contrasena);
+
+                    Cliente cliente = new Cliente(idCliente, nombre, apellidoPaterno, apellidoMaterno,
+                            correo, fechaNacimiento, latitud, longitud, contrasena);
                     clientes.add(cliente);
                 }
             }
@@ -151,5 +183,5 @@ public class ClienteDAO implements IClienteDAO {
 
         return clientes;
     }
-    
+
 }
