@@ -12,7 +12,6 @@ import Persistencia.SucursalDAO;
 import Persistencia.excepcion.PersistenciaException;
 import Persistencia.interfaces.ISucursalDAO;
 import entidad.Sucursal;
-import static java.lang.StringTemplate.STR;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
