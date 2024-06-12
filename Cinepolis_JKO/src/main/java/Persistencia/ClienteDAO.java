@@ -20,18 +20,51 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public void crear(Cliente cliente) throws PersistenciaException {
-        String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = conexionBD.crearConexion(); PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, cliente.getNombre());
-            stmt.setString(2, cliente.getApellidoPaterno());
-            stmt.setString(3, cliente.getApellidoMaterno());
-            stmt.setString(4, cliente.getCorreo());
-            stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
-            stmt.setString(6, cliente.getContrasena());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            throw new PersistenciaException("Error al crear un cliente en la base de datos: " + ex.getMessage());
+    String query = "INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, correo, fechaNacimiento, contrasena) VALUES (?, ?, ?, ?, ?, ?)";
+    Connection conn = null;
+    PreparedStatement stmt = null;
+
+    try {
+        conn = conexionBD.crearConexion();
+        conn.setAutoCommit(false); // Desactivar el auto-commit para iniciar la transacción
+
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, cliente.getNombre());
+        stmt.setString(2, cliente.getApellidoPaterno());
+        stmt.setString(3, cliente.getApellidoMaterno());
+        stmt.setString(4, cliente.getCorreo());
+        stmt.setDate(5, Date.valueOf(cliente.getFechaNacimiento()));
+        stmt.setString(6, cliente.getContrasena());
+        stmt.executeUpdate();
+
+        conn.commit(); // Confirmar la transacción
+
+    } catch (SQLException ex) {
+        if (conn != null) {
+            try {
+                conn.rollback(); // Deshacer la transacción en caso de error
+            } catch (SQLException rollbackEx) {
+                throw new PersistenciaException("Error al deshacer la transacción: " + rollbackEx.getMessage());
+            }
         }
+        throw new PersistenciaException("Error al crear un cliente en la base de datos: " + ex.getMessage());
+    } finally {
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                throw new PersistenciaException("Error al cerrar el PreparedStatement: " + ex.getMessage());
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.setAutoCommit(true); // Restaurar el auto-commit
+                conn.close();
+            } catch (SQLException ex) {
+                throw new PersistenciaException("Error al cerrar la conexión: " + ex.getMessage());
+            }
+        }
+    }
     }
 
     @Override
