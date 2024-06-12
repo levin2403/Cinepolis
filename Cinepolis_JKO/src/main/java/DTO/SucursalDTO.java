@@ -124,6 +124,11 @@ public class SucursalDTO {
     public void setNumero(String numero) {
         this.numero = numero;
     }
+
+    @Override
+    public String toString() {
+        return  nombre;
+    }
     
     
     
