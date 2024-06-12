@@ -4,8 +4,8 @@
  */
 package Persistencia.interfaces;
 
+import Persistencia.excepcion.PersistenciaException;
 import entidad.Sucursal;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -15,9 +15,9 @@ import java.util.List;
 public interface ISucursalDAO {
     
     
-    public void agregarSucursal(Sucursal sucursal) throws SQLException;
+    public void agregarSucursal(Sucursal sucursal) throws PersistenciaException ;
     
-    public List<Sucursal> obtenerSucursales() throws SQLException;
+    public List<Sucursal> obtenerSucursales() throws PersistenciaException ;
         
     
 }

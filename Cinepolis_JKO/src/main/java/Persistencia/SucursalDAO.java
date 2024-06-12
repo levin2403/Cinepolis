@@ -4,6 +4,7 @@
  */
 package Persistencia;
 import Persistencia.excepcion.PersistenciaException;
+import Persistencia.interfaces.ISucursalDAO;
 import entidad.Sucursal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,13 +13,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SucursalDAO {
+public class SucursalDAO implements ISucursalDAO{
     private ConexionBD conexionBD;
 
     public SucursalDAO(ConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
 
+    /**
+     *
+     * @param sucursal
+     * @throws PersistenciaException
+     */
+    @Override
     public void agregarSucursal(Sucursal sucursal) throws PersistenciaException {
         try{
         String query = "INSERT INTO Sucursal (Nombre, Latitud, Longitud, SRID, Ciudad, Colonia, Calle, Numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -40,6 +47,12 @@ public class SucursalDAO {
         }
     }
 
+    /**
+     * 
+     * @return
+     * @throws PersistenciaException 
+     */
+    @Override
     public List<Sucursal> obtenerSucursales() throws PersistenciaException {
     List<Sucursal> sucursales = new ArrayList<>();
     String query = "SELECT * FROM Sucursal";
