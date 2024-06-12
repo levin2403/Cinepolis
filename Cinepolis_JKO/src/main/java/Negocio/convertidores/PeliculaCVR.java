@@ -13,7 +13,7 @@ import entidad.Pelicula;
  */
 public class PeliculaCVR {
     
-    public Pelicula peliculaDTO_entidad(Pelicula pelicula){
+    public Pelicula peliculaDTO_entidad(PeliculaDTO pelicula){
         int idPelicula = pelicula.getIdPelicula();
         String titulo = pelicula.getTitulo();
         String sinopsis = pelicula.getSinopsis();
@@ -26,7 +26,7 @@ public class PeliculaCVR {
         return new Pelicula (idPelicula, titulo, sinopsis, idPais, duracion, clasificacion, trailer, imagen, idGenero);
     } 
     
-    public PeliculaDTO pelicula_DTO(PeliculaDTO peliculaDTO){
+    public PeliculaDTO pelicula_DTO(Pelicula peliculaDTO){
         int idPelicula = peliculaDTO.getIdPelicula();
         String titulo = peliculaDTO.getTitulo();
         String sinopsis = peliculaDTO.getSinopsis();

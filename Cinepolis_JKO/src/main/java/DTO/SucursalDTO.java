@@ -24,7 +24,9 @@ public class SucursalDTO {
     public SucursalDTO() {
     }
 
-    public SucursalDTO(String nombre, Double latitud, Double longitud, Integer srid, String ciudad, String colonia, String calle, String numero) {
+    public SucursalDTO(String nombre, Double latitud, Double longitud, 
+            Integer srid, String ciudad, String colonia, String calle, 
+            String numero) {
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -48,6 +50,8 @@ public class SucursalDTO {
         this.calle = calle;
         this.numero = numero;
     }
+
+    
 
     public int getIdSucursal() {
         return idSucursal;

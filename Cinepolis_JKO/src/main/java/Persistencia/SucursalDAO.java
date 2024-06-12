@@ -40,7 +40,7 @@ public class SucursalDAO {
         }
     }
 
-public List<Sucursal> obtenerSucursales() throws PersistenciaException {
+    public List<Sucursal> obtenerSucursales() throws PersistenciaException {
     List<Sucursal> sucursales = new ArrayList<>();
     String query = "SELECT * FROM Sucursal";
 
